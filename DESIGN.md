@@ -237,3 +237,11 @@ Content changes fade from 0.6 opacity and rise 8px over 0.28s with `cubic-bezier
 - Don't add decorative shadows to ordinary content cards.
 - Don't replace interface icons with platform-dependent text glyphs.
 - Don't present a requested time or a demonstration receipt as a confirmed appointment.
+
+## Signature motion extension — Inside → Insight
+
+The homepage hero now uses a deep ink surface (`#091d25`), the Breoris Signal (`#aadbd5`), translucent illustrative anatomy and an authentic physician portrait. The original blue/turquoise logo and blue navigation actions remain the brand anchor. Hero copy stays in HTML, with a calm left safe area on desktop and an upper safe area on mobile. Local motion styles live in `dist/hero-motion.css`.
+
+The 12-second desktop and 10-second mobile compositions are independently framed. Slow camera travel, one subtle pulse, a scanning plane, and a continuous fine line establish the motion vocabulary. The line carries into a native-scroll SVG divider. Use the same thin stroke and restrained timing for future components; do not make essential information depend on movement.
+
+The film loops automatically while visible. Reduced motion and Save-Data show a responsive poster. The browser pauses it when the hero is offscreen or the page is hidden. Source files, provenance, storyboards, exports and QA are documented in `../breoris-motion/README.md`.

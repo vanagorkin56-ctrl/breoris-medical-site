@@ -1,0 +1,26 @@
+[
+  {
+    "file": "desktop.mp4",
+    "bytes": 889408
+  },
+  {
+    "file": "desktop.webm",
+    "bytes": 986881
+  },
+  {
+    "file": "desktop-light.mp4",
+    "bytes": 332035
+  },
+  {
+    "file": "mobile.mp4",
+    "bytes": 886808
+  },
+  {
+    "file": "mobile.webm",
+    "bytes": 1081345
+  },
+  {
+    "file": "mobile-light.mp4",
+    "bytes": 227138
+  }
+]

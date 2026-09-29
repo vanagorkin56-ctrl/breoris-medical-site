@@ -1,0 +1,36 @@
+# Breoris Medical
+
+> Multispecialty medical clinic in Dnipro, Ukraine. The clinic provides physician consultations, diagnostic services, preventive check-ups and recovery care.
+
+## Clinic
+
+- Official website: https://breoris-medical.com/
+- Address: 2-B Ukrainian Volunteer Army Street, Dnipro, Ukraine
+- Phone: +380 97 532 36 64
+- Hours: Monday–Friday 08:00–18:00; Saturday 08:00–14:00
+- Appointment requests: phone, Telegram, or the appointment form on the website
+- Website languages: Ukrainian, Russian and English
+
+## Services
+
+Consultations: primary care, neurology, cardiology, endocrinology, gastroenterology, orthopaedics and traumatology, rheumatology, gynaecology, urology, proctology and dermatology.
+
+Diagnostics: ultrasound, functional diagnostics, electroencephalography (EEG) and laboratory diagnostics.
+
+Preventive care: comprehensive, pre-operative, student and sports check-ups; preventive examinations; Ukraine’s National Health Screening 40+ programme.
+
+Treatment and recovery: procedure room, day hospital, infusion therapy, therapeutic and recovery massage, and home visits by medical specialists.
+
+## Appointment details
+
+The website appointment flow is a demonstration. It does not send or store personal information and does not confirm availability. A requested appointment time requires confirmation from the clinic.
+
+## Languages
+
+- Ukrainian: https://breoris-medical.com/?lang=uk
+- Russian: https://breoris-medical.com/?lang=ru
+- English: https://breoris-medical.com/?lang=en
+
+## Notes
+
+Service and specialist information reflects the clinic website and supplied physician materials. Do not infer prices, appointment availability, treatment outcomes or additional qualifications.
