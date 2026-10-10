@@ -63,14 +63,24 @@
 .hero.is-playing-film:not(.is-revealing) .hero-service-shape{opacity:0;visibility:hidden;pointer-events:none;transition:none}
 .hero-service-shape:focus-visible{outline:3px solid #163c5a;outline-offset:5px;border-radius:12px}
 @media(hover:hover) and (pointer:fine){.hero-service-shape:hover>span:first-child{text-decoration:underline;text-underline-offset:4px}}
+/* Portrait layout preserves the desktop shapes and brand composition at readable sizes. */
 @media(max-width:760px){
- .hero{min-height:680px}
- .hero-stage{transform:translateY(-100px)}
- .hero-services{inset:auto 20px auto;top:calc(100% + 18px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
- .hero-service-shape{position:relative;left:auto;top:auto;width:100%;height:52px;flex-direction:row;gap:8px;font-size:13px;padding:10px;background:#235b92;border-radius:16px;color:white}
- .shape-consultations{background:#cdebed;color:#163c5a}
- .shape-consultations::before{display:none}
- .hero-service-shape .shape-link{display:inline;font-size:14px}
- .hero-message{top:calc(100% + 158px)}
+ .hero{height:auto;min-height:0;padding:32px 0 40px;display:block}
+ .hero-stage{width:100%;max-width:520px;height:410px;aspect-ratio:auto;max-height:none;transform:none}
+ .hero-media{top:40px;bottom:auto;height:auto;aspect-ratio:1440/816;clip-path:polygon(8% 40%,92% 40%,92% 43%,100% 43%,100% 100%,0 100%,0 43%,8% 43%)}
+ .hero-services{inset:0 12px auto;display:grid;grid-template-columns:1fr 1.15fr 1fr 1fr;gap:8px;align-items:center;height:108px}
+ .hero-service-shape{position:relative;left:auto;top:auto;width:100%;height:82px;font-size:12px;padding:4px;background:none;border-radius:0;color:#fff}
+ .hero-service-shape::before{content:"";position:absolute;inset:0;z-index:-1;background:#235b92}
+ .shape-ultrasound::before{inset:10px 2px;border-radius:15px;transform:rotate(-38deg);background:#338fc3}
+ .shape-consultations{color:#163c5a;font-size:11px;height:84px;padding:8px 3px}
+ .shape-consultations::before{border-radius:50%;background:#cdebed}
+ .shape-labs::before{clip-path:polygon(32% 0,68% 0,68% 30%,100% 30%,100% 70%,68% 70%,68% 100%,32% 100%,32% 70%,0 70%,0 30%,32% 30%)}
+ .shape-checkup{padding-left:10px}
+ .shape-checkup::before{border-radius:100% 0 0 100%;transform:rotate(-8deg)}
+ .hero-service-shape .shape-link{display:none}
+ .hero-message{top:calc(40px + 56.67cqw + 14px);width:calc(100% - 32px);gap:18px}
+ .hero-message p{max-width:32ch;font-size:14px}
+ .hero-book .ui-icon{width:20px;height:20px}
 }
+@media(min-width:450px) and (max-width:760px){.hero-stage{height:510px}.hero-services{inset-inline:20px;gap:18px;height:120px}.hero-service-shape{height:96px;font-size:14px}.shape-consultations{font-size:12px}.hero-media{top:90px}.hero-message{top:calc(90px + 56.67cqw + 14px)}}
 @media(prefers-reduced-motion:reduce){.hero-service-shape,.hero.is-playing-film:not(.is-revealing) .hero-service-shape{opacity:1;visibility:visible;pointer-events:auto;transition:none}}
