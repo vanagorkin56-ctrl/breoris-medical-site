@@ -60,3 +60,32 @@ h1,h2,h3{font-family:"DM Sans",Manrope,Arial,sans-serif;font-weight:500;letter-s
 .preview-mark{width:50px;height:50px;border-radius:50%;background:var(--pale);display:grid;place-items:center;color:var(--blue);margin-bottom:22px}
 .preview-mark .ui-icon{width:26px;height:26px}
 .ui-icon{display:inline-block;width:20px;height:20px;vertical-align:middle;flex-shrink:0}.button>span,.text-link>span{display:inline-flex;align-items:center}.button .ui-icon{width:22px;height:22px}.dialog-close .ui-icon{width:20px;height:20px}.profile-arrow .ui-icon{width:19px;height:19px}.success-check .ui-icon{width:26px;height:26px}.social-links .ui-icon,.footer .ui-icon{width:15px;height:15px}.additional summary:after{content:'';width:14px;height:14px;top:27px;background:linear-gradient(var(--blue),var(--blue)) center/14px 1.5px no-repeat,linear-gradient(var(--blue),var(--blue)) center/1.5px 14px no-repeat}.additional details[open] summary:after{content:'';background:linear-gradient(var(--blue),var(--blue)) center/14px 1.5px no-repeat}
+
+/* Equal side columns keep the navigation on the page centre. */
+@media(min-width:1101px){
+ .header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);column-gap:24px}
+ .header .brand{justify-self:start}
+ .header nav{justify-self:center;white-space:nowrap;gap:clamp(20px,1.7vw,30px)}
+ .header-actions{justify-self:end;gap:16px;white-space:nowrap}
+ .header-actions .button{white-space:nowrap}
+}
+@media(min-width:1101px) and (max-width:1399px){
+ .header-phone{display:none}
+ .header-actions{gap:12px}
+ .header-actions .button{padding:14px 18px;gap:12px;font-size:13px}
+}
+@media(min-width:761px) and (max-width:1100px){
+ .header{display:flex}
+ .header-actions{margin-left:auto;gap:14px}
+ .header-phone{display:none}
+ .header nav{display:none;position:absolute;top:104px;left:0;right:0;padding:20px 4vw;background:white;box-shadow:0 12px 20px #183b4f10}
+ .header nav.open{display:flex;flex-direction:column;gap:6px}
+ .menu-toggle{display:flex;flex-direction:column;justify-content:center;gap:6px;background:none;border:0;width:32px;height:44px;padding:4px}
+ .menu-toggle span{height:1.5px;width:23px;background:var(--deep)}
+}
+@media(max-width:760px){.header-actions{margin-left:auto}.header-actions .button{white-space:nowrap}}
+@media(max-width:420px){
+ .header .brand{width:110px}
+ .header-actions .button{width:94px;min-height:44px;white-space:normal;line-height:1.2;padding:9px 8px;text-align:center;justify-content:center}
+}
+@media(max-width:360px){.header .brand{width:82px}.header-actions{gap:6px}.header{gap:6px}}
