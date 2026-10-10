@@ -47,4 +47,16 @@ h1,h2,h3{font-family:"DM Sans",Manrope,Arial,sans-serif;font-weight:500;letter-s
 @media(max-width:1100px){.header-phone{display:inline-flex;font-size:13px}.header-actions{gap:16px}.hero h1{max-width:590px}}
 @media(max-width:760px){:root{scroll-padding-top:88px}.header{gap:10px}.header nav{top:82px}.header-actions{gap:8px}.header-actions .button{font-size:11px}.header-phone{display:none}.language-select{min-width:54px;padding:9px 22px 9px 8px}.language-control:after{right:8px}.hero h1{max-width:550px;font-size:clamp(2.55rem,9vw,3.8rem);line-height:1.09}.hero-content{animation-duration:.65s}.hero-actions{animation-delay:.08s}.feature-photo{aspect-ratio:1.45}.feature-photo img{min-height:0;height:270px}}
 @media(prefers-reduced-motion:reduce){[data-reveal],.hero-content,.hero-actions{opacity:1;transform:none;animation:none!important;transition:none!important}}
+
+/* Give the preview a clear route to an actual appointment. */
+.demo-note{padding:14px 16px;background:var(--pale);border-left:3px solid var(--blue);border-radius:7px;color:var(--ink)}
+.demo-note p{line-height:1.55}
+.demo-contact-links,.booking-live-contact{display:flex;flex-wrap:wrap;gap:10px 20px}
+.demo-contact-links{margin-top:10px}
+.demo-contact-links a,.booking-live-contact a{color:var(--blue);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.booking-live-contact{align-items:center;padding:17px 0 0}
+.booking-live-contact p{width:100%;font-size:13px;line-height:1.5}
+#booking-success .booking-live-contact+.button{margin-top:24px}
+.preview-mark{width:50px;height:50px;border-radius:50%;background:var(--pale);display:grid;place-items:center;color:var(--blue);margin-bottom:22px}
+.preview-mark .ui-icon{width:26px;height:26px}
 .ui-icon{display:inline-block;width:20px;height:20px;vertical-align:middle;flex-shrink:0}.button>span,.text-link>span{display:inline-flex;align-items:center}.button .ui-icon{width:22px;height:22px}.dialog-close .ui-icon{width:20px;height:20px}.profile-arrow .ui-icon{width:19px;height:19px}.success-check .ui-icon{width:26px;height:26px}.social-links .ui-icon,.footer .ui-icon{width:15px;height:15px}.additional summary:after{content:'';width:14px;height:14px;top:27px;background:linear-gradient(var(--blue),var(--blue)) center/14px 1.5px no-repeat,linear-gradient(var(--blue),var(--blue)) center/1.5px 14px no-repeat}.additional details[open] summary:after{content:'';background:linear-gradient(var(--blue),var(--blue)) center/14px 1.5px no-repeat}

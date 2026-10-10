@@ -1,26 +1,26 @@
 [
   {
-    "file": "desktop.mp4",
-    "bytes": 889408
+    "file": "breoris-hero-desktop.mp4",
+    "bytes": 157184
   },
   {
-    "file": "desktop.webm",
-    "bytes": 986881
+    "file": "breoris-hero-desktop.webm",
+    "bytes": 96436
   },
   {
-    "file": "desktop-light.mp4",
-    "bytes": 332035
+    "file": "breoris-hero-desktop-light.mp4",
+    "bytes": 51351
   },
   {
-    "file": "mobile.mp4",
-    "bytes": 886808
+    "file": "breoris-hero-mobile.mp4",
+    "bytes": 160702
   },
   {
-    "file": "mobile.webm",
-    "bytes": 1081345
+    "file": "breoris-hero-mobile.webm",
+    "bytes": 94251
   },
   {
-    "file": "mobile-light.mp4",
-    "bytes": 227138
+    "file": "breoris-hero-mobile-light.mp4",
+    "bytes": 33328
   }
 ]

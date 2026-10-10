@@ -1,0 +1,61 @@
+.doctor-page{background:#fff;color:#163c5a}
+.doctor-main{max-width:1440px;margin:auto;padding:28px max(5vw,24px) 72px}
+.doctor-breadcrumbs{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 36px;font-size:13px;line-height:1.7;color:#476265}
+.doctor-breadcrumbs a{text-decoration:underline;text-underline-offset:4px}
+.physician-intro{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(30px,6vw,90px);align-items:center}
+.physician-photo{margin:0;border-radius:16px;overflow:hidden;background:#edf3f4}
+.physician-photo img{width:100%;height:auto;max-height:660px;object-fit:contain}
+.doctor-eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:#476265;margin-bottom:18px}
+.physician-summary h1,.directory-heading h1{font-size:clamp(34px,4.3vw,62px);line-height:1.12;overflow-wrap:anywhere}
+.physician-label{margin-top:14px;color:#476265;font-size:14px}
+.physician-specialties{margin-top:10px;font-size:20px;line-height:1.5;color:#235b92}
+.physician-experience{margin-top:18px;font-weight:600}
+.physician-actions{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:28px}
+.physician-phone{font-size:20px;font-weight:600;min-height:44px;display:inline-flex;align-items:center;white-space:nowrap}
+.physician-address{font-size:13px;color:#476265;margin-top:20px}
+.physician-details{max-width:940px;margin:64px auto 0}
+.physician-details section{padding:30px 0;border-top:1px solid #dce5e8}
+.physician-details h2{font-size:clamp(25px,3vw,34px);margin-bottom:22px}
+.physician-facts{margin:0}
+.physician-facts>div{display:grid;grid-template-columns:190px 1fr;gap:20px;padding:12px 0;line-height:1.65}
+.physician-facts dt{font-weight:600}.physician-facts dd{margin:0;color:#365567}
+.physician-details li{margin:8px 0;line-height:1.65}
+.physician-details a{text-underline-offset:4px}.physician-details a:hover{text-decoration:underline}
+.physician-reviews{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.physician-reviews h2{margin-bottom:12px}.physician-rating{font-size:18px;color:#235b92;text-decoration:underline}
+.physician-source{color:#476265;font-size:13px;margin-top:16px}
+.physician-prices{list-style:none;padding:0}.physician-prices li{display:flex;justify-content:space-between;gap:20px}
+.directory-heading{max-width:760px;margin-bottom:42px}.directory-heading>p:not(.doctor-eyebrow){margin-top:20px;color:#476265}
+.physician-directory-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 28px}
+.physician-directory-card{min-width:0;display:flex;flex-direction:column}.physician-directory-card img{width:100%;height:360px;object-fit:cover;object-position:top;border-radius:12px;background:#edf3f4}
+.physician-directory-card h2{font-size:23px;line-height:1.25;margin-top:18px}.physician-directory-card p{font-size:14px;color:#476265;margin-top:8px}.physician-directory-card .button{align-self:flex-start;margin-top:auto}.physician-directory-card .card-details{padding-bottom:20px}
+.doctor-page dialog{width:min(540px,calc(100% - 24px));max-height:calc(100dvh - 32px);border:0;border-radius:16px;padding:28px;color:#163c5a;overflow:auto}
+.doctor-page dialog::backdrop{background:#163c5a80;backdrop-filter:blur(4px)}
+.physician-form-head{position:relative;display:flex;justify-content:space-between;gap:20px;align-items:start;padding-right:40px;margin-bottom:20px}
+.physician-form-head h2{font-size:29px}.physician-form-head .dialog-close{position:absolute;top:-8px;right:-8px;font-size:30px;min-width:44px;min-height:44px}
+.doctor-page form label{display:block;font-size:14px;font-weight:600;margin:18px 0 8px}.doctor-page form input:not([type=radio]),.doctor-page form select,.doctor-page form textarea{width:100%;max-width:100%;padding:12px;border:1px solid #9bafb8;border-radius:8px;min-height:48px;background:#fff;color:#163c5a;font:inherit}.doctor-page form textarea{resize:vertical}
+.doctor-page form .button{margin-top:20px;width:100%}.doctor-page form [aria-invalid=true]{border-color:#ad3030!important}
+.physician-stars{border:0;padding:0;margin:20px 0;display:flex;gap:8px;flex-wrap:wrap}.physician-stars legend{font-weight:600;font-size:14px;margin-bottom:10px}.doctor-page .physician-stars label{display:flex;align-items:center;gap:5px;min-width:54px;min-height:44px;padding:7px;border:1px solid #9bafb8;border-radius:8px;margin:0;cursor:pointer}.physician-stars label:has(input:checked){background:#e4f2f2;border-color:#235b92}.physician-stars input{accent-color:#235b92}
+.review-count{text-align:right;font-size:12px;color:#476265}.review-moderation,.physician-form-contact{font-size:13px;color:#476265}.physician-form-contact{margin-top:18px}.physician-form-contact a{text-decoration:underline;display:inline-block;min-height:44px;line-height:44px}
+.form-status{padding:12px;border-radius:8px;margin-top:18px;background:#eef4f5;color:#163c5a}.form-status[data-state=error]{background:#fff0ed;color:#822b22}.form-status[data-state=success]{background:#e6f4ed;color:#19563e}
+.doctor-page .header-actions .button{white-space:nowrap}.doctor-page .footer{margin-top:0}
+@media(max-width:1000px){.physician-directory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.physician-directory-card img{height:330px}}
+@media(max-width:760px){.doctor-main{padding:18px 20px 40px}.doctor-breadcrumbs{font-size:12px;gap:7px;margin-bottom:24px}.physician-intro{display:flex;flex-direction:column;gap:30px;align-items:stretch}.physician-summary{order:0}.physician-photo{order:1;max-width:440px;width:100%;margin:auto}.physician-summary h1,.directory-heading h1{font-size:33px}.doctor-eyebrow{font-size:10px;margin-bottom:12px}.physician-specialties{font-size:17px}.physician-actions{margin-top:18px;gap:10px 18px}.physician-phone{font-size:18px}.physician-address{margin-top:12px}.physician-details{margin-top:36px}.physician-facts>div{grid-template-columns:1fr;gap:4px}.physician-reviews{align-items:flex-start;flex-direction:column}.physician-directory-grid{grid-template-columns:1fr;gap:34px}.physician-directory-card img{height:auto;max-height:440px;object-fit:contain}.doctor-page .mobile-booking{padding-bottom:calc(12px + env(safe-area-inset-bottom));gap:12px}.doctor-page .mobile-booking>a{font-size:13px;white-space:nowrap}.doctor-page .footer{padding-bottom:calc(100px + env(safe-area-inset-bottom))}.doctor-page dialog{padding:22px}.physician-form-head h2{font-size:26px}}
+
+/* Collapsible information sections shared by all doctor profiles. */
+.physician-accordion{border-top:1px solid #dce5e8}
+.physician-accordion summary{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:80px;padding:18px 0;cursor:pointer;list-style:none}
+.physician-accordion summary::-webkit-details-marker{display:none}
+.physician-accordion summary h2{margin:0;font-size:clamp(22px,2.5vw,30px);line-height:1.35}
+.physician-accordion summary:focus-visible{outline:2px solid #235b92;outline-offset:4px;border-radius:4px}
+.accordion-symbol{position:relative;flex:0 0 44px;height:44px;border:1px solid #dce5e8;border-radius:50%;color:#235b92;background:#f5f9fb}
+.accordion-symbol::before,.accordion-symbol::after{content:"";position:absolute;top:21px;left:13px;width:16px;height:2px;background:currentColor}
+.accordion-symbol::after{transform:rotate(90deg)}
+.physician-accordion[open] .accordion-symbol::after{transform:rotate(0)}
+.physician-accordion summary:hover .accordion-symbol{background:#e5f0f6;border-color:#235b92}
+.accordion-content{padding:0 0 24px}
+@media(max-width:760px){.physician-accordion summary{min-height:76px;gap:14px}.physician-accordion summary h2{font-size:22px}}
+
+.physician-summary-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 18px;margin-top:24px;padding:14px 18px;background:#eef5f8;border-radius:10px;width:fit-content;color:#163c5a}
+.physician-summary-price span{font-size:15px}.physician-summary-price strong{font-size:24px;white-space:nowrap;font-weight:700}
+.physician-summary-price + .physician-actions{margin-top:18px}

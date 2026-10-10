@@ -1,58 +1,59 @@
-/* Native video and a reusable SVG signal. No animation framework shipped. */
+/* Play the brand film once per page load, then keep its clean final frame. */
 (() => {
  'use strict';
  const hero=document.querySelector('.hero');
  const video=document.querySelector('.hero-video');
- const poster=document.querySelector('.hero-poster img');
+ const poster=document.querySelector('.hero-poster');
  if(!hero||!video)return;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
- const mobile=matchMedia('(max-width: 760px)');
  const connection=navigator.connection;
- let visible=true,variant='',generation=0;
- const allowed=()=>!reduced.matches&&!connection?.saveData;
+ let visible=false,posterReady=false,failed=false,finished=false;
+ const allowed=()=>!failed&&!reduced.matches&&!connection?.saveData;
  const play=()=>{
-  if(!variant||!allowed()||!visible||document.hidden){video.pause();return;}
-  const current=generation;
-  video.play().then(()=>{if(current===generation&&allowed()&&visible&&!document.hidden)video.classList.add('is-playing');else video.pause()}).catch(()=>video.classList.remove('is-playing'));
+  if(finished)return;
+  hero.classList.toggle('is-static',!allowed());
+  if(!allowed()){video.pause();video.classList.remove('is-playing');hero.classList.remove('is-playing-film');return;}
+  if(!visible||document.hidden||!posterReady){video.pause();return;}
+  if(!video.paused)return;
+  hero.classList.add('is-playing-film');
+  video.play().catch(error=>{
+   if(error.name==='AbortError'&&(!visible||document.hidden))return;
+   failed=true;play();
+  });
  };
- const configure=()=>{
-  if(!allowed()){
-   generation++;video.pause();video.classList.remove('is-playing');video.replaceChildren();video.removeAttribute('src');video.load();variant='';return;
-  }
-  const next=mobile.matches?'mobile':'desktop';
-  if(next===variant){play();return;}
-  generation++;variant=next;video.pause();video.classList.remove('is-playing');
-  video.poster=`assets/motion/${next}-poster.webp`;
-  video.replaceChildren();
-  for(const [ext,type] of [['webm','video/webm'],['mp4','video/mp4']]){
-   const source=document.createElement('source');source.src=`assets/motion/${next}.${ext}?v=inside-insight-5`;source.type=type;video.append(source);
-  }
-  video.muted=true;video.defaultMuted=true;video.load();play();
+ video.muted=true;video.defaultMuted=true;video.playsInline=true;video.loop=false;
+ video.addEventListener('canplay',play);
+ // Reveal against a decoded, presented frame rather than coarse timeupdate events.
+ const revealAt=4.25;
+ let frameRequest=null;
+ const presentFrame=(_now,metadata)=>{
+  frameRequest=null;
+  if(allowed())video.classList.add('is-playing');
+  if(metadata.mediaTime>=revealAt)hero.classList.add('is-revealing');
+  if(!video.paused&&!video.ended)frameRequest=video.requestVideoFrameCallback(presentFrame);
  };
- video.addEventListener('loadeddata',play);
- video.addEventListener('error',()=>{video.classList.remove('is-playing');video.pause()});
+ video.addEventListener('playing',()=>{
+  if('requestVideoFrameCallback' in video){
+   if(frameRequest===null)frameRequest=video.requestVideoFrameCallback(presentFrame);
+  }else if(allowed())video.classList.add('is-playing');
+ });
+ video.addEventListener('timeupdate',()=>{
+  if(!('requestVideoFrameCallback' in video)&&video.currentTime>=revealAt)hero.classList.add('is-revealing');
+ });
+ video.addEventListener('ended',()=>{
+  finished=true;
+  hero.classList.remove('is-playing-film');
+  hero.classList.add('is-finished');
+  // Keep the actual last video frame: switching to a poster causes a visible cut.
+  hero.classList.add('is-revealing');
+ });
+ video.addEventListener('error',()=>{failed=true;play()});
  document.addEventListener('visibilitychange',play);
- reduced.addEventListener('change',configure);mobile.addEventListener('change',configure);
- connection?.addEventListener?.('change',configure);
+ reduced.addEventListener('change',play);
+ connection?.addEventListener?.('change',play);
  const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;play()},{threshold:.05});observer.observe(hero);
- // The picture is the LCP asset. Request video only after it has loaded.
- const start=()=>{if('requestIdleCallback' in window)requestIdleCallback(configure,{timeout:1500});else setTimeout(configure,150)};
- if(poster.complete)start();else {poster.addEventListener('load',start,{once:true});poster.addEventListener('error',start,{once:true})}
-
- const bridge=document.querySelector('.signal-bridge');
- const path=document.querySelector('#bridge-signal');
- const organ=document.querySelector('#bridge-organ');
- let scheduled=false;
- const draw=()=>{
-  scheduled=false;if(!bridge||!path)return;
-  const rect=bridge.getBoundingClientRect();
-  if(rect.bottom<0||rect.top>innerHeight)return;
-  const p=reduced.matches?1:Math.max(0,Math.min(1,(innerHeight-rect.top)/(innerHeight*.8)));
-  const amp=Math.sin(p*Math.PI)*42;
-  let d='';for(let i=0;i<=120;i++){const x=i*10;const z=(x-600)/35;const y=100+amp*(-Math.exp(-z*z)+.38*Math.exp(-((z-1.1)**2)/.25));d+=`${i?'L':'M'}${x} ${y.toFixed(2)} `}
-  path.setAttribute('d',d);path.style.strokeDashoffset=String((1-p)*1200);
-  if(organ)organ.style.opacity=String(reduced.matches?0:Math.sin(p*Math.PI)*.24);
- };
- const schedule=()=>{if(!scheduled){scheduled=true;requestAnimationFrame(draw)}};
- addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule,{passive:true});reduced.addEventListener('change',schedule);draw();
+ // Load the video after its poster is available.
+ if(allowed())hero.classList.add('is-playing-film');
+ const start=()=>{posterReady=true;play()};
+ if(poster?.complete)start();else {poster?.addEventListener('load',start,{once:true});poster?.addEventListener('error',start,{once:true})}
 })();

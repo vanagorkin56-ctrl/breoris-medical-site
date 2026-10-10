@@ -1,0 +1,69 @@
+/* Six independent layers: room, scrim, consultation, badges, live copy, scroll cue. */
+.hero.cinematic-hero{height:calc(100svh - 104px);min-height:700px;max-height:1000px;background:#e8e9e1;color:#173e46;isolation:isolate;overflow:hidden}
+.cinematic-hero:after{display:none}
+.cinema-room{position:absolute;inset:-9%;z-index:-5;will-change:transform;pointer-events:none}
+.cinema-arrival,.cinema-zoom,.cinema-room picture,.cinema-room img{display:block;width:100%;height:100%}
+.cinema-room img{object-fit:cover;object-position:58% center}
+.cinema-arrival{animation:cinema-arrive 1.4s cubic-bezier(.16,1,.3,1) both}
+.cinema-zoom{animation:cinema-breathe 20s linear infinite alternate;will-change:transform}
+.cinema-scrim{position:absolute;inset:0;z-index:-4;pointer-events:none;background:linear-gradient(90deg,rgba(244,245,239,.97) 0%,rgba(244,245,239,.88) 34%,rgba(244,245,239,.3) 58%,rgba(244,245,239,.04) 80%),linear-gradient(0deg,rgba(0,0,0,.4),transparent 42%);animation:cinema-fade .8s .2s both}
+.cinema-consult{position:absolute;right:8%;top:12%;width:32%;height:69%;max-width:520px;z-index:-2;will-change:transform;pointer-events:none}
+.cinema-consult picture{display:block;height:100%;border-radius:160px 160px 22px 22px;overflow:hidden;border:1px solid #ffffffb3;box-shadow:0 28px 65px #183f4626;animation:cinema-rise 1s .5s cubic-bezier(.16,1,.3,1) both}
+.cinema-consult img{width:100%;height:100%;object-fit:cover;object-position:62% 42%}
+.cinematic-hero .hero-content{position:relative;width:53%;max-width:820px;padding:clamp(70px,10vh,125px) 0 125px 5vw;animation:none;will-change:transform,opacity}
+.cinematic-hero .hero-eyebrow{font-size:10px;letter-spacing:.16em;margin-bottom:28px;color:#466564}
+.cinematic-hero h1{font-size:clamp(44px,4.65vw,80px);line-height:1.035;letter-spacing:-.055em;max-width:680px;font-weight:500;text-wrap:initial}
+.cinematic-hero h1>span{color:#3d7376}.cinema-line{display:block;animation:cinema-rise .6s cubic-bezier(.16,1,.3,1) both}.cinema-line:nth-child(1){animation-delay:.4s}.cinema-line:nth-child(2){animation-delay:.48s}.cinema-line:nth-child(3){animation-delay:.56s}
+.cinematic-hero .hero-content>p{font-size:16px;line-height:1.75;color:#3e5d61;max-width:395px;margin-top:27px;animation:cinema-rise .5s .8s cubic-bezier(.16,1,.3,1) both}
+.cinematic-hero .hero-actions{margin-top:30px;gap:25px;animation:cinema-cta .6s 1s cubic-bezier(.34,1.25,.64,1) both}
+.cinematic-hero .button.white{background:#285f78;color:#fff;border-radius:9px}
+.cinematic-hero .text-link.light{color:#234c53;border-color:#65878b88}
+.cinema-badge{position:absolute;z-index:2;will-change:transform}
+.cinema-badge button{display:flex;align-items:center;gap:12px;min-height:59px;padding:11px 17px;border:1px solid #fff9;background:#f7fcf0df;border-radius:14px;color:#214e55;box-shadow:0 12px 40px #1d44481a;backdrop-filter:blur(14px);font:inherit;font-size:13px;animation:cinema-cta .6s both;animation-delay:var(--delay)}
+.cinema-badge button:focus-visible{outline:3px solid #285f78;outline-offset:5px}
+.cinema-badge svg{width:25px;height:25px;stroke:#45888b;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.cinema-badge-float{animation:cinema-float var(--duration) ease-in-out infinite alternate;animation-delay:var(--phase);will-change:transform}
+.cinema-badge:focus-within .cinema-badge-float,.cinema-badge:hover .cinema-badge-float{animation-play-state:paused}
+.cinema-badge.one{left:55%;top:16%;--delay:1.2s;--duration:4.8s;--phase:-1s}
+.cinema-badge.two{right:3%;top:41%;--delay:1.35s;--duration:5.7s;--phase:-3s}
+.cinema-badge.three{left:55%;bottom:21%;--delay:1.5s;--duration:5.2s;--phase:-2s}
+.cinema-badge.four{right:4%;bottom:13%;--delay:1.65s;--duration:4.6s;--phase:-.6s}
+.cinematic-hero .hero-bottom{color:white;border-color:#ffffff70;font-size:10px;bottom:24px;right:28%;padding-top:15px}.cinematic-hero .hero-bottom i{background:#d3eae2}
+.cinema-scroll{position:absolute;left:50%;bottom:27px;z-index:3;display:flex;align-items:center;gap:10px;color:#fff;font-size:11px;animation:cinema-fade .6s 1.8s both}
+.cinema-scroll svg{width:15px;height:30px;animation:cinema-down 1.5s ease-in-out infinite}
+.cinematic-hero~.signal-bridge{display:none}.cinematic-hero~.intro{position:relative;background:#fff;z-index:3}
+.cinematic-hero.is-offscreen .cinema-zoom,.cinematic-hero.is-offscreen .cinema-badge-float,.cinematic-hero.is-offscreen .cinema-scroll svg{animation-play-state:paused}
+@keyframes cinema-arrive{from{opacity:0;transform:scale(1.05)}to{opacity:1;transform:scale(1)}}
+@keyframes cinema-breathe{from{transform:scale(1)}to{transform:scale(1.08)}}
+@keyframes cinema-fade{from{opacity:0}to{opacity:1}}
+@keyframes cinema-rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cinema-cta{from{opacity:0;transform:scale(.93) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes cinema-float{from{transform:translateY(-8px)}to{transform:translateY(8px)}}
+@keyframes cinema-down{0%,100%{transform:translateY(-3px)}50%{transform:translateY(5px)}}
+@media(min-width:761px) and (max-width:1100px){.cinematic-hero h1{font-size:clamp(40px,4.8vw,53px)}.cinema-consult{right:5%;width:35%;height:61%;top:17%}.cinema-badge.one{left:56%;top:12%}.cinema-badge.three{left:56%;bottom:20%}.cinema-badge button{font-size:11px;padding:10px;gap:7px}.cinematic-hero .hero-content{width:54%}.cinematic-hero .hero-content>p{font-size:14px;max-width:340px}}
+@media(max-width:760px){
+ .hero.cinematic-hero{height:auto;min-height:1000px;max-height:none;aspect-ratio:auto;background:#f0f1e9}
+ .cinema-room{inset:35% -20% -3%;opacity:.75}.cinema-room img{object-position:65% center}
+ .cinema-scrim{background:linear-gradient(180deg,#f3f4ed 0%,#f3f4ed 34%,#f3f4ed30 65%,#143b4366 100%)}
+ .cinematic-hero .hero-content{width:100%;max-width:none;padding:40px 24px 0}
+ .cinematic-hero .hero-eyebrow{font-size:9px;margin-bottom:23px}
+ .cinematic-hero h1{font-size:clamp(38px,10vw,63px);line-height:1.06;letter-spacing:-.05em}
+ .cinematic-hero .hero-content>p{font-size:13px;line-height:1.7;margin-top:22px;max-width:340px}
+ .cinematic-hero .hero-actions{gap:22px;margin-top:25px;flex-direction:row;align-items:center}
+ .cinematic-hero .hero-actions .button{font-size:12px;padding:13px 16px;gap:15px}.cinematic-hero .text-link.light{font-size:12px;gap:12px}
+ .cinema-consult{width:65%;height:370px;top:auto;bottom:190px;right:13%;max-width:340px}
+ .cinema-consult picture{border-radius:110px 110px 18px 18px;animation:cinema-rise .7s .3s both}
+ .cinema-line{animation:cinema-rise .6s .2s both!important}
+ .cinema-badge button{min-height:48px;padding:10px 12px;font-size:11px;gap:8px}.cinema-badge svg{width:21px;height:21px}
+ .cinema-badge.one{left:6%;top:auto;bottom:500px}.cinema-badge.two{right:5%;top:auto;bottom:340px}.cinema-badge.three{left:6%;bottom:185px}.cinema-badge.four{display:none}
+ .cinematic-hero .hero-bottom{left:24px;right:24px;bottom:24px;font-size:10px;gap:4px;line-height:1.5}
+ .cinema-scroll{left:24px;bottom:113px;font-size:10px}
+ .cinema-badge-float{animation:none}
+}
+@media(prefers-reduced-motion:reduce){.cinematic-hero *{animation:none!important;transition:none!important;will-change:auto!important}.cinematic-hero .hero-content{opacity:1!important;transform:none!important}.cinema-room,.cinema-consult,.cinema-badge{transform:none!important}.cinema-arrival{animation:cinema-fade .2s both!important}}
+.cinematic-hero h1>.cinema-line:first-child{color:#173e46}
+.cinematic-hero .hero-bottom{color:#244a51;border-color:#486d704d;font-size:11px}
+.cinema-scroll{left:5vw;bottom:85px;color:#244a51}
+@media(max-width:760px){.cinematic-hero .hero-bottom{color:#fff;border-color:#ffffff70;font-size:10px}.cinema-scroll{left:24px;bottom:113px;color:#fff}}
+@media(min-width:761px) and (max-width:1100px){.header{gap:14px;padding-inline:3vw}.header .header-phone{display:none}.header .brand{width:130px}.header nav{gap:15px;font-size:13px}.header-actions{gap:12px}.header-actions .button{padding:13px 16px;gap:15px}}
+@media(max-width:380px){.header{padding-inline:12px;gap:7px}.header .brand{width:95px}.header-actions{gap:6px}.header-actions .button{padding:10px;font-size:10px}.language-select{min-width:49px;padding-left:6px}.header .menu-toggle{width:28px}}

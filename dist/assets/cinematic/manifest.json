@@ -1,0 +1,86 @@
+[
+  {
+    "file": "interior-800.webp",
+    "bytes": 36450,
+    "width": 800,
+    "height": 450
+  },
+  {
+    "file": "interior-800.avif",
+    "bytes": 26600,
+    "width": 800,
+    "height": 450
+  },
+  {
+    "file": "interior-1600.webp",
+    "bytes": 104956,
+    "width": 1600,
+    "height": 900
+  },
+  {
+    "file": "interior-1600.avif",
+    "bytes": 74146,
+    "width": 1600,
+    "height": 900
+  },
+  {
+    "file": "consultation-640.webp",
+    "bytes": 28920,
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "consultation-640.avif",
+    "bytes": 23266,
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "consultation-1000.webp",
+    "bytes": 50830,
+    "width": 1000,
+    "height": 1250
+  },
+  {
+    "file": "consultation-1000.avif",
+    "bytes": 39863,
+    "width": 1000,
+    "height": 1250
+  },
+  {
+    "file": "ultrasound-1000.webp",
+    "bytes": 71552,
+    "width": 1000,
+    "height": 1000
+  },
+  {
+    "file": "ultrasound-1000.avif",
+    "bytes": 50973,
+    "width": 1000,
+    "height": 1000
+  },
+  {
+    "file": "laboratory-1000.webp",
+    "bytes": 32680,
+    "width": 1000,
+    "height": 1000
+  },
+  {
+    "file": "laboratory-1000.avif",
+    "bytes": 25356,
+    "width": 1000,
+    "height": 1000
+  },
+  {
+    "file": "reception-1200.webp",
+    "bytes": 78566,
+    "width": 1200,
+    "height": 675
+  },
+  {
+    "file": "reception-1200.avif",
+    "bytes": 59937,
+    "width": 1200,
+    "height": 675
+  }
+]

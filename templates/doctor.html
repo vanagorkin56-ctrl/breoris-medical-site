@@ -1,0 +1,10 @@
+<nav class="doctor-breadcrumbs" aria-label="Навігаційний ланцюжок"><a href="${root}index.html">Головна</a><span aria-hidden="true">›</span><a href="${root}ua/doctors/index.html">Лікарі</a><span aria-hidden="true">›</span><span aria-current="page">${name}</span></nav>
+<article>
+  <section class="physician-intro" aria-labelledby="physician-name">
+    <figure class="physician-photo"><img src="${photo}" width="${photo_width}" height="${photo_height}" alt="Фотографія ${name}" title="${name}" fetchpriority="high"></figure>
+    <div class="physician-summary"><p class="doctor-eyebrow">BREORIS MEDICAL · Дніпро</p><h1 id="physician-name">${name}</h1><p class="physician-label">Лікар</p><p class="physician-specialties">${specialties}</p>${experience_badge}<div class="physician-actions"><button class="button primary" type="button" data-book data-physician="${id}">Записатися <span aria-hidden="true">↗</span></button><a class="physician-phone" href="tel:+380975323664" aria-label="Зателефонувати до клініки: +380 97 532 36 64">+380 97 532 36 64</a></div><p class="physician-address">Дніпро, вул. Української Добровольчої армії, 2-Б</p></div>
+  </section>
+  <div class="physician-details"><section aria-labelledby="facts-title"><h2 id="facts-title">Про лікаря</h2><dl class="physician-facts">${facts}</dl></section>${sections}
+  <section class="physician-reviews" aria-labelledby="reviews-title"><div><h2 id="reviews-title">Відгуки</h2>${rating}</div><button type="button" class="button outline" data-review data-physician="${id}">Залишити відгук</button></section>
+  <p class="physician-source">Профіль лікаря: <a href="${source_url}" target="_blank" rel="noopener noreferrer">DOC.UA ↗</a> · Дані від 06.10.2026</p></div>
+</article>

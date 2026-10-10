@@ -238,10 +238,18 @@ Content changes fade from 0.6 opacity and rise 8px over 0.28s with `cubic-bezier
 - Don't replace interface icons with platform-dependent text glyphs.
 - Don't present a requested time or a demonstration receipt as a confirmed appointment.
 
-## Signature motion extension — Inside → Insight
+## Signature motion extension — The Body as a Map
 
-The homepage hero now uses a deep ink surface (`#091d25`), the Breoris Signal (`#aadbd5`), translucent illustrative anatomy and an authentic physician portrait. The original blue/turquoise logo and blue navigation actions remain the brand anchor. Hero copy stays in HTML, with a calm left safe area on desktop and an upper safe area on mobile. Local motion styles live in `dist/hero-motion.css`.
+A luminous ivory (#f3f6f5), mist and pale-teal stage replaces the dark hero. Keep live text dark (#203e43), secondary copy #476265, and the signal #478d91. Rendered media contains only original illustrative anatomy and abstract geometry. Maintain a clear left 40% desktop area; mobile uses a distinct macro composition below the copy.
 
-The 12-second desktop and 10-second mobile compositions are independently framed. Slow camera travel, one subtle pulse, a scanning plane, and a continuous fine line establish the motion vocabulary. The line carries into a native-scroll SVG divider. Use the same thin stroke and restrained timing for future components; do not make essential information depend on movement.
+Both variants run 10 seconds / 300 frames / 30 fps. A frosted human figure turns five degrees as health points appear and connect. A narrow scan reveals selected anatomy. The constellation reorganizes into one signal, which curves back into the original body edge. Beginning and end share the same camera and surface state. All motion is deterministic and restrained. No doctor, baked copy or invented medical readings.
 
-The film loops automatically while visible. Reduced motion and Save-Data show a responsive poster. The browser pauses it when the hero is offscreen or the page is hidden. Source files, provenance, storyboards, exports and QA are documented in `../breoris-motion/README.md`.
+Keep the responsive poster beneath native video that plays once per page load. Reveal video only after sufficient data is decoded; show the clean final frame and live booking action after playback, and use the poster for reduced motion, Save-Data or rejected autoplay. Keep the same organic-to-clear-line path language in the scroll divider. The website does not load Remotion.
+
+### Body presence refinement
+
+Keep a 24% translucent material silhouette throughout the film. A feathered torso overlay reaches approximately 36% at the middle climax. Scan motion uses sinusoidal easing and a feathered reveal band. Heart, lungs and spine hold for 1.2 seconds before simplifying. Signal is 2 SVG units; node cores are smaller and quieter. Warm mist background stays #f3f6f5, with a soft radial depth field behind the body.
+
+## Current hero — cinematic photography
+
+Warm daylight, pale oak, chalk white and muted sherpa-blue. Independent architectural and consultation layers, restrained glass service badges, large live type. Backgrounds and consultation are generated illustrative campaign scenes. Desktop depth via 7/18/25–28px damped pointer motion and ScrollTrigger scrub; mobile disables parallax. All five new photographs share art direction; existing named physician portraits are unchanged. Photo manifest and provenance: `dist/assets/cinematic/manifest.json`, `../design/cinematic/prompts.json`.
