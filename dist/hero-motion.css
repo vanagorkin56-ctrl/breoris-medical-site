@@ -63,24 +63,24 @@
 .hero.is-playing-film:not(.is-revealing) .hero-service-shape{opacity:0;visibility:hidden;pointer-events:none;transition:none}
 .hero-service-shape:focus-visible{outline:3px solid #163c5a;outline-offset:5px;border-radius:12px}
 @media(hover:hover) and (pointer:fine){.hero-service-shape:hover>span:first-child{text-decoration:underline;text-underline-offset:4px}}
-/* Portrait layout preserves the desktop shapes and brand composition at readable sizes. */
+/* Mobile uses the same complete film and label coordinates as desktop. */
 @media(max-width:760px){
- .hero{height:auto;min-height:0;padding:32px 0 40px;display:block}
- .hero-stage{width:100%;max-width:520px;height:410px;aspect-ratio:auto;max-height:none;transform:none}
- .hero-media{top:40px;bottom:auto;height:auto;aspect-ratio:1440/816;clip-path:polygon(8% 40%,92% 40%,92% 43%,100% 43%,100% 100%,0 100%,0 43%,8% 43%)}
- .hero-services{inset:0 12px auto;display:grid;grid-template-columns:1fr 1.15fr 1fr 1fr;gap:8px;align-items:center;height:108px}
- .hero-service-shape{position:relative;left:auto;top:auto;width:100%;height:82px;font-size:12px;padding:4px;background:none;border-radius:0;color:#fff}
- .hero-service-shape::before{content:"";position:absolute;inset:0;z-index:-1;background:#235b92}
- .shape-ultrasound::before{inset:10px 2px;border-radius:15px;transform:rotate(-38deg);background:#338fc3}
- .shape-consultations{color:#163c5a;font-size:11px;height:84px;padding:8px 3px}
- .shape-consultations::before{border-radius:50%;background:#cdebed}
- .shape-labs::before{clip-path:polygon(32% 0,68% 0,68% 30%,100% 30%,100% 70%,68% 70%,68% 100%,32% 100%,32% 70%,0 70%,0 30%,32% 30%)}
- .shape-checkup{padding-left:10px}
- .shape-checkup::before{border-radius:100% 0 0 100%;transform:rotate(-8deg)}
- .hero-service-shape .shape-link{display:none}
- .hero-message{top:calc(40px + 56.67cqw + 14px);width:calc(100% - 32px);gap:18px}
+ .hero{height:auto;min-height:0;padding:20px 0 28px;display:block}
+ .hero-stage{width:100%;max-height:none;aspect-ratio:auto;transform:none}
+ .hero-media{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:1440/816;clip-path:none}
+ .hero-services{bottom:auto;height:56.6667cqw}
+ .hero-service-shape{font-size:2cqw}
+ .shape-consultations{font-size:1.65cqw;padding:.5%;width:12%;height:21.18%;left:19.69%;top:0}
+ .shape-labs{font-size:1.8cqw;width:9%;left:76.75%}
+ .shape-checkup{font-size:1.65cqw;width:7.5%;left:86.49%;white-space:nowrap}
+ .hero-message{position:relative;top:auto;left:auto;transform:none;margin:18px auto 0;width:calc(100% - 32px);gap:16px}
  .hero-message p{max-width:32ch;font-size:14px}
  .hero-book .ui-icon{width:20px;height:20px}
+ .hero-follow.section{padding-top:36px;padding-bottom:40px}
+ .mobile-booking{display:none!important}
+ .footer{padding-bottom:32px}
 }
-@media(min-width:450px) and (max-width:760px){.hero-stage{height:510px}.hero-services{inset-inline:20px;gap:18px;height:120px}.hero-service-shape{height:96px;font-size:14px}.shape-consultations{font-size:12px}.hero-media{top:90px}.hero-message{top:calc(90px + 56.67cqw + 14px)}}
+/* Safari can discard a paused video's decoded surface. Keep a real final image. */
+.hero.is-finished .hero-static{opacity:1;transition:none}
+.hero.is-finished .hero-video{opacity:0}
 @media(prefers-reduced-motion:reduce){.hero-service-shape,.hero.is-playing-film:not(.is-revealing) .hero-service-shape{opacity:1;visibility:visible;pointer-events:auto;transition:none}}
