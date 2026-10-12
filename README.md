@@ -59,3 +59,7 @@ Import this repository, use its root as Root Directory, and keep the framework p
 Real booking and Health24 are not connected. Homepage booking remains a demonstration; doctor page endpoints in `dist/doctor-pages-config.js` are empty. Reviews are manually supplied static content, so no Google API key is required. Keep server credentials outside `dist`. Preview noindex directives remain enabled.
 
 Release check (2026-10-10): all local HTML link/asset targets and JavaScript syntax passed. Headless Chrome checks passed at 1440px and 390px: feature images, contact panel open/Escape close, booking dialog open/close, physician accordion, no horizontal overflow or uncaught JavaScript errors. External embeds were excluded from this local test. Real appointment submission remains unconfigured.
+
+## Health24 connection check (2026-10-12)
+
+A server-only test diagnostic is available at `/api/health24/status` after deployment. It checks OAuth authorization and clinic employee-list access; it does not enable booking. See [HEALTH24.md](HEALTH24.md). Health24 clarified that the supplied access is currently for the test environment with an IP allowlist. Use `https://dev-ehr.h24.ua` for this stage. Appointment forms remain demonstrations/unconfigured until schedule and submission are integrated and verified.
