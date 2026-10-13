@@ -48,3 +48,16 @@ test('Vercel diagnostic returns no credential, token, staff name or raw upstream
     await handler({method:'POST'},res);assert.equal(code,405);
   } finally {global.fetch=original;for(const key of Object.keys(env))delete process.env[key];}
 });
+
+test('support details identify failing request but never expose arbitrary upstream content', async () => {
+  const client=createClient(configuration(env),async()=>new Response(JSON.stringify({error:'example-secret',message:'private-token'}),{status:403,headers:{'Content-Type':'application/json','server':'cloudflare','cf-ray':'abcdef0123456789-FRA'}}));
+  await assert.rejects(client.employees(),error=>{
+    assert.equal(error.diagnostic.path,'/oauth/token');
+    assert.equal(error.diagnostic.method,'POST');
+    assert.equal(error.diagnostic.cloudflareRayId,'abcdef0123456789-FRA');
+    assert.equal(error.diagnostic.responseKind,'json');
+    assert.ok(!JSON.stringify(error.diagnostic).includes('example-secret'));
+    assert.ok(!JSON.stringify(error.diagnostic).includes('private-token'));
+    return true;
+  });
+});

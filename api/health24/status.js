@@ -6,7 +6,7 @@ const messages = {
   missing_configuration: 'Додайте відсутні змінні середовища та виконайте Redeploy.',
   test_environment_required: 'Для цього етапу встановіть HEALTH24_API_BASE_URL=https://dev-ehr.h24.ua і виконайте Redeploy.',
   invalid_configuration: 'Перевірте адресу API та HEALTH24_LEGAL_ENTITY_ID.',
-  access_blocked: 'Health24 відхилив доступ (403). IP сервера Vercel може відрізнятися від IP вашого комп’ютера. Потрібне уточнення білого списку тестового середовища.',
+  access_blocked: 'Health24 повернув 403. Причина не підтверджена: потрібна перевірка запиту їхньою підтримкою.',
   authorization_failed: 'Health24 відхилив авторизацію. Перевірте доступи для тестового середовища.',
   network_error: 'Не вдалося отримати відповідь Health24. Можливе обмеження доступу або тимчасова недоступність.',
   unexpected_response: 'Health24 повернув неочікуваний формат відповіді.',
@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
         return { connected: true, environment: 'test', employeeCount: rows.filter(e => e.fired === false).length, message: 'Авторизація та доступ до списку працівників клініки підтверджені. Запис пацієнтів ще не увімкнено.' };
       } catch (e) {
         const code = Object.hasOwn(messages, e.code) ? e.code : 'upstream_error';
-        return { connected: false, environment: 'test', code, ...(e.upstreamStatus ? { upstreamStatus: e.upstreamStatus } : {}), message: messages[code] };
+        return { connected: false, environment: 'test', code, ...(e.upstreamStatus ? { upstreamStatus: e.upstreamStatus } : {}), ...(e.diagnostic ? { diagnostic: e.diagnostic } : {}), message: messages[code] };
       }
     })();
     try { lastResult = await pending; lastAt = Date.now(); } finally { pending = null; }

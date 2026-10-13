@@ -1,7 +1,7 @@
 'use strict';
 // Server-only: never import this file into dist/ or return upstream JSON.
 class Health24Error extends Error {
-  constructor(code, upstreamStatus) { super(code); this.code = code; this.upstreamStatus = upstreamStatus; }
+  constructor(code, upstreamStatus, diagnostic) { super(code); this.code = code; this.upstreamStatus = upstreamStatus; this.diagnostic = diagnostic; }
 }
 function configuration(env = process.env) {
   const required = ['HEALTH24_API_BASE_URL', 'HEALTH24_CLIENT_ID', 'HEALTH24_CLIENT_SECRET', 'HEALTH24_LEGAL_ENTITY_ID'];
@@ -23,7 +23,25 @@ function createClient(config, fetcher = fetch) {
     try {
       response = await fetcher(config.base + path, { ...options, redirect: 'error', signal: AbortSignal.timeout(8000), headers: { 'Content-Type': 'application/json', Accept: 'application/json', ...options.headers } });
     } catch { throw new Health24Error('network_error'); }
-    if (!response.ok) throw new Health24Error(response.status === 403 ? 'access_blocked' : response.status === 401 ? 'authorization_failed' : 'upstream_error', response.status);
+    if (!response.ok) {
+      const contentType = response.headers.get('content-type') || '';
+      const ray = response.headers.get('cf-ray') || '';
+      const diagnostic = {
+        method: options.method || 'GET', path: path.split('?')[0],
+        checkedAt: new Date().toISOString(),
+        responseKind: contentType.includes('application/json') ? 'json' : contentType.includes('text/html') ? 'html' : 'other',
+        ...(response.headers.get('server')?.toLowerCase() === 'cloudflare' ? { server: 'cloudflare' } : {}),
+        ...(/^[a-f0-9]{8,32}(?:-[a-z]{3})?$/i.test(ray) ? { cloudflareRayId: ray } : {})
+      };
+      // Only documented OAuth error codes may leave the server; no raw response text.
+      if (diagnostic.responseKind === 'json') {
+        try {
+          const body = await response.json();
+          if (['invalid_client', 'invalid_grant', 'invalid_scope', 'unauthorized_client', 'unsupported_grant_type', 'access_denied'].includes(body.error)) diagnostic.oauthError = body.error;
+        } catch { /* The HTTP status remains useful even with invalid JSON. */ }
+      }
+      throw new Health24Error(response.status === 403 ? 'access_blocked' : response.status === 401 ? 'authorization_failed' : 'upstream_error', response.status, diagnostic);
+    }
     if (!response.headers.get('content-type')?.includes('application/json')) throw new Health24Error('unexpected_response');
     try { return await response.json(); } catch { throw new Health24Error('unexpected_response'); }
   }
