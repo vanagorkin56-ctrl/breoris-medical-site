@@ -75,6 +75,16 @@ function createClient(config, fetcher = fetch) {
       throw error;
     }
   }
-  return { employees, legalEntities };
+  async function schedule(employeeId, periodStart, periodEnd) {
+    if (!/^[1-9]\d*$/.test(String(employeeId)) || !Number.isSafeInteger(Number(employeeId))) throw new Health24Error('invalid_configuration');
+    const validDate = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
+    if (!validDate(periodStart) || !validDate(periodEnd) || periodEnd < periodStart || Date.parse(periodEnd) - Date.parse(periodStart) > 30 * 86400000) throw new Health24Error('invalid_schedule_range');
+    const bearer = await authorize();
+    const query = new URLSearchParams({ period_start: periodStart, period_end: periodEnd });
+    const days = await json('/api/v4/employees/' + employeeId + '/schedule?' + query, { headers: { Authorization: 'Bearer ' + bearer } });
+    if (!days || typeof days !== 'object' || Array.isArray(days) || Object.keys(days).length > 31 || Object.entries(days).some(([date, slots]) => !validDate(date) || date < periodStart || date > periodEnd || !Array.isArray(slots) || slots.length > 1000 || slots.some(slot => typeof slot !== 'string'))) throw new Health24Error('unexpected_schedule_response');
+    return days;
+  }
+  return { employees, legalEntities, schedule };
 }
 module.exports = { configuration, createClient, Health24Error };

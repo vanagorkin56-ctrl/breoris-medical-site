@@ -42,3 +42,11 @@ The owner ran the local checker from the approved workstation using test legal_e
 `dist/contact-booking.js` currently routes all homepage, service, physician-card and physician-page booking buttons to the clinic phone and Telegram. It preserves the selected physician/service as visible context. It collects no personal data, shows no invented schedule, sends no automatic message and does not claim that an appointment was created. The clinic administrator confirms the visit. The former demonstration form is not offered to visitors, and its optional browser tool is not registered in contact mode.
 
 Before switching to Health24 booking, confirm matching production credentials/entity, stable outbound access, the actual schedule response and a full approved test of visit creation. Add the required patient fields at that stage. Do not redirect the production contact actions into the test organization.
+
+## Local schedule inspection
+
+Run `zsh scripts/check-health24-local.command --schedule` from the repository on the approved workstation. Enter test entity 22356 and the OAuth credentials at the hidden prompts. After employee lookup, it reads each active employee's documented schedule endpoint for today through the next 13 days in Europe/Kyiv, bounded to 10 employees.
+
+The report is saved to the Git-ignored `.health24-local/schedule.json` with private file permissions. It contains numeric employee IDs, date ranges, counts and up to three time-shaped slot samples for up to three dates per employee. Other strings are represented only by their length. It excludes employee names, contacts, OAuth credentials, tokens and arbitrary response fields. Empty schedules are retained as an availability result; no appointment duration or free time is invented. No visits are created. A successful run proves only read access from that workstation.
+
+The report is a diagnostic, not a booking slot parser: the actual encoding must be confirmed before using it for period_start/period_end. Missing production access and the Vercel IP allowlist remain separate launch requirements. The schedule check has no public HTTP route.

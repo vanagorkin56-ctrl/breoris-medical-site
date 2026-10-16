@@ -78,3 +78,34 @@ test('test clinic discovery omits contacts; employee lookup uses only a valid se
   assert.equal(paths.length,count);
   assert.equal(paths.filter(url=>url.endsWith('/oauth/token')).length,1);
 });
+
+test('schedule reads use the documented path and reject invalid IDs or date ranges before sending', async () => {
+  const requests=[];
+  const client=createClient(configuration(env), async (url, options)=>{
+    requests.push(url);
+    if(url.endsWith('/oauth/token'))return json({access_token:'server-token',token_type:'Bearer',expires_in:3600});
+    assert.equal(options.headers.Authorization,'Bearer server-token');
+    assert.equal(url,'https://dev-ehr.h24.ua/api/v4/employees/123/schedule?period_start=2026-10-16&period_end=2026-10-29');
+    return json({'2026-10-16':['09:00-09:30']});
+  });
+  for(const args of [['123/../../visits','2026-10-16','2026-10-29'],[123,'2026-02-30','2026-03-01'],[123,'2026-10-29','2026-10-16'],[123,'2026-10-16','2026-12-16']])await assert.rejects(client.schedule(...args));
+  assert.equal(requests.length,0);
+  assert.deepEqual(await client.schedule(123,'2026-10-16','2026-10-29'),{'2026-10-16':['09:00-09:30']});
+});
+
+test('local schedule report keeps time examples and never exports arbitrary slot content or employee details', async () => {
+  const {scheduleReport}=require('../scripts/health24-schedule-report');
+  const client={async schedule(id,start,end){assert.equal(id,123);assert.equal(start,'2026-10-16');assert.equal(end,'2026-10-29');return {'2026-10-16':['09:00-09:30','private-token-secret','0671234567'],'2026-10-17':[]}}};
+  const report=await scheduleReport(client,'22356',[{id:123,fired:false,name:'Not exported',party_id:555},{id:124,fired:true}],new Date('2026-10-15T22:30:00Z'));
+  assert.equal(report.activeEmployeeCount,1);
+  assert.equal(report.employees[0].slotCount,3);
+  assert.deepEqual(report.employees[0].samples[0].slots[0],{kind:'time_string',value:'09:00-09:30'});
+  for(const value of ['private-token-secret','Not exported','party_id','0671234567'])assert.ok(!JSON.stringify(report).includes(value));
+});
+
+test('unexpected schedule fields and entries are rejected without serializing response contents', async () => {
+  for(const body of [{access_token:'private'}, {'2026-10-16':[{patient:'private'}]}, {'2026-10-15':['09:00']}, []]){
+    const client=createClient(configuration(env),async url=>url.endsWith('/oauth/token')?json({access_token:'token',token_type:'Bearer',expires_in:3600}):json(body));
+    await assert.rejects(client.schedule(123,'2026-10-16','2026-10-29'),error=>error.code==='unexpected_schedule_response'&&!error.message.includes('private'));
+  }
+});

@@ -3,12 +3,17 @@
 const readline = require('node:readline');
 const { Writable } = require('node:stream');
 const { createClient } = require('../server/health24');
+const { scheduleReport } = require('./health24-schedule-report');
+const { mkdir, writeFile } = require('node:fs/promises');
+const path = require('node:path');
 
 async function main() {
   if (!process.stdin.isTTY || !process.stdout.isTTY) throw new Error('Запустіть файл у Terminal, щоб безпечно ввести доступи.');
   console.log('Health24 — локальна перевірка тестового доступу\n');
   console.log('Запити підуть із цього комп’ютера. Запис пацієнтів не створюється.');
   console.log('Доступи вводяться приховано і не зберігаються у файлах або історії команд.\n');
+  const inspectSchedule = process.argv.includes('--schedule');
+  if (inspectSchedule) console.log('Додатково перевіримо розклад на 14 днів. Збережемо лише ID та приклади часу, без доступів і даних пацієнтів.\n');
   let muted = true;
   const output = new Writable({ write(chunk, encoding, done) { if (!muted) process.stdout.write(chunk, encoding); done(); } });
   const rl = readline.createInterface({ input: process.stdin, output, terminal: true, historySize: 0 });
@@ -54,9 +59,20 @@ async function main() {
     console.log('legal_entity_id: ' + entity);
     console.log('Активних працівників: ' + employees.filter(e => e.fired === false).length);
     console.log('Це підтверджує локальний доступ. Онлайн-запис на сайті ще не увімкнено.');
+    if (inspectSchedule) {
+      console.log('\nПеревіряю розклад…');
+      const report = await scheduleReport(client, entity, employees);
+      const directory = path.resolve(__dirname, '../.health24-local');
+      await mkdir(directory, { recursive: true, mode: 0o700 });
+      const destination = path.join(directory, 'schedule.json');
+      await writeFile(destination, JSON.stringify(report, null, 2) + '\n', { mode: 0o600 });
+      for (const row of report.employees) console.log('Працівник ' + row.employeeId + ': доступних інтервалів — ' + row.slotCount);
+      console.log('Результат збережено локально: ' + destination);
+      console.log('Записів не створено. Можна повернутися до чату та написати «готово».');
+    }
   } catch (error) {
     if (error.diagnostic?.path === '/api/v4/employees') console.log('\nАвторизація успішна. Помилка на етапі отримання працівників.');
-    console.log('\nДоступ до клініки не підтверджено. Дані для підтримки:');
+    console.log('\nПеревірку не завершено. Дані для підтримки:');
     console.log(JSON.stringify({ connected: false, environment: 'test', source: 'local_computer', code: error.code || 'connection_failed', ...(error.upstreamStatus ? { upstreamStatus: error.upstreamStatus } : {}), ...(error.diagnostic ? { diagnostic: error.diagnostic } : {}) }, null, 2));
     process.exitCode = 1;
   } finally { rl.close(); }
