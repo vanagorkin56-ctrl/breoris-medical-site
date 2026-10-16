@@ -2,11 +2,11 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { configuration, createClient } = require('../server/health24');
-const env = { HEALTH24_API_BASE_URL: 'https://dev-ehr.h24.ua', HEALTH24_CLIENT_ID: 'example-id', HEALTH24_CLIENT_SECRET: 'example-secret', HEALTH24_LEGAL_ENTITY_ID: '17027' };
+const env = { HEALTH24_API_BASE_URL: 'https://dev-ehr.h24.ua', HEALTH24_CLIENT_ID: 'example-id', HEALTH24_CLIENT_SECRET: 'example-secret', HEALTH24_LEGAL_ENTITY_ID: '22356' };
 const json = (data, status = 200) => new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json' } });
-test('missing configuration never authorizes; only exact test host accepted', () => {
+test('missing configuration never authorizes; only exact Health24 hosts accepted', () => {
   assert.equal(configuration({}).missing.length, 4);
-  for (const url of ['https://ehr.h24.ua','https://dev-ehr.h24.ua.evil.example','https://example.com','http://dev-ehr.h24.ua','https://user@dev-ehr.h24.ua','https://dev-ehr.h24.ua/path']) {
+  for (const url of ['https://ehr.h24.ua.evil.example','https://dev-ehr.h24.ua.evil.example','https://example.com','http://dev-ehr.h24.ua','https://user@dev-ehr.h24.ua','https://dev-ehr.h24.ua/path']) {
     assert.throws(() => configuration({ ...env, HEALTH24_API_BASE_URL: url }));
   }
 });
@@ -19,7 +19,7 @@ test('documented OAuth payload, server bearer, clinic filter and single shared a
       assert.deepEqual(JSON.parse(options.body), {client_id:'example-id',client_secret:'example-secret',grant_type:'client_credentials',scope:'portal'});
       return json({ access_token:'server-token',token_type:'Bearer',expires_in:3600 });
     }
-    assert.equal(url, 'https://dev-ehr.h24.ua/api/v4/employees?legal_entity_id=17027');
+    assert.equal(url, 'https://dev-ehr.h24.ua/api/v4/employees?legal_entity_id=22356');
     assert.equal(options.headers.Authorization, 'Bearer server-token');
     return json([{id:3,fired:false,name:'Public physician'}]);
   });
@@ -167,4 +167,37 @@ test('interval reader strips patient fields and rejects invalid or ambiguous per
   assert.equal(report.employees[0].scheduleRead,true);
   assert.equal(report.employees[0].samples[0].slots[0].kind,'interval');
   for(const value of ['Private patient','private-token','access_token','patient_name'])assert.ok(!JSON.stringify(report).includes(value));
+});
+
+test('production diagnostic uses the confirmed clinic and reports its actual environment without creating visits', async () => {
+  assert.throws(()=>configuration({...env,HEALTH24_API_BASE_URL:'https://ehr.h24.ua'}),error=>error.code==='production_clinic_required');
+  assert.throws(()=>configuration({...env,HEALTH24_LEGAL_ENTITY_ID:'17027'}),error=>error.code==='test_clinic_required');
+  const production={...env,HEALTH24_API_BASE_URL:'https://ehr.h24.ua',HEALTH24_LEGAL_ENTITY_ID:'17027'};
+  const config=configuration(production);
+  assert.equal(config.environment,'production');
+  assert.equal(configuration(env).environment,'test');
+  const originalFetch=global.fetch, originalEnv=Object.fromEntries(Object.keys(production).map(key=>[key,process.env[key]]));
+  const requests=[];
+  Object.assign(process.env,production);
+  global.fetch=async(url,options)=>{
+    requests.push([url,options.method||'GET']);
+    if(url==='https://ehr.h24.ua/oauth/token')return json({access_token:'private-production-token',token_type:'Bearer',expires_in:3600});
+    assert.equal(url,'https://ehr.h24.ua/api/v4/employees?legal_entity_id=17027');
+    return json([{fired:false,name:'Private employee'},{fired:true}]);
+  };
+  try{
+    const handler=require('../api/health24/status');
+    let code,body;
+    const res={setHeader(){},status(value){code=value;return this},json(value){body=value;return this}};
+    await handler({method:'GET'},res);
+    assert.equal(code,200);
+    assert.equal(body.environment,'production');
+    assert.equal(body.legalEntityId,17027);
+    assert.equal(body.employeeCount,1);
+    assert.deepEqual(requests,[['https://ehr.h24.ua/oauth/token','POST'],['https://ehr.h24.ua/api/v4/employees?legal_entity_id=17027','GET']]);
+    for(const value of ['private-production-token','Private employee','example-secret','example-id'])assert.ok(!JSON.stringify(body).includes(value));
+  }finally{
+    global.fetch=originalFetch;
+    for(const [key,value] of Object.entries(originalEnv))if(value===undefined)delete process.env[key];else process.env[key]=value;
+  }
 });

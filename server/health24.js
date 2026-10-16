@@ -11,12 +11,15 @@ function configuration(env = process.env) {
   if (missing.length) return { missing };
   let base;
   try { base = new URL(env.HEALTH24_API_BASE_URL.trim()); } catch { throw new Health24Error('invalid_configuration'); }
-  if (base.origin !== 'https://dev-ehr.h24.ua' || !['', '/'].includes(base.pathname) || base.search || base.hash || base.username || base.password) {
-    throw new Health24Error('test_environment_required');
+  const environment = { 'https://dev-ehr.h24.ua': 'test', 'https://ehr.h24.ua': 'production' }[base.origin];
+  if (!environment || !['', '/'].includes(base.pathname) || base.search || base.hash || base.username || base.password) {
+    throw new Health24Error('unsupported_api_host');
   }
   const entity = env.HEALTH24_LEGAL_ENTITY_ID.trim();
   if (!/^[1-9]\d*$/.test(entity) || !Number.isSafeInteger(Number(entity))) throw new Health24Error('invalid_configuration');
-  return { base: base.origin, clientId: env.HEALTH24_CLIENT_ID.trim(), secret: env.HEALTH24_CLIENT_SECRET.trim(), entity };
+  if (environment === 'production' && entity !== '17027') throw new Health24Error('production_clinic_required');
+  if (environment === 'test' && entity === '17027') throw new Health24Error('test_clinic_required');
+  return { base: base.origin, environment, clientId: env.HEALTH24_CLIENT_ID.trim(), secret: env.HEALTH24_CLIENT_SECRET.trim(), entity };
 }
 function createClient(config, fetcher = fetch) {
   let token = null, expires = 0, pendingToken;

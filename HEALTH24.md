@@ -1,4 +1,14 @@
-# Health24 integration — test connection
+# Health24 integration — connection diagnostics
+
+## Current production clarification — 2026-10-16
+
+Health24 confirmed in the owner's supplied support conversation that the originally issued client_id/client_secret were for production. Their reply about IP allowlisting was tentative and described it as a development-environment requirement; production connectivity from Vercel still needs a real check.
+
+The read-only Vercel diagnostic now supports two exact API origins: `https://dev-ehr.h24.ua` (test) and `https://ehr.h24.ua` (production). Production is restricted to the confirmed clinic ID **17027**; using the test profile with the production host, or production clinic 17027 with the test host, returns a configuration error before authorization. Successful status includes the actual environment, clinic ID and active employee count, never staff names or credentials. It still creates no visits.
+
+For the production check, set Vercel Production variables HEALTH24_API_BASE_URL to `https://ehr.h24.ua` and HEALTH24_LEGAL_ENTITY_ID to `17027`, retaining the originally supplied production client credentials, then redeploy. Read `/api/health24/status` on the deployment. Success proves OAuth and employee-list access only. Booking forms remain routed to the clinic's phone and Telegram until real schedule availability, clinic/doctor mapping, patient fields and visit creation are integrated and verified. Fourteen mock tests pass, including production request origin, clinic filtering and non-disclosure.
+
+The historical test-stage details below remain useful for local test profile 22356; this section supersedes their earlier statement that the credential environment was unconfirmed.
 
 Confirmed 2026-10-12 by Health24 support: the clinic is at the test connection stage; the test service requires an IP allowlist. Earlier production guidance was intended for another integration.
 
