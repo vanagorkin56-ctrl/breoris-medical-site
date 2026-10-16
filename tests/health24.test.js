@@ -61,3 +61,20 @@ test('support details identify failing request but never expose arbitrary upstre
     return true;
   });
 });
+
+test('test clinic discovery omits contacts; employee lookup uses only a valid selected ID', async () => {
+  const paths=[];
+  const client=createClient({base:'https://dev-ehr.h24.ua',clientId:'example-id',secret:'example-secret'},async url=>{
+    paths.push(url);
+    if(url.endsWith('/oauth/token'))return json({access_token:'token',token_type:'Bearer',expires_in:3600});
+    if(url.endsWith('/legal_entities'))return json([{id:12345,name:'Test clinic',phones:['private-contact']}]);
+    assert.equal(url,'https://dev-ehr.h24.ua/api/v4/employees?legal_entity_id=12345');
+    return json([]);
+  });
+  assert.deepEqual(await client.legalEntities(),[{id:12345,name:'Test clinic'}]);
+  await client.employees('12345');
+  const count=paths.length;
+  await assert.rejects(client.employees('12345&legal_entity_id=17027'));
+  assert.equal(paths.length,count);
+  assert.equal(paths.filter(url=>url.endsWith('/oauth/token')).length,1);
+});

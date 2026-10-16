@@ -2,7 +2,7 @@
 'use strict';
 const readline = require('node:readline');
 const { Writable } = require('node:stream');
-const { configuration, createClient } = require('../server/health24');
+const { createClient } = require('../server/health24');
 
 async function main() {
   if (!process.stdin.isTTY || !process.stdout.isTTY) throw new Error('Запустіть файл у Terminal, щоб безпечно ввести доступи.');
@@ -17,24 +17,41 @@ async function main() {
     rl.question('', value => { process.stdout.write('\n'); resolve(value.trim()); });
   });
   rl.on('SIGINT', () => { rl.close(); process.stdout.write('\nПеревірку скасовано.\n'); process.exit(130); });
-  let clientId, secret, entity;
+  let entity;
   try {
-    entity = await ask('Вставте legal_entity_id тестового профілю від Health24 і натисніть Enter: ');
-    if (!/^[1-9]\d*$/.test(entity) || !Number.isSafeInteger(Number(entity))) {
-      console.error('Потрібен числовий ID тестового профілю. Отримайте його у Health24.');
+    entity = await ask('legal_entity_id тестового профілю (якщо невідомий — просто Enter): ');
+    if (entity && (!/^[1-9]\d*$/.test(entity) || !Number.isSafeInteger(Number(entity)))) {
+      console.error('Потрібен числовий ID або порожнє поле для пошуку.');
       process.exitCode = 1;
       return;
     }
-    clientId = await ask('Вставте client_id і натисніть Enter: ');
-    secret = await ask('Вставте client_secret і натисніть Enter: ');
-  }
-  finally { rl.close(); }
-  if (!clientId || !secret) throw new Error('Обидва значення обов’язкові.');
-  const config = configuration({ HEALTH24_API_BASE_URL: 'https://dev-ehr.h24.ua', HEALTH24_LEGAL_ENTITY_ID: entity, HEALTH24_CLIENT_ID: clientId, HEALTH24_CLIENT_SECRET: secret });
-  console.log('\nПеревіряю авторизацію та список працівників тестового профілю ' + entity + '…');
-  try {
-    const employees = await createClient(config).employees();
+    const clientId = await ask('Вставте client_id і натисніть Enter: ');
+    const secret = await ask('Вставте client_secret і натисніть Enter: ');
+    if (!clientId || !secret) throw new Error('Обидва значення обов’язкові.');
+    const client = createClient({ base: 'https://dev-ehr.h24.ua', clientId, secret });
+    if (!entity) {
+      console.log('\nОтримую список тестових організацій…');
+      const clinics = (await client.legalEntities()).filter(row => Number.isSafeInteger(row.id) && row.id > 0);
+      if (!clinics.length) {
+        console.log('Доступних організацій не знайдено. Уточніть доступ до тестового профілю у Health24.');
+        process.exitCode = 1;
+        return;
+      }
+      console.log('Авторизація успішна. Організації з відповіді API (до 30):');
+      for (const row of clinics.slice(0, 30)) console.log(row.id + ' — ' + String(row.name || '').replace(/[\x00-\x1f\x7f-\x9f]/g, '').slice(0, 150));
+      if (clinics.length > 30) console.log('Знайдено більше 30 організацій. Уточніть ID саме вашого тестового профілю у Health24.');
+      entity = await ask('Введіть ID вашої тестової організації зі списку (або Enter, щоб завершити): ');
+      if (!entity) return;
+      if (!/^[1-9]\d*$/.test(entity) || !clinics.some(row => String(row.id) === entity)) {
+        console.error('ID відсутній у відповіді API. Перевірку зупинено.');
+        process.exitCode = 1;
+        return;
+      }
+    }
+    console.log('\nПеревіряю список працівників тестового профілю ' + entity + '…');
+    const employees = await client.employees(entity);
     console.log('\nУСПІХ: авторизація та доступ до списку працівників підтверджені.');
+    console.log('legal_entity_id: ' + entity);
     console.log('Активних працівників: ' + employees.filter(e => e.fired === false).length);
     console.log('Це підтверджує локальний доступ. Онлайн-запис на сайті ще не увімкнено.');
   } catch (error) {
@@ -42,6 +59,6 @@ async function main() {
     console.log('\nДоступ до клініки не підтверджено. Дані для підтримки:');
     console.log(JSON.stringify({ connected: false, environment: 'test', source: 'local_computer', code: error.code || 'connection_failed', ...(error.upstreamStatus ? { upstreamStatus: error.upstreamStatus } : {}), ...(error.diagnostic ? { diagnostic: error.diagnostic } : {}) }, null, 2));
     process.exitCode = 1;
-  }
+  } finally { rl.close(); }
 }
 main().catch(() => { console.error('Не вдалося виконати перевірку. Перевірте запуск у Terminal та введення обох доступів.'); process.exitCode = 1; });

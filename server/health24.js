@@ -57,10 +57,17 @@ function createClient(config, fetcher = fetch) {
     })();
     try { return await pendingToken; } finally { pendingToken = null; }
   }
-  async function employees() {
+  async function legalEntities() {
+    const bearer = await authorize();
+    const rows = await json('/api/v4/legal_entities', { headers: { Authorization: 'Bearer ' + bearer } });
+    if (!Array.isArray(rows)) throw new Health24Error('unexpected_response');
+    return rows.map(row => ({ id: row.id, name: row.name }));
+  }
+  async function employees(entity = config.entity) {
+    if (!/^[1-9]\d*$/.test(String(entity)) || !Number.isSafeInteger(Number(entity))) throw new Health24Error('invalid_configuration');
     const bearer = await authorize();
     try {
-      const rows = await json('/api/v4/employees?legal_entity_id=' + encodeURIComponent(config.entity), { headers: { Authorization: 'Bearer ' + bearer } });
+      const rows = await json('/api/v4/employees?legal_entity_id=' + encodeURIComponent(entity), { headers: { Authorization: 'Bearer ' + bearer } });
       if (!Array.isArray(rows)) throw new Health24Error('unexpected_response');
       return rows;
     } catch (error) {
@@ -68,6 +75,6 @@ function createClient(config, fetcher = fetch) {
       throw error;
     }
   }
-  return { employees };
+  return { employees, legalEntities };
 }
 module.exports = { configuration, createClient, Health24Error };
