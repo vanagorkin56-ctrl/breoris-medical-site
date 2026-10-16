@@ -31,7 +31,7 @@ function normalizeSchedule(days, start, end) {
       return {
         time, period_start: slot.period_start, period_end: slot.period_end,
         status: statuses.has(status) ? status : 'unknown',
-        flags: Object.fromEntries(flags.filter(key => typeof slot[key] === 'boolean').map(key => [key, slot[key]]))
+        flags: Object.fromEntries(Object.keys(slot).filter(key => /^[a-z_]{1,40}$/.test(key) && typeof slot[key] === 'boolean').slice(0, 30).map(key => [key, slot[key]]))
       };
     });
   }
