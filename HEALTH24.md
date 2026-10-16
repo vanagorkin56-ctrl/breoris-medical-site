@@ -31,3 +31,14 @@ For deployment, repeatedly adding observed Vercel IPs is not a stable allowlist.
 2026-10-16 clarification from Health24: legal_entity_id 17027 is not a test profile. Support will provide test-profile access. The local checker now asks for the test ID explicitly; no production clinic ID is used as a default. OAuth succeeded locally on 2026-10-16; employee lookup using 17027 returned JSON HTTP 500. Await the confirmed test ID and matching access before repeating clinic lookups.
 
 The checker also supports clinic discovery: leave the first ID prompt blank to call the documented GET `/api/v4/legal_entities`, display organization IDs/names (without phone numbers), and select the confirmed test profile. It never picks an organization automatically. The portal login/password supplied by support are separate from OAuth client_id/client_secret; they must not be substituted into the API prompts.
+
+
+## Verified test profile (2026-10-16)
+
+The owner ran the local checker from the approved workstation using test legal_entity_id **22356**. OAuth and the employee list succeeded with **2 active employees**. This supersedes the earlier pending test-profile note. It does not establish production access to clinic 17027, schedule availability, visit creation, or network access from Vercel.
+
+## Contact booking prepared for launch
+
+`dist/contact-booking.js` currently routes all homepage, service, physician-card and physician-page booking buttons to the clinic phone and Telegram. It preserves the selected physician/service as visible context. It collects no personal data, shows no invented schedule, sends no automatic message and does not claim that an appointment was created. The clinic administrator confirms the visit. The former demonstration form is not offered to visitors, and its optional browser tool is not registered in contact mode.
+
+Before switching to Health24 booking, confirm matching production credentials/entity, stable outbound access, the actual schedule response and a full approved test of visit creation. Add the required patient fields at that stage. Do not redirect the production contact actions into the test organization.

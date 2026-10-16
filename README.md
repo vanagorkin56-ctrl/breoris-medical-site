@@ -1,4 +1,18 @@
-# Breoris Medical — design prototype
+# Breoris Medical — clinic website
+
+## Current launch preparation — 2026-10-16
+
+The ready-to-serve website is in `dist/`. Booking buttons now open the clinic's phone and Telegram contact options, including on physician pages. The administrator arranges and confirms the appointment; there is no automated Health24 booking yet. No personal data is collected by this contact dialog.
+
+The approved workstation successfully authenticated to Health24 test profile 22356 and retrieved 2 active employees. Production clinic 17027 and Vercel outbound access remain unconfirmed. See [HEALTH24.md](HEALTH24.md).
+
+Local checks passed for 13 HTML pages and all local asset/link targets. Contact booking passed headless Chrome checks at 390px and 1440px, with Ukrainian, Russian and English homepage copy, selected physician context, real contact links, Escape close and no uncaught JavaScript errors or horizontal overflow. The six Health24 mock tests passed. External embeds and physical iOS were not part of this check.
+
+Domain migration and indexing are still pending. Keep preview noindex until the approved public release. DNS email records must be retained. The historical notes below describe earlier prototype iterations; the contact route above supersedes their demonstration-booking behavior.
+
+---
+
+## Earlier prototype notes
 
 Single-page Ukrainian site for review, built with HTML, CSS and JavaScript. Serve `dist/` with any static server.
 
