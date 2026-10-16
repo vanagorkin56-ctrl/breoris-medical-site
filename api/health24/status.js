@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
     if (!pending) pending = (async () => {
       try {
         const rows = await client.employees();
-        return { connected: true, environment: config.environment, legalEntityId: Number(config.entity), employeeCount: rows.filter(e => e.fired === false).length, message: 'Авторизація та доступ до списку працівників клініки підтверджені. Запис пацієнтів ще не увімкнено.' };
+        return { connected: true, environment: config.environment, legalEntityId: Number(config.entity), employeeCount: rows.filter(e => e.fired === false).length, message: 'Авторизація та доступ до списку працівників клініки підтверджені. Створення та підтвердження запису перевіряються окремо.' };
       } catch (e) {
         const code = Object.hasOwn(messages, e.code) ? e.code : 'upstream_error';
         return { connected: false, environment: config.environment, legalEntityId: Number(config.entity), code, ...(e.upstreamStatus ? { upstreamStatus: e.upstreamStatus } : {}), ...(e.diagnostic ? { diagnostic: e.diagnostic } : {}), message: messages[code] };

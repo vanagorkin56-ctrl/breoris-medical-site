@@ -27,7 +27,7 @@ function createClient(config, fetcher = fetch) {
     let response;
     try {
       response = await fetcher(config.base + path, { ...options, redirect: 'error', signal: AbortSignal.timeout(8000), headers: { 'Content-Type': 'application/json', Accept: 'application/json', ...options.headers } });
-    } catch { throw new Health24Error('network_error'); }
+    } catch { throw new Health24Error('network_error', undefined, { method: options.method || 'GET', path: path.split('?')[0], checkedAt: new Date().toISOString() }); }
     if (!response.ok) {
       const contentType = response.headers.get('content-type') || '';
       const ray = response.headers.get('cf-ray') || '';
@@ -47,8 +47,9 @@ function createClient(config, fetcher = fetch) {
       }
       throw new Health24Error(response.status === 403 ? 'access_blocked' : response.status === 401 ? 'authorization_failed' : 'upstream_error', response.status, diagnostic);
     }
-    if (!response.headers.get('content-type')?.includes('application/json')) throw new Health24Error('unexpected_response');
-    try { return await response.json(); } catch { throw new Health24Error('unexpected_response'); }
+    const diagnostic = { method: options.method || 'GET', path: path.split('?')[0], checkedAt: new Date().toISOString(), responseKind: response.headers.get('content-type')?.includes('application/json') ? 'json' : 'other' };
+    if (!response.headers.get('content-type')?.includes('application/json')) throw new Health24Error('unexpected_response', response.status, diagnostic);
+    try { return await response.json(); } catch { throw new Health24Error('unexpected_response', response.status, diagnostic); }
   }
   async function authorize() {
     if (token && Date.now() < expires) return token;

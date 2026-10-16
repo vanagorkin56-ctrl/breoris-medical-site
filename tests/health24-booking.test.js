@@ -73,3 +73,14 @@ test('rejected and unrecognized upstream states cannot produce a booking confirm
   }finally{h.restore();}
  }
 });
+
+test('failure diagnostics expose only transport metadata and never patient response contents',()=>{
+ const h=harness(),warn=console.warn,logs=[];console.warn=value=>logs.push(value);
+ try{
+  let body;const res={setHeader(){},status(){return this;},json(value){body=value;}};
+  const error=new h.booking.BookingError('booking_uncertain',503,{stage:'create_visit',method:'POST',path:'/api/v4/visit_moderations',responseKind:'json',patient:'private-patient',structure:{name:'private-patient'},cloudflareRayId:'abc123-AMS'});
+  error.upstreamStatus=500;h.booking.fail(res,error);
+  assert.equal(body.diagnostic.stage,'create_visit');assert.equal(body.diagnostic.upstreamStatus,500);assert.match(body.incidentId,/^[a-f0-9-]{36}$/);
+  assert.ok(!JSON.stringify([body,logs]).includes('private-patient'));assert.ok(!Object.hasOwn(body.diagnostic,'structure'));assert.equal(logs.length,1);assert.equal(h.posts(),0);
+ }finally{console.warn=warn;h.restore();}
+});

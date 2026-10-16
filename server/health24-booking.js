@@ -5,7 +5,7 @@ const {validDate}=require('./health24-schedule');
 let client,key,catalogCache,catalogAt=0;
 const attempts=new Map(),limits=new Map();
 const mapped={595920:'tomakh',595938:'sokrut',596094:'sokrut',596096:'sushko',596803:'sushko',596308:'orlov',596330:'hrytsai',658345:'mishchenko',663338:'pokaichuk'};
-class BookingError extends Error{constructor(code,status=400){super(code);this.code=code;this.status=status;}}
+class BookingError extends Error{constructor(code,status=400,diagnostic){super(code);this.code=code;this.status=status;this.diagnostic=diagnostic;}}
 function context(){
  const config=configuration();if(config.missing)throw new BookingError('not_configured',503);
  const next=createHash('sha256').update(JSON.stringify(config)).digest('hex');
@@ -22,7 +22,23 @@ async function catalog(fresh=false){
  catalogCache={environment:config.environment,legalEntityId:Number(config.entity),doctors};catalogAt=Date.now();return catalogCache;
 }
 function send(res,status,body){res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');return res.status(status).json(body);}
-function fail(res,error){return send(res,error.status||502,{ok:false,code:error instanceof BookingError?error.code:'health24_unavailable'});}
+function fail(res,error){
+ const code=error instanceof BookingError?error.code:'health24_unavailable';
+ const body={ok:false,code};
+ if((error.status||502)>=500){
+  const source=error.diagnostic||{},diagnostic={checkedAt:new Date().toISOString()};
+  // Only fixed metadata is exposed: never patient fields, response bodies or tokens.
+  for(const field of ['method','path','checkedAt','responseKind','server','cloudflareRayId','stage']){
+   const value=source[field];
+   if(typeof value==='string'&&/^[a-zA-Z0-9_/:.\-]{1,160}$/.test(value))diagnostic[field]=value;
+  }
+  if(Number.isInteger(error.upstreamStatus))diagnostic.upstreamStatus=error.upstreamStatus;
+  if(['network_error','unexpected_response','unexpected_schedule_response','upstream_error','authorization_failed','access_blocked'].includes(error.code))diagnostic.reason=error.code;
+  body.incidentId=randomUUID();body.diagnostic=diagnostic;
+  console.warn(JSON.stringify({event:'health24_request_failed',code,incidentId:body.incidentId,diagnostic}));
+ }
+ return send(res,error.status||502,body);
+}
 function addDays(day,n){return new Date(Date.parse(day)+n*86400000).toISOString().slice(0,10);}
 function signSlot(employeeId,slot){
  const {config}=context();const body=Buffer.from(JSON.stringify({v:1,clinic:Number(config.entity),employeeId,start:slot.period_start,end:slot.period_end,expires:Date.now()+10*60000,nonce:randomUUID()})).toString('base64url');
@@ -100,11 +116,11 @@ async function book(input,ip){
    if(error.upstreamStatus===409||error.upstreamStatus===422)throw new BookingError('booking_rejected',409);
    if(error.code==='authorization_failed'||error.code==='access_blocked')throw new BookingError('health24_unavailable',502);
    // Never retry an ambiguous POST; ask the clinic to verify the outcome.
-   throw new BookingError('booking_uncertain',503);
+   const uncertain=new BookingError('booking_uncertain',503,{...error.diagnostic,stage:'create_visit'});uncertain.upstreamStatus=error.upstreamStatus;throw uncertain;
   }
-  if(!Number.isSafeInteger(result?.id)||result.id<=0||result.legal_entity?.id!==Number(config.entity)||result.employee?.id!==doctor.id||Date.parse(result.period_start)!==Date.parse(current.period_start)||Date.parse(result.period_end)!==Date.parse(current.period_end))throw new BookingError('booking_uncertain',503);
+  if(!Number.isSafeInteger(result?.id)||result.id<=0||result.legal_entity?.id!==Number(config.entity)||result.employee?.id!==doctor.id||Date.parse(result.period_start)!==Date.parse(current.period_start)||Date.parse(result.period_end)!==Date.parse(current.period_end))throw new BookingError('booking_uncertain',503,{stage:'validate_visit_response'});
   if(['rejected','cancelled','canceled'].includes(result.state))throw new BookingError('booking_rejected',409);
-  if(!['approved','pending','new','requested'].includes(result.state))throw new BookingError('booking_uncertain',503);
+  if(!['approved','pending','new','requested'].includes(result.state))throw new BookingError('booking_uncertain',503,{stage:'validate_visit_state'});
   return {ok:true,accepted:true,confirmed:result.state==='approved',reference:String(result.id),doctor:{id:doctor.id,name:doctor.name,specialty:doctor.specialty},start:current.period_start,end:current.period_end,location:safeText(result.division?.address,200)};
  })();
  attempts.set(input.attemptId,{fingerprint,promise,expires:now+30*60000});return promise;
