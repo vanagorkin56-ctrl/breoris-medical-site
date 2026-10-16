@@ -298,8 +298,8 @@
     const title = {uk:'Breoris Medical — медична клініка у Дніпрі',ru:'Breoris Medical — медицинская клиника в Днепре',en:'Breoris Medical — medical clinic in Dnipro, Ukraine'};
     document.title = title[next]; translateTree();
   }
-  Object.assign(dictionaries.ru, {'Консультації лікарів':'Консультации врачей','Запис через адміністратора клініки':'Запись через администратора клиники'});
-  Object.assign(dictionaries.en, {'Консультації лікарів':'Doctor consultations','Запис через адміністратора клініки':'Booking through the clinic administrator'});
+  Object.assign(dictionaries.ru, {'Консультації лікарів':'Консультации врачей','Онлайн-запис до лікарів':'Онлайн-запись к врачам'});
+  Object.assign(dictionaries.en, {'Консультації лікарів':'Doctor consultations','Онлайн-запис до лікарів':'Book a doctor online'});
   window.BreorisLocale = { get language(){return language}, t(value){return dictionaries[language]?.[value] || value}, setLanguage, translateTree };
   document.addEventListener('change', event => { if (event.target.matches('.language-select')) setLanguage(event.target.value); });
   const observer = new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => { if (node.nodeType === Node.TEXT_NODE) translateTextNode(node); else if (node.nodeType === Node.ELEMENT_NODE) translateTree(node); })));

@@ -1,3 +1,15 @@
+# Current Health24 booking — 2026-10-16
+
+Booking actions now open the real Health24 workflow: clinic-scoped doctor/specialty profiles, live available dates and exact time intervals, patient first/last name, phone, birth date, sex and consent, then server-side visit creation. Phone/Telegram remain secondary help links. Both the homepage and generated physician pages use `health24-booking.js` and `health24-booking.css`.
+
+Confirmed live reads from Vercel: production OAuth, clinic 17027, 11 active employee records, 9 clinical doctor/specialty profiles after excluding resources, and schedules for all 9 profiles. Some profiles have no available slots in the queried period. Hrytsai and Pokaichuk are registered as therapists in Health24 while the website describes neurology; these profiles are not automatically selected from their website cards, and a notice asks the visitor to verify the specialty with the clinic. Clinic staff should reconcile this data.
+
+The server signs exact slots, rechecks clinic membership and fresh availability before submission, excludes booked slots and unsupported referral/prepayment/service requirements, validates patient inputs and same-origin JSON requests, limits attempts per instance, coalesces identical submissions, and never automatically retries an ambiguous POST. Patient fields, tokens and secrets are not logged, returned publicly or stored in the browser. See HEALTH24.md for operational limits.
+
+Verification: 21 backend tests pass; desktop/mobile browser flows pass in Ukrainian, Russian and English with simulated submission responses, including conflict and uncertain-result states. No real production appointment has been created by the agent. A clinic-approved end-to-end appointment remains the final acceptance check. Indexing/domain migration remains separate.
+
+---
+
 # Breoris Medical — clinic website
 
 ## Current launch preparation — 2026-10-16

@@ -1,3 +1,27 @@
+# Current booking implementation — 2026-10-16
+
+This section supersedes historical statements below that booking is contact-only.
+
+## Public server routes
+
+- GET `/api/health24/catalog`: returns only active clinical doctor profiles (DOCTOR/SPECIALIST, excluding resource offices), IDs, names, specialties and verified website-card mappings for configured clinic 17027. No party IDs, staff contacts or patient data are returned.
+- GET `/api/health24/availability?employeeId=<id>&start=YYYY-MM-DD`: requires a doctor in that clinic, a date from today through 90 days ahead and returns a 14-day range. Only future `available` intervals with no blocking flag or extra `_required` constraint are offered. Each exact interval has a signed, ten-minute token; the token contains no patient data.
+- POST `/api/health24/appointments`: accepts a same-origin JSON request containing a signed token, a UUID attempt ID and required patient data/consent. It validates the patient, re-reads clinic employees and the selected day's schedule, and then calls POST `/api/v4/visit_moderations` once. It sends the actual API-provided start/end and employee ID. It never fabricates durations or auto-retries a visit POST. The response must contain the expected clinic, employee and interval. `approved` is displayed as confirmed; pending states as requests; rejected/unknown results cannot produce a confirmation.
+
+The site keeps temporary attempt/rate-limit metadata in the function instance's memory; this is not a persistent database. Identical concurrent attempts on that instance share one operation. Availability revalidation and upstream conflict handling also protect normal retries. Cross-instance atomic idempotency and durable abuse limits would require a shared store/upstream idempotency support; the current code does not claim those guarantees. Ambiguous POST outcomes disable automatic resubmission and ask the patient to contact the clinic.
+
+## Frontend and verification
+
+The new shared booking dialog is loaded on the homepage, physician directory and all ten physician pages. All entry points use it. It preserves unambiguous physician mappings, shows Health24 specialty labels, offers no invented availability, refreshes expired/taken selections and collects the fields required by Health24. Public-read HTTP errors show a contact fallback; a pending request is never presented as a confirmed visit.
+
+Twenty-one backend tests cover host/clinic validation, patient-data exclusion, actual interval examples, signed token integrity, clinic membership, fresh availability, prerequisites, same-origin requests, duplicate attempts and ambiguous/rejected outcomes. Browser checks at 390px/1440px in uk/ru/en use simulated POST responses; conflict and uncertain-result checks also pass. No test patient or appointment was created in production by the agent. Finish with one explicitly clinic-approved real submission and verify its exact record in Health24, including any patient notification behavior.
+
+Actual production catalog contains two Sushko and two Sokrut specialty profiles. Hrytsai/Pokaichuk have therapist profiles in Health24 despite neurology descriptions on the website; the UI prevents automatic preselection and flags the mismatch. Some profiles have no slots in the next 14 days. Keep these as configuration/content issues for clinic staff; do not substitute another specialty or invent a schedule.
+
+No database, payment, patient login or direct `/visits` OTP flow was added. Credentials remain server-only. The moderation endpoint is the flow documented in the supplied Health24 integration schema.
+
+---
+
 # Health24 integration — connection diagnostics
 
 ## Current production clarification — 2026-10-16

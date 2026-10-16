@@ -2,7 +2,6 @@
 const dayFormat = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Kyiv' });
 const timeFormat = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Kyiv', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
 const statuses = new Set(['available', 'unavailable', 'free', 'busy', 'booked', 'reserved', 'blocked', 'closed']);
-const flags = ['available', 'is_available', 'is_busy', 'busy', 'booked', 'is_booked', 'blocked', 'is_blocked', 'reserved', 'is_reserved', 'online_available', 'is_online_available', 'allow_online_booking', 'is_online', 'online'];
 function validDate(value) {
   return typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
 }

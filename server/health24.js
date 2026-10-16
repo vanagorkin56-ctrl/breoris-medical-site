@@ -89,6 +89,11 @@ function createClient(config, fetcher = fetch) {
     try { return normalizeSchedule(days, periodStart, periodEnd); }
     catch { throw new Health24Error('unexpected_schedule_response', 200, { method: 'GET', path: '/api/v4/employees/' + employeeId + '/schedule', checkedAt: new Date().toISOString(), responseKind: 'json', structure: responseShape(days) }); }
   }
-  return { employees, legalEntities, schedule };
+  async function createVisit(payload) {
+    const bearer = await authorize();
+    // A POST is never automatically retried: a lost response may still mean a visit was created.
+    return json('/api/v4/visit_moderations', { method: 'POST', headers: { Authorization: 'Bearer ' + bearer }, body: JSON.stringify(payload) });
+  }
+  return { employees, legalEntities, schedule, createVisit };
 }
 module.exports = { configuration, createClient, Health24Error };

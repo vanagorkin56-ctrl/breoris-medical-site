@@ -4,8 +4,8 @@
   "buildCommand": null,
   "outputDirectory": "dist",
   "functions": {
-    "api/health24/status.js": {
-      "maxDuration": 25
+    "api/health24/*.js": {
+      "maxDuration": 60
     }
   }
 }

@@ -1,0 +1,19 @@
+#health24-booking-dialog{width:min(680px,calc(100% - 32px));max-height:calc(100dvh - 32px);padding:36px;border:0;border-radius:24px;color:#153c4e;background:#fff;box-sizing:border-box;overflow:auto}
+#health24-booking-dialog::backdrop{background:rgba(10,35,48,.45)}
+#health24-booking-dialog h2{padding-right:30px;margin:0 0 20px;font-size:clamp(26px,4vw,34px);line-height:1.15}
+#health24-booking-dialog .dialog-close{position:absolute;right:12px;top:10px;min-width:44px;min-height:44px;font-size:30px;line-height:1}
+#health24-booking-dialog h3{font-size:17px;margin:20px 0 12px}
+.h24-steps{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;margin:0 0 20px;color:#71848b}.h24-steps [aria-current]{font-weight:700;color:#235b92}
+.h24-intro,.h24-hint,.h24-help{font-size:14px;line-height:1.6;color:#526c76}.h24-intro{margin-bottom:22px}
+#h24-form label:not(.h24-consent){display:block;margin:16px 0 8px;font-size:15px;font-weight:600}
+#h24-form input:not([type=checkbox]),#h24-form select{display:block;width:100%;min-width:0;min-height:48px;padding:12px;border:1px solid #b9cdd5;border-radius:10px;font:inherit;font-size:16px;color:#153c4e;background:#fff;box-sizing:border-box}
+#h24-form select{padding-right:26px}#h24-form input[type=date]{appearance:none;-webkit-appearance:none}
+.h24-fields{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.h24-consent{display:flex;align-items:flex-start;gap:12px;margin:24px 0;font-size:13px;line-height:1.6}.h24-consent input{width:20px;height:20px;flex-shrink:0;margin-top:2px;accent-color:#235b92}
+.h24-date-search{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}.h24-more{border:0;background:#e7f3f4;border-radius:10px;padding:12px;min-height:48px;color:#235b92;font:inherit;font-size:13px;cursor:pointer}
+.h24-days,.h24-times{display:flex;flex-wrap:wrap;gap:8px}.h24-days button,.h24-times button{border:1px solid #bfd4dc;border-radius:10px;background:#fff;color:#235b92;min-height:44px;padding:10px 14px;font:inherit;font-size:14px;cursor:pointer}.h24-days [aria-pressed=true],.h24-times [aria-pressed=true]{background:#235b92;color:#fff;border-color:#235b92}
+#h24-status,#h24-context,.h24-summary,#h24-doctor-note{font-size:14px;line-height:1.6;padding:12px 16px;border-radius:12px;background:#e7f3f4;margin:16px 0}#h24-status{background:#fff3e8;color:#70432b}#h24-doctor-note{background:#fff3e8}
+.h24-actions{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:28px}.h24-actions .primary{margin-left:auto;min-height:48px}.h24-help{border-top:1px solid #e0e9ec;margin-top:28px;padding-top:16px}.h24-help a{text-decoration:underline;color:#235b92;display:inline-block;padding:6px 0}
+#h24-back{border:0;background:transparent;padding:12px 8px;min-height:44px;color:#235b92;font:inherit;font-size:14px;cursor:pointer}
+#h24-success h3{font-size:25px}.h24-result-summary{line-height:1.7}.h24-reference{font-size:14px;color:#526c76}
+#health24-booking-dialog button:disabled{opacity:.55;cursor:wait}#health24-booking-dialog :focus-visible{outline:3px solid #64bccc;outline-offset:3px}
+@media(max-width:600px){#health24-booking-dialog{padding:30px 20px}.h24-fields{grid-template-columns:1fr}.h24-date-search{grid-template-columns:1fr}.h24-steps{gap:10px;font-size:12px}.h24-actions .primary{font-size:15px;padding:14px 18px}.h24-help{font-size:13px}}
