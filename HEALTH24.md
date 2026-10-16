@@ -21,3 +21,9 @@ Homepage and doctor-page booking remain unchanged and do not create Health24 vis
 POST `/api/v4/visit_moderations` requires phone_number, first_name, last_name, gender, birth_date, employee_id, period_start, period_end. The existing contact-only form is insufficient. Use the documented plural endpoint (`visit_moderations`), despite support's abbreviated example. Do not use the direct `/visits` flow without implementing its documented patient verification steps.
 
 Run `node --test tests/health24.test.js` for local verification using simulated API responses; these tests never contact Health24.
+
+## Manual local connection test
+
+On the approved workstation/network, open `scripts/check-health24-local.command` in Terminal (double-click it in Finder). Enter the client ID and secret at the hidden prompts. The checker calls only test OAuth and the clinic employee list; it does not store credentials, print staff names, or create visits. Node.js is required; the launcher uses an installed Node.js or the existing Codex bundled runtime. A local success does not establish Vercel access. Run on the same approved connection, without changing VPN/network; a home connection can also receive a different IP later.
+
+For deployment, repeatedly adding observed Vercel IPs is not a stable allowlist. Choose managed fixed outbound IPs or host the API on a server with a reserved public outbound IP, while the static site can stay on Vercel. Confirm current costs and ownership before provisioning anything.
