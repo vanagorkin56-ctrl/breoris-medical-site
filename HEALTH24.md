@@ -8,7 +8,7 @@ Production paths have the same names at ehr.h24.ua, but production credentials/r
 
 ## Current implementation
 
-`api/health24/status.js` is a Vercel Node function outside `dist`. It obtains a server-only OAuth token through POST `/oauth/token` (`client_credentials`, scope `portal`), then reads GET `/api/v4/employees?legal_entity_id=17027` to verify clinic access. It returns connection status and an active employee count; it never returns the token, secret, raw API response or patient data, and never creates appointments. Upstream redirects are rejected. Concurrent requests are coalesced and diagnostic results cached for five minutes per function instance.
+`api/health24/status.js` is a Vercel Node function outside `dist`. It obtains a server-only OAuth token through POST `/oauth/token` (`client_credentials`, scope `portal`), then reads GET `/api/v4/employees?legal_entity_id=<configured test ID>` to verify clinic access. It returns connection status and an active employee count; it never returns the token, secret, raw API response or patient data, and never creates appointments. Upstream redirects are rejected. Concurrent requests are coalesced and diagnostic results cached for five minutes per function instance.
 
 Set the four variables in `.env.example` in the same Vercel project/environment. Credentials stay outside the repository. Set the base URL to **https://dev-ehr.h24.ua**, not production, for this test. Redeploy after changing variables. Open `/api/health24/status` on the deployment to check the result. `connected: true` proves authentication and employee-list access only.
 
@@ -24,6 +24,8 @@ Run `node --test tests/health24.test.js` for local verification using simulated 
 
 ## Manual local connection test
 
-On the approved workstation/network, open `scripts/check-health24-local.command` in Terminal (double-click it in Finder). Enter the client ID and secret at the hidden prompts. The checker calls only test OAuth and the clinic employee list; it does not store credentials, print staff names, or create visits. Node.js is required; the launcher uses an installed Node.js or the existing Codex bundled runtime. A local success does not establish Vercel access. Run on the same approved connection, without changing VPN/network; a home connection can also receive a different IP later.
+On the approved workstation/network, open `scripts/check-health24-local.command` in Terminal (double-click it in Finder). Enter the test profile legal_entity_id supplied by Health24, then the client ID and secret at the hidden prompts. The checker calls only test OAuth and the clinic employee list; it does not store credentials, print staff names, or create visits. Node.js is required; the launcher uses an installed Node.js or the existing Codex bundled runtime. A local success does not establish Vercel access. Run on the same approved connection, without changing VPN/network; a home connection can also receive a different IP later.
 
 For deployment, repeatedly adding observed Vercel IPs is not a stable allowlist. Choose managed fixed outbound IPs or host the API on a server with a reserved public outbound IP, while the static site can stay on Vercel. Confirm current costs and ownership before provisioning anything.
+
+2026-10-16 clarification from Health24: legal_entity_id 17027 is not a test profile. Support will provide test-profile access. The local checker now asks for the test ID explicitly; no production clinic ID is used as a default. OAuth succeeded locally on 2026-10-16; employee lookup using 17027 returned JSON HTTP 500. Await the confirmed test ID and matching access before repeating clinic lookups.

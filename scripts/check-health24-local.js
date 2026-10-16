@@ -17,19 +17,29 @@ async function main() {
     rl.question('', value => { process.stdout.write('\n'); resolve(value.trim()); });
   });
   rl.on('SIGINT', () => { rl.close(); process.stdout.write('\nПеревірку скасовано.\n'); process.exit(130); });
-  let clientId, secret;
-  try { clientId = await ask('Вставте client_id і натисніть Enter: '); secret = await ask('Вставте client_secret і натисніть Enter: '); }
+  let clientId, secret, entity;
+  try {
+    entity = await ask('Вставте legal_entity_id тестового профілю від Health24 і натисніть Enter: ');
+    if (!/^[1-9]\d*$/.test(entity) || !Number.isSafeInteger(Number(entity))) {
+      console.error('Потрібен числовий ID тестового профілю. Отримайте його у Health24.');
+      process.exitCode = 1;
+      return;
+    }
+    clientId = await ask('Вставте client_id і натисніть Enter: ');
+    secret = await ask('Вставте client_secret і натисніть Enter: ');
+  }
   finally { rl.close(); }
   if (!clientId || !secret) throw new Error('Обидва значення обов’язкові.');
-  const config = configuration({ HEALTH24_API_BASE_URL: 'https://dev-ehr.h24.ua', HEALTH24_LEGAL_ENTITY_ID: '17027', HEALTH24_CLIENT_ID: clientId, HEALTH24_CLIENT_SECRET: secret });
-  console.log('\nПеревіряю авторизацію та список працівників клініки 17027…');
+  const config = configuration({ HEALTH24_API_BASE_URL: 'https://dev-ehr.h24.ua', HEALTH24_LEGAL_ENTITY_ID: entity, HEALTH24_CLIENT_ID: clientId, HEALTH24_CLIENT_SECRET: secret });
+  console.log('\nПеревіряю авторизацію та список працівників тестового профілю ' + entity + '…');
   try {
     const employees = await createClient(config).employees();
     console.log('\nУСПІХ: авторизація та доступ до списку працівників підтверджені.');
     console.log('Активних працівників: ' + employees.filter(e => e.fired === false).length);
     console.log('Це підтверджує локальний доступ. Онлайн-запис на сайті ще не увімкнено.');
   } catch (error) {
-    console.log('\nДоступ не підтверджено. Дані для підтримки:');
+    if (error.diagnostic?.path === '/api/v4/employees') console.log('\nАвторизація успішна. Помилка на етапі отримання працівників.');
+    console.log('\nДоступ до клініки не підтверджено. Дані для підтримки:');
     console.log(JSON.stringify({ connected: false, environment: 'test', source: 'local_computer', code: error.code || 'connection_failed', ...(error.upstreamStatus ? { upstreamStatus: error.upstreamStatus } : {}), ...(error.diagnostic ? { diagnostic: error.diagnostic } : {}) }, null, 2));
     process.exitCode = 1;
   }
