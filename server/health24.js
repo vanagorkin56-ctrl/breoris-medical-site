@@ -1,4 +1,5 @@
 'use strict';
+const { responseShape } = require('./health24-response-shape');
 // Server-only: never import this file into dist/ or return upstream JSON.
 class Health24Error extends Error {
   constructor(code, upstreamStatus, diagnostic) { super(code); this.code = code; this.upstreamStatus = upstreamStatus; this.diagnostic = diagnostic; }
@@ -82,7 +83,7 @@ function createClient(config, fetcher = fetch) {
     const bearer = await authorize();
     const query = new URLSearchParams({ period_start: periodStart, period_end: periodEnd });
     const days = await json('/api/v4/employees/' + employeeId + '/schedule?' + query, { headers: { Authorization: 'Bearer ' + bearer } });
-    if (!days || typeof days !== 'object' || Array.isArray(days) || Object.keys(days).length > 31 || Object.entries(days).some(([date, slots]) => !validDate(date) || date < periodStart || date > periodEnd || !Array.isArray(slots) || slots.length > 1000 || slots.some(slot => typeof slot !== 'string'))) throw new Health24Error('unexpected_schedule_response');
+    if (!days || typeof days !== 'object' || Array.isArray(days) || Object.keys(days).length > 31 || Object.entries(days).some(([date, slots]) => !validDate(date) || date < periodStart || date > periodEnd || !Array.isArray(slots) || slots.length > 1000 || slots.some(slot => typeof slot !== 'string'))) throw new Health24Error('unexpected_schedule_response', 200, { method: 'GET', path: '/api/v4/employees/' + employeeId + '/schedule', checkedAt: new Date().toISOString(), responseKind: 'json', structure: responseShape(days) });
     return days;
   }
   return { employees, legalEntities, schedule };

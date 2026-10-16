@@ -8,10 +8,17 @@ async function scheduleReport(client, entity, employees, now = new Date()) {
   const report = { environment: 'test', legalEntityId: Number(entity), checkedAt: now.toISOString(), periodStart: start, periodEnd: end, activeEmployeeCount: active.length, employees: [] };
   // Keep a local diagnostic bounded even if access unexpectedly covers a large clinic.
   for (const employee of active.slice(0, 10)) {
-    const days = await client.schedule(employee.id, start, end);
+    let days;
+    try { days = await client.schedule(employee.id, start, end); }
+    catch (error) {
+      // Keep the useful partial report, including safe schema diagnostics.
+      report.employees.push({ employeeId: employee.id, scheduleRead: false, code: error.code || 'connection_failed', ...(error.upstreamStatus ? { upstreamStatus: error.upstreamStatus } : {}), ...(error.diagnostic ? { diagnostic: error.diagnostic } : {}) });
+      continue;
+    }
     const occupied = Object.entries(days).filter(([, slots]) => slots.length);
     report.employees.push({
       employeeId: employee.id,
+      scheduleRead: true,
       daysReturned: Object.keys(days).length,
       daysWithSlots: occupied.length,
       slotCount: occupied.reduce((sum, [, slots]) => sum + slots.length, 0),

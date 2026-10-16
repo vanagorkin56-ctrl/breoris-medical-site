@@ -109,3 +109,30 @@ test('unexpected schedule fields and entries are rejected without serializing re
     await assert.rejects(client.schedule(123,'2026-10-16','2026-10-29'),error=>error.code==='unexpected_schedule_response'&&!error.message.includes('private'));
   }
 });
+
+test('schema diagnostics reveal wrapped schedule structure but redact arbitrary names and values', () => {
+  const {responseShape}=require('../server/health24-response-shape');
+  const structure=responseShape({data:{'2026-10-16':[{start:'2026-10-16T09:00:00+03:00',end:'2026-10-16T09:30:00+03:00',patient_name:'Private patient',access_token:'private-token',phone:'0671234567',duration:30}]},'private-key-as-field':'private-value'});
+  const text=JSON.stringify(structure);
+  assert.ok(text.includes('2026-10-16T09:00:00+03:00'));
+  assert.ok(text.includes('start'));
+  for(const value of ['Private patient','private-token','0671234567','private-key-as-field','private-value','patient_name','access_token'])assert.ok(!text.includes(value));
+  assert.ok(JSON.stringify(responseShape(Array.from({length:10000},()=>({data:Array(1000).fill('hidden')})))).length<50000);
+});
+
+test('local inspection retains schema mismatch and successful employee results in one report', async () => {
+  const {scheduleReport}=require('../scripts/health24-schedule-report');
+  const client=createClient(configuration(env),async url=>{
+    if(url.endsWith('/oauth/token'))return json({access_token:'private-token',token_type:'Bearer',expires_in:3600});
+    if(url.includes('/123/schedule'))return json({data:{'2026-10-16':[{start:'09:00',end:'09:30',patient:'Do not export'}]}});
+    return json({'2026-10-16':['10:00-10:30']});
+  });
+  const report=await scheduleReport(client,'22356',[{id:123,fired:false},{id:124,fired:false}],new Date('2026-10-16T12:00:00Z'));
+  assert.equal(report.employees.length,2);
+  assert.equal(report.employees[0].scheduleRead,false);
+  assert.equal(report.employees[0].upstreamStatus,200);
+  assert.equal(report.employees[0].diagnostic.structure.keys[0],'data');
+  assert.equal(report.employees[1].scheduleRead,true);
+  assert.equal(report.employees[1].slotCount,1);
+  for(const value of ['Do not export','private-token','example-secret'])assert.ok(!JSON.stringify(report).includes(value));
+});

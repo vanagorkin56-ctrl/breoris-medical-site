@@ -66,7 +66,7 @@ async function main() {
       await mkdir(directory, { recursive: true, mode: 0o700 });
       const destination = path.join(directory, 'schedule.json');
       await writeFile(destination, JSON.stringify(report, null, 2) + '\n', { mode: 0o600 });
-      for (const row of report.employees) console.log('Працівник ' + row.employeeId + ': доступних інтервалів — ' + row.slotCount);
+      for (const row of report.employees) console.log('Працівник ' + row.employeeId + ': ' + (row.scheduleRead ? 'інтервалів у відповіді — ' + row.slotCount : row.code === 'unexpected_schedule_response' ? 'формат відповіді потребує перевірки; структуру збережено.' : 'не вдалося прочитати розклад; діагностику збережено.'));
       console.log('Результат збережено локально: ' + destination);
       console.log('Записів не створено. Можна повернутися до чату та написати «готово».');
     }
