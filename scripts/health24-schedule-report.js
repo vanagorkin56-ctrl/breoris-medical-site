@@ -22,7 +22,10 @@ async function scheduleReport(client, entity, employees, now = new Date()) {
       daysReturned: Object.keys(days).length,
       daysWithSlots: occupied.length,
       slotCount: occupied.reduce((sum, [, slots]) => sum + slots.length, 0),
-      samples: occupied.slice(0, 3).map(([date, slots]) => ({ date, slots: slots.slice(0, 3).map(slot => /^[0-9TZtz:+.,/ \-]{1,200}$/.test(slot) && /\d{2}:\d{2}/.test(slot) ? { kind: 'time_string', value: slot } : { kind: 'other_string', length: slot.length }) }))
+      samples: occupied.slice(0, 3).map(([date, slots]) => ({ date, slots: slots.slice(0, 3).map(slot => {
+        if (slot && typeof slot === 'object') return { kind: 'interval', time: slot.time, period_start: slot.period_start, period_end: slot.period_end, status: slot.status, flags: slot.flags };
+        return /^[0-9TZtz:+.,/ \-]{1,200}$/.test(slot) && /\d{2}:\d{2}/.test(slot) ? { kind: 'time_string', value: slot } : { kind: 'other_string', length: slot.length };
+      }) }))
     });
   }
   return report;

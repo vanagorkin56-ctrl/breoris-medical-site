@@ -136,3 +136,35 @@ test('local inspection retains schema mismatch and successful employee results i
   assert.equal(report.employees[1].slotCount,1);
   for(const value of ['Do not export','private-token','example-secret'])assert.ok(!JSON.stringify(report).includes(value));
 });
+
+test('observed test schedules accept explicit intervals across Kyiv timezone offsets without inventing availability', () => {
+  const {normalizeSchedule}=require('../server/health24-schedule');
+  const fixture=require('./fixtures/health24-schedule-intervals.json');
+  for(const employee of fixture.employees){
+    const days=normalizeSchedule(employee.days,fixture.periodStart,fixture.periodEnd);
+    for(const [day,slots] of Object.entries(days))for(const slot of slots){
+      assert.equal(slot.status,'unknown');
+      assert.deepEqual(slot.flags,{});
+      assert.equal(Date.parse(slot.period_end)-Date.parse(slot.period_start),20*60000);
+      assert.equal(slot.period_start.slice(0,10),day);
+      assert.ok(slot.period_start.startsWith(day+'T'+slot.time));
+    }
+    assert.ok(Object.values(days).flat().some(slot=>slot.period_start.endsWith('+03:00')));
+    assert.ok(Object.values(days).flat().some(slot=>slot.period_start.endsWith('+02:00')));
+  }
+});
+
+test('interval reader strips patient fields and rejects invalid or ambiguous periods', async () => {
+  const {normalizeSchedule}=require('../server/health24-schedule');
+  const slot={time:'10:00',period_start:'2026-10-19T10:00:00.000+03:00',period_end:'2026-10-19T10:20:00.000+03:00',status:'available',is_busy:false,patient_name:'Private patient',access_token:'private-token'};
+  const clean=normalizeSchedule({'2026-10-19':[slot]},'2026-10-16','2026-10-29')['2026-10-19'][0];
+  assert.deepEqual(clean,{time:slot.time,period_start:slot.period_start,period_end:slot.period_end,status:'available',flags:{is_busy:false}});
+  assert.ok(!JSON.stringify(clean).includes('Private patient'));
+  for(const patch of [{period_end:slot.period_start},{period_end:'2026-10-19T09:40:00.000+03:00'},{period_start:'2026-10-19T10:00:00'},{period_start:'2026-10-20T10:00:00.000+03:00'},{time:'11:00'}])assert.throws(()=>normalizeSchedule({'2026-10-19':[{...slot,...patch}]},'2026-10-16','2026-10-29'));
+  const client=createClient(configuration(env),async url=>url.endsWith('/oauth/token')?json({access_token:'token',token_type:'Bearer',expires_in:3600}):json({'2026-10-19':[slot]}));
+  const {scheduleReport}=require('../scripts/health24-schedule-report');
+  const report=await scheduleReport(client,'22356',[{id:123,fired:false}],new Date('2026-10-16T12:00:00Z'));
+  assert.equal(report.employees[0].scheduleRead,true);
+  assert.equal(report.employees[0].samples[0].slots[0].kind,'interval');
+  for(const value of ['Private patient','private-token','access_token','patient_name'])assert.ok(!JSON.stringify(report).includes(value));
+});

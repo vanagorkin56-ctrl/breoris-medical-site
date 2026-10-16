@@ -1,5 +1,6 @@
 'use strict';
 const { responseShape } = require('./health24-response-shape');
+const { normalizeSchedule, validDate } = require('./health24-schedule');
 // Server-only: never import this file into dist/ or return upstream JSON.
 class Health24Error extends Error {
   constructor(code, upstreamStatus, diagnostic) { super(code); this.code = code; this.upstreamStatus = upstreamStatus; this.diagnostic = diagnostic; }
@@ -78,13 +79,12 @@ function createClient(config, fetcher = fetch) {
   }
   async function schedule(employeeId, periodStart, periodEnd) {
     if (!/^[1-9]\d*$/.test(String(employeeId)) || !Number.isSafeInteger(Number(employeeId))) throw new Health24Error('invalid_configuration');
-    const validDate = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
     if (!validDate(periodStart) || !validDate(periodEnd) || periodEnd < periodStart || Date.parse(periodEnd) - Date.parse(periodStart) > 30 * 86400000) throw new Health24Error('invalid_schedule_range');
     const bearer = await authorize();
     const query = new URLSearchParams({ period_start: periodStart, period_end: periodEnd });
     const days = await json('/api/v4/employees/' + employeeId + '/schedule?' + query, { headers: { Authorization: 'Bearer ' + bearer } });
-    if (!days || typeof days !== 'object' || Array.isArray(days) || Object.keys(days).length > 31 || Object.entries(days).some(([date, slots]) => !validDate(date) || date < periodStart || date > periodEnd || !Array.isArray(slots) || slots.length > 1000 || slots.some(slot => typeof slot !== 'string'))) throw new Health24Error('unexpected_schedule_response', 200, { method: 'GET', path: '/api/v4/employees/' + employeeId + '/schedule', checkedAt: new Date().toISOString(), responseKind: 'json', structure: responseShape(days) });
-    return days;
+    try { return normalizeSchedule(days, periodStart, periodEnd); }
+    catch { throw new Health24Error('unexpected_schedule_response', 200, { method: 'GET', path: '/api/v4/employees/' + employeeId + '/schedule', checkedAt: new Date().toISOString(), responseKind: 'json', structure: responseShape(days) }); }
   }
   return { employees, legalEntities, schedule };
 }
