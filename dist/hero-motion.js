@@ -8,44 +8,6 @@
  if(!hero||!video)return;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  const connection=navigator.connection;
- // Desktop Safari can refuse muted video autoplay. An image animation uses
- // the same frames and timing without a media playback permission or controls.
- const desktopSafari=/Safari\//.test(navigator.userAgent)&&!/Chrome|Chromium|CriOS|Edg|OPR|FxiOS|Mobile/.test(navigator.userAgent)&&navigator.maxTouchPoints<2;
- if(desktopSafari){
-  video.pause();video.remove();
-  let generation=0,frame=null,objectURL=null,image=null,complete=false,blobPromise=null;
-  const cleanup=()=>{generation++;if(frame!==null)cancelAnimationFrame(frame);frame=null;image?.remove();image=null;if(objectURL)URL.revokeObjectURL(objectURL);objectURL=null;};
-  const staticFrame=()=>{cleanup();hero.classList.add('is-static','is-revealing');hero.classList.remove('is-playing-film');};
-  const start=async()=>{
-   cleanup();complete=false;hero.classList.remove('is-finished','is-static','is-revealing');
-   if(reduced.matches||connection?.saveData){staticFrame();return;}
-   if(document.hidden)return;
-   const current=generation;hero.classList.add('is-playing-film');
-   try{
-    blobPromise??=fetch('assets/motion/breoris-opening-once.webp?v=1').then(response=>{if(!response.ok)throw new Error('animation_unavailable');return response.blob();});
-    const blob=await blobPromise;if(current!==generation||document.hidden)return;
-    objectURL=URL.createObjectURL(blob);image=document.createElement('img');image.className='hero-image-film';image.alt='';image.setAttribute('aria-hidden','true');
-    image.onload=()=>{
-     if(current!==generation)return;
-     const started=performance.now();
-     const tick=now=>{
-      if(current!==generation)return;
-      if(now-started>=4250)hero.classList.add('is-revealing');
-      if(now-started>=5000){complete=true;hero.classList.remove('is-playing-film');hero.classList.add('is-revealing');const hold=()=>{if(current===generation){hero.classList.add('is-finished');cleanup();}};if(still?.decode)still.decode().then(hold).catch(()=>{});else if(still?.complete)hold();return;}
-      frame=requestAnimationFrame(tick);
-     };frame=requestAnimationFrame(tick);
-    };
-    image.onerror=()=>{if(current===generation)staticFrame();};
-    image.src=objectURL;hero.querySelector('.hero-media').append(image);
-   }catch{if(current===generation){blobPromise=null;staticFrame();}}
-  };
-  document.addEventListener('visibilitychange',()=>{if(!complete){if(document.hidden)cleanup();else start();}});
-  window.addEventListener('pageshow',event=>{if(event.persisted)start();});
-  window.addEventListener('pagehide',cleanup);
-  reduced.addEventListener('change',start);connection?.addEventListener?.('change',start);
-  start();return;
- }
-
  let visible=hero.getBoundingClientRect().bottom>0&&hero.getBoundingClientRect().top<innerHeight,posterReady=false,failed=false,finished=false,pending=false,blocked=false,retryTimer,interruptions=0;
  const allowed=()=>!failed&&!reduced.matches&&!connection?.saveData;
  const play=()=>{

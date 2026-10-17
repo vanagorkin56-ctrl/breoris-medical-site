@@ -84,6 +84,3 @@
 .hero.is-finished .hero-static{opacity:1;transition:none}
 .hero.is-finished .hero-video{opacity:0}
 @media(prefers-reduced-motion:reduce){.hero-service-shape,.hero.is-playing-film:not(.is-revealing) .hero-service-shape{opacity:1;visibility:visible;pointer-events:auto;transition:none}}
-
-
-.hero-image-film{position:absolute;inset:0;z-index:2;display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}.hero.is-static .hero-image-film,.hero.is-finished .hero-image-film{display:none}
