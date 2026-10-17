@@ -17,7 +17,7 @@ function harness(options={}){
  let posts=0,reads=0;
  global.fetch=async(url,request)=>{
   if(url.endsWith('/oauth/token'))return json({access_token:'server-only-token',token_type:'Bearer',expires_in:3600});
-  if(url.includes('/employees?'))return json([{id:595920,name:'Test doctor',fired:false,resource_office:false,employee_type:{value:'SPECIALIST'},position:{name_uk:'Невропатолог'},party_id:999,phone:'private-staff-phone'},{id:999,fired:false,name:'Resource',resource_office:true,employee_type:{value:'SPECIALIST'}}]);
+  if(url.includes('/employees?'))return json([{id:595920,name:'Test doctor',fired:false,resource_office:false,employee_type:{value:'SPECIALIST'},position:{name_uk:options.specialty||'Невропатолог'},party_id:999,phone:'private-staff-phone'},{id:999,fired:false,name:'Resource',resource_office:true,employee_type:{value:'SPECIALIST'}}]);
   if(url.includes('/schedule?')){reads++;return json({[day]:[{...slot,...(options.schedule||{})}]});}
   if(url.endsWith('/visit_moderations')){
    posts++;assert.equal(request.method,'POST');assert.equal(request.redirect,'error');assert.equal(request.headers.Authorization,'Bearer server-only-token');
@@ -83,4 +83,10 @@ test('failure diagnostics expose only transport metadata and never patient respo
   assert.equal(body.diagnostic.stage,'create_visit');assert.equal(body.diagnostic.upstreamStatus,500);assert.match(body.incidentId,/^[a-f0-9-]{36}$/);
   assert.ok(!JSON.stringify([body,logs]).includes('private-patient'));assert.ok(!Object.hasOwn(body.diagnostic,'structure'));assert.equal(logs.length,1);assert.equal(h.posts(),0);
  }finally{console.warn=warn;h.restore();}
+});
+
+test('consultation quote follows the mapped doctor and never applies to another specialty',async()=>{
+ for(const [specialty,price] of [['Невропатолог',1200],['Лікар з ультразвукової діагностики',null],['Терапевт',null]]){
+  const h=harness({specialty});try{const result=await h.booking.catalog();assert.equal(result.doctors[0].consultationFrom,price);assert.equal(h.posts(),0);}finally{h.restore();}
+ }
 });

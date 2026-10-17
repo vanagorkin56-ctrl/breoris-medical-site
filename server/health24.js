@@ -23,10 +23,10 @@ function configuration(env = process.env) {
 }
 function createClient(config, fetcher = fetch) {
   let token = null, expires = 0, pendingToken;
-  async function json(path, options = {}) {
+  async function json(path, options = {}, timeout = 8000) {
     let response;
     try {
-      response = await fetcher(config.base + path, { ...options, redirect: 'error', signal: AbortSignal.timeout(8000), headers: { 'Content-Type': 'application/json', Accept: 'application/json', ...options.headers } });
+      response = await fetcher(config.base + path, { ...options, redirect: 'error', signal: AbortSignal.timeout(timeout), headers: { 'Content-Type': 'application/json', Accept: 'application/json', ...options.headers } });
     } catch { throw new Health24Error('network_error', undefined, { method: options.method || 'GET', path: path.split('?')[0], checkedAt: new Date().toISOString() }); }
     if (!response.ok) {
       const contentType = response.headers.get('content-type') || '';
@@ -93,7 +93,7 @@ function createClient(config, fetcher = fetch) {
   async function createVisit(payload) {
     const bearer = await authorize();
     // A POST is never automatically retried: a lost response may still mean a visit was created.
-    return json('/api/v4/visit_moderations', { method: 'POST', headers: { Authorization: 'Bearer ' + bearer }, body: JSON.stringify(payload) });
+    return json('/api/v4/visit_moderations', { method: 'POST', headers: { Authorization: 'Bearer ' + bearer }, body: JSON.stringify(payload) }, 30000);
   }
   return { employees, legalEntities, schedule, createVisit };
 }

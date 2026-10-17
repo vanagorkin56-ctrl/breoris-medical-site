@@ -2,9 +2,17 @@
 const {createHash,createHmac,randomUUID,timingSafeEqual}=require('node:crypto');
 const {configuration,createClient}=require('./health24');
 const {validDate}=require('./health24-schedule');
+const profiles=require('../data/doctors.json').doctors;
 let client,key,catalogCache,catalogAt=0;
 const attempts=new Map(),limits=new Map();
 const mapped={595920:'tomakh',595938:'sokrut',596094:'sokrut',596096:'sushko',596803:'sushko',596308:'orlov',596330:'hrytsai',658345:'mishchenko',663338:'pokaichuk'};
+function consultationFrom(siteId,specialty){
+ const profile=profiles.find(row=>row.id===siteId);
+ const canonical=value=>value==='Невропатолог'?'Невролог':value;
+ if(!profile?.specialties.some(value=>canonical(value)===canonical(specialty)))return null;
+ const prices=profile.services.filter(row=>['Консультація','Консультативний прийом'].includes(row.name)&&Number.isFinite(row.price)&&row.price>0).map(row=>row.price);
+ return prices.length?Math.min(...prices):null;
+}
 class BookingError extends Error{constructor(code,status=400,diagnostic){super(code);this.code=code;this.status=status;this.diagnostic=diagnostic;}}
 function context(){
  const config=configuration();if(config.missing)throw new BookingError('not_configured',503);
@@ -19,6 +27,7 @@ async function catalog(fresh=false){
  const rows=await client.employees();
  const doctors=rows.filter(row=>row.fired===false&&!row.resource_office&&['DOCTOR','SPECIALIST'].includes(row.employee_type?.value)&&Number.isSafeInteger(row.id)&&row.id>0)
   .map(row=>({id:row.id,name:safeText(row.name),specialty:safeText(row.position?.name_uk||row.position?.name),type:row.employee_type.value,siteId:config.environment==='production'?mapped[row.id]||null:null})).filter(row=>row.name);
+ for(const doctor of doctors)doctor.consultationFrom=consultationFrom(doctor.siteId,doctor.specialty);
  catalogCache={environment:config.environment,legalEntityId:Number(config.entity),doctors};catalogAt=Date.now();return catalogCache;
 }
 function send(res,status,body){res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');return res.status(status).json(body);}
@@ -121,7 +130,7 @@ async function book(input,ip){
   if(!Number.isSafeInteger(result?.id)||result.id<=0||result.legal_entity?.id!==Number(config.entity)||result.employee?.id!==doctor.id||Date.parse(result.period_start)!==Date.parse(current.period_start)||Date.parse(result.period_end)!==Date.parse(current.period_end))throw new BookingError('booking_uncertain',503,{stage:'validate_visit_response'});
   if(['rejected','cancelled','canceled'].includes(result.state))throw new BookingError('booking_rejected',409);
   if(!['approved','pending','new','requested'].includes(result.state))throw new BookingError('booking_uncertain',503,{stage:'validate_visit_state'});
-  return {ok:true,accepted:true,confirmed:result.state==='approved',reference:String(result.id),doctor:{id:doctor.id,name:doctor.name,specialty:doctor.specialty},start:current.period_start,end:current.period_end,location:safeText(result.division?.address,200)};
+  return {ok:true,accepted:true,confirmed:result.state==='approved',reference:String(result.id),consultationFrom:doctor.consultationFrom,doctor:{id:doctor.id,name:doctor.name,specialty:doctor.specialty},start:current.period_start,end:current.period_end,location:safeText(result.division?.address,200)};
  })();
  attempts.set(input.attemptId,{fingerprint,promise,expires:now+30*60000});return promise;
 }

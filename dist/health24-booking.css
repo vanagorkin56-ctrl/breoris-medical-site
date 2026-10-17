@@ -17,3 +17,5 @@
 #h24-success h3{font-size:25px}.h24-result-summary{line-height:1.7}.h24-reference{font-size:14px;color:#526c76}
 #health24-booking-dialog button:disabled{opacity:.55;cursor:wait}#health24-booking-dialog :focus-visible{outline:3px solid #64bccc;outline-offset:3px}
 @media(max-width:600px){#health24-booking-dialog{padding:30px 20px}.h24-fields{grid-template-columns:1fr}.h24-date-search{grid-template-columns:1fr}.h24-steps{gap:10px;font-size:12px}.h24-actions .primary{font-size:15px;padding:14px 18px}.h24-help{font-size:13px}}
+
+.h24-price{padding:14px 16px;border-left:3px solid #64bccc;background:#f0f8f8;color:#153c4e;font-size:14px;line-height:1.7;margin:18px 0}
