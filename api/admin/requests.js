@@ -1,0 +1,3 @@
+'use strict';
+const admin=require('../../server/clinic-admin'),{send,fail,origin,body,ClinicError}=require('../../server/clinic-web');
+module.exports=async(req,res)=>{try{if(!['GET','PATCH'].includes(req.method))throw new ClinicError('method_not_allowed',405);if(req.method==='PATCH')origin(req);const auth=await admin.session(req);if(req.method==='PATCH')return send(res,200,await admin.update(auth,body(req)));const query=new URL(req.url,'https://local.invalid').searchParams;return send(res,200,await admin.list(auth,query.get('status')||'new',Number(query.get('offset')||0)));}catch(error){return fail(res,error);}};

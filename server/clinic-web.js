@@ -1,0 +1,7 @@
+'use strict';
+class ClinicError extends Error{constructor(code,status=400){super(code);this.code=code;this.status=status;}}
+function send(res,status,body){res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('X-Robots-Tag','noindex, nofollow');return res.status(status).json(body);}
+function fail(res,error){return send(res,error instanceof ClinicError?error.status:503,{ok:false,code:error instanceof ClinicError?error.code:'service_unavailable'});}
+function origin(req){const allowed=new Set(['https://breoris-medical-site-dist.vercel.app','https://breoris-medical.com','https://www.breoris-medical.com']);for(const host of [process.env.VERCEL_URL,process.env.VERCEL_PROJECT_PRODUCTION_URL])if(host&&/^[a-z0-9.-]+$/.test(host))allowed.add('https://'+host);if(!allowed.has(req.headers.origin))throw new ClinicError('origin_not_allowed',403);}
+function body(req,max=4096){if(!/^application\/json(?:\s*;|$)/i.test(req.headers['content-type']||'')||Number(req.headers['content-length']||0)>max)throw new ClinicError('invalid_request');let value=req.body;if(typeof value==='string'){if(Buffer.byteLength(value)>max)throw new ClinicError('invalid_request');try{value=JSON.parse(value);}catch{throw new ClinicError('invalid_request');}}if(!value||typeof value!=='object'||Array.isArray(value)||Buffer.byteLength(JSON.stringify(value))>max)throw new ClinicError('invalid_request');return value;}
+module.exports={ClinicError,send,fail,origin,body};

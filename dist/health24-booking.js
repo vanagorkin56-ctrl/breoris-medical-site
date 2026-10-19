@@ -8,6 +8,11 @@
  };
  const priceStrings={uk:{estimate:'Орієнтовна вартість консультації',from:'від',priceNote:'Остаточну вартість підтвердить адміністратор. Додаткові обстеження та процедури оплачуються окремо.',priceUnknown:'Вартість обраної послуги уточнить адміністратор.'},ru:{estimate:'Ориентировочная стоимость консультации',from:'от',priceNote:'Окончательную стоимость подтвердит администратор. Дополнительные обследования и процедуры оплачиваются отдельно.',priceUnknown:'Стоимость выбранной услуги уточнит администратор.'},en:{estimate:'Estimated consultation price',from:'from',priceNote:'The administrator will confirm the final price. Additional examinations and procedures are charged separately.',priceUnknown:'The administrator will confirm the price of this service.'}};
  for(const lang of Object.keys(priceStrings))Object.assign(strings[lang],priceStrings[lang]);
+ const callbackStrings={
+ uk:{time:'Бажані годинні вікна',selectTime:'Оберіть бажаний час.',title:'Заявка на прийом',intro:'Оберіть бажаний час. Це ще не бронювання: адміністратор зв’яжеться з вами та підтвердить прийом.',submit:'Надіслати заявку',sending:'Надсилаємо заявку…',pending:'Заявку отримано',pendingText:'Обраний час — бажаний. Прийом буде підтверджено після узгодження з адміністратором.',step2:'2. Бажаний час',reference:'Номер заявки',empty:'На ці дати ще немає годин для заявки. Оберіть інший період або зателефонуйте до клініки.',service_unavailable:'Не вдалося отримати відповідь. Повторіть відправлення без зміни даних — повторну заявку не буде створено.',attempt_conflict:'Дані попередньої спроби відрізняються. Уточніть отримання заявки в адміністратора.'},
+ ru:{time:'Желаемые часовые окна',selectTime:'Выберите желаемое время.',title:'Заявка на приём',intro:'Выберите желаемое время. Это ещё не бронь: администратор свяжется с вами и подтвердит приём.',submit:'Отправить заявку',sending:'Отправляем заявку…',pending:'Заявка получена',pendingText:'Выбранное время — желаемое. Приём будет подтверждён после согласования с администратором.',step2:'2. Желаемое время',reference:'Номер заявки',empty:'На эти даты ещё нет часов для заявки. Выберите другой период или позвоните в клинику.',service_unavailable:'Не удалось получить ответ. Повторите отправку без изменения данных — повторная заявка не будет создана.',attempt_conflict:'Данные предыдущей попытки отличаются. Уточните получение заявки у администратора.'},
+ en:{time:'Preferred one-hour windows',selectTime:'Choose your preferred time.',title:'Appointment request',intro:'Choose your preferred time. This is not a reservation: the administrator will contact you to confirm.',submit:'Send request',sending:'Sending request…',pending:'Request received',pendingText:'Your selected time is a preference. Your appointment will be confirmed after speaking with the administrator.',step2:'2. Preferred time',reference:'Request reference',empty:'No request times have been added for these dates. Choose another date range or call the clinic.',service_unavailable:'We could not receive a response. Retry without changing the details to avoid a duplicate request.',attempt_conflict:'The previous attempt had different details. Please check receipt with the administrator.'}
+ };
  const dialog=document.createElement('dialog');dialog.id='health24-booking-dialog';dialog.setAttribute('aria-labelledby','h24-title');
  dialog.innerHTML=`<button type="button" class="dialog-close" data-h24-close aria-label="Закрити запис">×</button><h2 id="h24-title" data-h24-text="title"></h2><nav class="h24-steps" aria-label="Етапи запису"><span data-h24-step="0" data-h24-text="step1"></span><span data-h24-step="1" data-h24-text="step2"></span><span data-h24-step="2" data-h24-text="step3"></span></nav><p class="h24-intro" data-h24-text="intro"></p><p id="h24-context" hidden></p><p id="h24-status" role="status" aria-live="polite" hidden></p><form id="h24-form" novalidate><section data-h24-panel="0"><label for="h24-doctor" data-h24-text="doctor"></label><select id="h24-doctor" required></select><p id="h24-doctor-note" hidden></p></section><section data-h24-panel="1" hidden><p class="h24-summary"></p><label for="h24-period" data-h24-text="period"></label><div class="h24-date-search"><input id="h24-period" type="date" required><button type="button" class="h24-more" data-h24-text="more"></button></div><h3 data-h24-text="dates"></h3><div id="h24-days" class="h24-days" role="group"></div><h3 data-h24-text="time"></h3><div id="h24-times" class="h24-times" role="group"></div><p class="h24-hint" data-h24-text="timezone"></p></section><section data-h24-panel="2" hidden><p class="h24-summary"></p><div class="h24-fields"><div><label for="h24-first" data-h24-text="first"></label><input id="h24-first" name="firstName" autocomplete="given-name" required minlength="2" maxlength="80"></div><div><label for="h24-last" data-h24-text="last"></label><input id="h24-last" name="lastName" autocomplete="family-name" required minlength="2" maxlength="80"></div><div><label for="h24-phone" data-h24-text="phone"></label><input id="h24-phone" name="phone" type="tel" autocomplete="tel" placeholder="+380 97 000 00 00" required maxlength="30"></div><div><label for="h24-birth" data-h24-text="birth"></label><input id="h24-birth" name="birthDate" type="date" autocomplete="bday" required></div><div><label for="h24-gender" data-h24-text="gender"></label><select id="h24-gender" name="gender" required><option value="">—</option><option value="female" data-h24-text="female"></option><option value="male" data-h24-text="male"></option></select></div></div><label class="h24-consent"><input id="h24-consent" name="consent" type="checkbox" required><span data-h24-text="consent"></span></label></section><div class="h24-actions"><button type="button" class="text-link" id="h24-back" data-h24-text="back" hidden></button><button type="submit" class="button primary" id="h24-next" data-h24-text="next"></button></div></form><section id="h24-success" hidden aria-live="polite"><h3></h3><p class="h24-result-summary"></p><p class="h24-pending" data-h24-text="pendingText" hidden></p><p class="h24-reference"></p><button type="button" class="button primary" data-h24-close data-h24-text="done"></button></section><div class="h24-help"><span data-h24-text="help"></span> <a href="tel:+380975323664" data-h24-text="call"></a> · <a href="https://t.me/Breoris_Medical" target="_blank" rel="noopener noreferrer" data-h24-text="telegram"></a></div>`;
  for(const selector of ['[data-h24-panel="0"]','[data-h24-panel="2"]','#h24-success']){
@@ -16,14 +21,16 @@
  document.body.append(dialog);
  const q=s=>dialog.querySelector(s),form=q('form');let state={},previousFocus,generation=0,requestVersion=0;
  const locale=()=>window.BreorisLocale?.language||document.documentElement.lang||'uk';
- const t=key=>(strings[locale()]||strings.uk)[key]||strings.uk[key]||strings.uk.health24_unavailable;
+ const callback=()=>state.complete?state.requestMode==='callback':doctor()?.mode==='callback';
+ const t=key=>(callback()&&(callbackStrings[locale()]||callbackStrings.uk)[key])||(strings[locale()]||strings.uk)[key]||strings.uk[key]||strings.uk.health24_unavailable;
  const today=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Kyiv'}).format(new Date());
  const addDays=(day,n)=>new Date(Date.parse(day)+n*86400000).toISOString().slice(0,10);
  const doctor=()=>state.doctors?.find(d=>String(d.id)===q('#h24-doctor').value);
  const dateLabel=(date)=>new Intl.DateTimeFormat({uk:'uk-UA',ru:'ru-RU',en:'en-GB'}[locale()]||'uk-UA',{weekday:'short',day:'numeric',month:'short',timeZone:'Europe/Kyiv'}).format(new Date(date+'T12:00:00Z'));
  function status(key){state.status=key;q('#h24-status').textContent=key?t(key):'';q('#h24-status').hidden=!key;}
- function summary(){const d=doctor();return d?[d.name,d.specialty,state.date?dateLabel(state.date):'',state.slot?.time||''].filter(Boolean).join(' · '):'';}
+ function summary(){const d=doctor();return d?[d.name,d.specialty,state.date?dateLabel(state.date):'',state.slot?.label||state.slot?.time||''].filter(Boolean).join(' · '):'';}
  function render(){
+  for(const id of ['h24-last','h24-birth','h24-gender']){const field=q('#'+id);field.disabled=!!callback();field.required=!callback();field.closest('div').hidden=!!callback();}
   dialog.querySelectorAll('[data-h24-text]').forEach(el=>el.textContent=t(el.dataset.h24Text));
   q('[data-h24-close]').setAttribute('aria-label',t('close'));
   dialog.querySelectorAll('[data-h24-panel]').forEach(el=>el.hidden=Number(el.dataset.h24Panel)!==state.step);
@@ -53,13 +60,13 @@
  }
  async function api(path,options={}){
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),65000);
-  try{const response=await fetch('/api/health24/'+path,{...options,signal:controller.signal,credentials:'same-origin',headers:{Accept:'application/json',...options.headers}});const data=await response.json();if(!response.ok||data.ok!==true){const error=new Error(data.code||'health24_unavailable');error.code=data.code||'health24_unavailable';throw error;}return data;}
+  try{const response=await fetch(path.startsWith('/')?path:'/api/health24/'+path,{...options,signal:controller.signal,credentials:'same-origin',headers:{Accept:'application/json',...options.headers}});const data=await response.json();if(!response.ok||data.ok!==true){const error=new Error(data.code||'health24_unavailable');error.code=data.code||'health24_unavailable';throw error;}return data;}
   finally{clearTimeout(timer);}
  }
  function renderTimes(){
   const container=q('#h24-times');container.replaceChildren();
   const day=state.days?.find(row=>row.date===state.date);
-  for(const slot of day?.slots||[]){const button=document.createElement('button');button.type='button';button.textContent=slot.time;button.setAttribute('aria-pressed',String(state.slot===slot));button.addEventListener('click',()=>{state.slot=slot;state.attemptId=crypto.randomUUID();status('');renderTimes();});container.append(button);}
+  for(const slot of day?.slots||[]){const button=document.createElement('button');button.type='button';button.textContent=slot.label||slot.time;button.setAttribute('aria-pressed',String(state.slot===slot));button.addEventListener('click',()=>{state.slot=slot;state.attemptId=crypto.randomUUID();status('');renderTimes();});container.append(button);}
   render();
  }
  function renderDays(){
@@ -71,7 +78,7 @@
  async function loadSlots(start=q('#h24-period').value){
   const d=doctor();if(!d)return;
   const currentGeneration=generation,version=++requestVersion;state.loading=true;state.slot=null;state.date=null;state.days=[];q('#h24-days').replaceChildren();q('#h24-times').replaceChildren();status('loadingSchedule');render();
-  try{const result=await api('availability?employeeId='+d.id+'&start='+encodeURIComponent(start));if(currentGeneration!==generation||version!==requestVersion||!dialog.open)return;state.days=result.days;state.date=result.days.find(day=>day.slots.length)?.date||null;status('');renderDays();}
+  try{const result=await api(d.mode==='callback'?'/api/booking/availability?doctorId='+encodeURIComponent(d.siteId)+'&start='+encodeURIComponent(start):'availability?employeeId='+d.id+'&start='+encodeURIComponent(start));if(currentGeneration!==generation||version!==requestVersion||!dialog.open)return;state.days=result.days;state.date=result.days.find(day=>day.slots.length)?.date||null;status('');renderDays();}
   catch(error){if(currentGeneration===generation&&version===requestVersion)status(error.code||'health24_unavailable');}
   finally{if(currentGeneration===generation&&version===requestVersion){state.loading=false;render();}}
  }
@@ -81,7 +88,7 @@
   q('#h24-doctor').replaceChildren(option('',t('loading')));q('#h24-period').min=today();q('#h24-period').max=addDays(today(),90);q('#h24-period').value=today();q('#h24-birth').max=today();q('#h24-birth').min=addDays(today(),-130*366);q('#h24-doctor-note').hidden=true;
   const localDoctor=window.breorisData?.doctors.find(d=>d.id===doctorId);const localOption=[...document.querySelectorAll('#appointment-doctor option')].find(el=>el.value===doctorId);
   q('#h24-context').textContent=localDoctor?.name||localOption?.textContent||window.BreorisLocale?.t(service)||service||'';q('#h24-context').hidden=!q('#h24-context').textContent;status('');render();dialog.showModal();
-  try{const result=await api('catalog');if(currentGeneration!==generation||!dialog.open)return;state.doctors=result.doctors;renderDoctors();}
+  try{const result=await api('/api/booking/doctors');if(currentGeneration!==generation||!dialog.open)return;state.doctors=result.doctors;renderDoctors();}
   catch(error){if(currentGeneration===generation)status(error.code||'health24_unavailable');}
   finally{if(currentGeneration===generation){state.loading=false;render();}}
  }
@@ -100,15 +107,17 @@
   const phone=q('#h24-phone').value.replace(/\D/g,'');q('#h24-phone').setCustomValidity(/^(380\d{9}|0\d{9})$/.test(phone)?'':t('invalidPhone'));
   if(!form.reportValidity())return;
   const patient={firstName:q('#h24-first').value,lastName:q('#h24-last').value,phone:q('#h24-phone').value,birthDate:q('#h24-birth').value,gender:q('#h24-gender').value,consent:q('#h24-consent').checked};
+  state.requestMode=callback()?'callback':'health24';
   state.posting=true;form.setAttribute('aria-busy','true');status('sending');render();
   try{
-   const result=await api('appointments',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({attemptId:state.attemptId,token:state.slot.token,patient})});
+   const payload=callback()?{attemptId:state.attemptId,doctorId:doctor().siteId,slotId:state.slot.id,website:'',patient:{name:patient.firstName,phone:patient.phone,consent:patient.consent}}:{attemptId:state.attemptId,token:state.slot.token,patient};
+   const result=await api(callback()?'/api/booking/requests':'appointments',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
    state.complete=true;state.result=result;status('');q('#h24-success h3').textContent=t(result.confirmed?'success':'pending');q('.h24-result-summary').textContent=summary()+(result.location?' · '+result.location:'');q('.h24-pending').hidden=result.confirmed;q('.h24-reference').textContent=t('reference')+': '+result.reference;form.reset();
   }catch(error){
-   const code=error.code||'booking_uncertain';status(code);
+   const code=error.code||(callback()?'service_unavailable':'booking_uncertain');status(code);
    if(['slot_taken','slot_expired','booking_rejected','doctor_unavailable'].includes(code)){state.step=1;await loadSlots();status(code);}
    else if(code==='booking_uncertain')state.uncertain=true;
-   else state.attemptId=crypto.randomUUID();
+   else if(!callback())state.attemptId=crypto.randomUUID();
   }finally{state.posting=false;form.removeAttribute('aria-busy');render();if(state.complete)q('#h24-success button').focus();}
  });
  document.addEventListener('click',event=>{const trigger=event.target.closest('[data-book],[data-service],[data-doctor]');if(!trigger)return;event.preventDefault();event.stopImmediatePropagation();open(trigger.dataset.service,trigger.dataset.doctor||trigger.dataset.physician||document.body.dataset.pageDoctor);},true);

@@ -1,0 +1,3 @@
+'use strict';
+const admin=require('../../server/clinic-admin'),db=require('../../server/clinic-db'),{send,fail,origin,body,ClinicError}=require('../../server/clinic-web');
+module.exports=async(req,res)=>{try{if(req.method==='GET'){const auth=await admin.session(req);return send(res,200,{ok:true,user:auth.user});}origin(req);if(req.method==='POST')return send(res,200,await admin.login(req,res,body(req,2048)));if(req.method==='DELETE'){const token=admin.token(req);admin.cookie(res,'',0);if(token)try{await db.request('/auth/v1/logout',{token,method:'POST'});}catch{/* The local session is cleared even if Auth is temporarily unavailable. */}return send(res,200,{ok:true});}throw new ClinicError('method_not_allowed',405);}catch(error){return fail(res,error);}};
