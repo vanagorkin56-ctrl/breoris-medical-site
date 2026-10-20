@@ -4,7 +4,7 @@
 
 ## Clinic
 
-- Official website: https://breoris-medical.com/
+- Official website: https://www.breoris-medical.com/
 - Address: 2-B Ukrainian Volunteer Army Street, Dnipro, Ukraine
 - Phone: +380 97 532 36 64
 - Hours: Monday–Friday 08:00–18:00; Saturday 08:00–14:00
@@ -27,9 +27,9 @@ The website appointment flow is a demonstration. It does not send or store perso
 
 ## Languages
 
-- Ukrainian: https://breoris-medical.com/?lang=uk
-- Russian: https://breoris-medical.com/?lang=ru
-- English: https://breoris-medical.com/?lang=en
+- Ukrainian: https://www.breoris-medical.com/?lang=uk
+- Russian: https://www.breoris-medical.com/?lang=ru
+- English: https://www.breoris-medical.com/?lang=en
 
 ## Notes
 

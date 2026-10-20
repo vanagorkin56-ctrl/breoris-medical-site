@@ -294,7 +294,7 @@
     const socialLocale = document.querySelector('meta[property="og:locale"]');
     if (socialLocale) socialLocale.content = {uk:'uk_UA',ru:'ru_UA',en:'en_US'}[next];
     const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.href = `https://breoris-medical.com/?lang=${next}`;
+    if (canonical) canonical.href = `https://www.breoris-medical.com/?lang=${next}`;
     const title = {uk:'Breoris Medical — медична клініка у Дніпрі',ru:'Breoris Medical — медицинская клиника в Днепре',en:'Breoris Medical — medical clinic in Dnipro, Ukraine'};
     document.title = title[next]; translateTree();
   }

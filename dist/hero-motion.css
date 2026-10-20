@@ -84,3 +84,20 @@
 .hero.is-finished .hero-static{opacity:1;transition:none}
 .hero.is-finished .hero-video{opacity:0}
 @media(prefers-reduced-motion:reduce){.hero-service-shape,.hero.is-playing-film:not(.is-revealing) .hero-service-shape{opacity:1;visibility:visible;pointer-events:auto;transition:none}}
+
+/* A readable mobile wordmark and navigation, independent of film scaling. */
+.hero-mobile-brand{display:none}
+@media(max-width:760px){
+ .hero-mobile-brand{display:flex;position:absolute;z-index:3;top:34%;left:3%;width:94%;min-height:39%;margin:0;padding:4px 0;flex-direction:column;justify-content:center;align-items:center;background:#eef1f0;color:#103c59;font-size:clamp(32px,10vw,58px);font-weight:800;line-height:1.02;letter-spacing:-.035em;pointer-events:none;transition:opacity .85s ease}
+ .hero.is-playing-film:not(.is-revealing) .hero-mobile-brand{opacity:0;transition:none}
+ .hero-services{position:relative;inset:auto;height:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:calc(100% - 40px);margin:18px auto 0}
+ .hero-service-shape,.shape-consultations,.shape-labs,.shape-checkup{position:static;inset:auto;width:auto;height:auto;min-height:64px;padding:12px 10px;border:1px solid #bed5dc;border-radius:14px;background:#fff;color:#163c5a;font-size:18px;font-weight:700;line-height:1.35;white-space:normal}
+ .shape-consultations::before{display:none}
+ .hero-message p{font-size:18px;line-height:1.5;max-width:29ch}
+ .hero-book{font-size:18px;min-height:54px;padding:14px 24px}
+ .hero-follow-copy>p{font-size:17px;line-height:1.75}
+ .hero-follow .hero-eyebrow{font-size:13px}
+ .hero-follow .hero-actions .button,.hero-follow .text-link{font-size:16px}
+ .hero-service-shape:focus-visible{outline-offset:2px}
+}
+@media(prefers-reduced-motion:reduce){.hero-mobile-brand{transition:none;opacity:1!important}}
