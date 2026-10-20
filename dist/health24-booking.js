@@ -86,7 +86,7 @@
   if(dialog.open)return;previousFocus=document.activeElement;document.querySelectorAll('dialog[open]').forEach(other=>other.close());form.reset();
   state={step:0,context:{service,doctorId},doctors:[],days:[],slot:null,loading:true,posting:false,complete:false,attemptId:crypto.randomUUID()};const currentGeneration=++generation;
   q('#h24-doctor').replaceChildren(option('',t('loading')));q('#h24-period').min=today();q('#h24-period').max=addDays(today(),90);q('#h24-period').value=today();q('#h24-birth').max=today();q('#h24-birth').min=addDays(today(),-130*366);q('#h24-doctor-note').hidden=true;
-  const localDoctor=window.breorisData?.doctors.find(d=>d.id===doctorId);const localOption=[...document.querySelectorAll('#appointment-doctor option')].find(el=>el.value===doctorId);
+  const localDoctor=window.breorisData?.doctors.find(d=>d.id===doctorId);const localOption=doctorId?[...document.querySelectorAll('#appointment-doctor option')].find(el=>el.value===doctorId):null;
   q('#h24-context').textContent=localDoctor?.name||localOption?.textContent||window.BreorisLocale?.t(service)||service||'';q('#h24-context').hidden=!q('#h24-context').textContent;status('');render();dialog.showModal();
   try{const result=await api('/api/booking/doctors');if(currentGeneration!==generation||!dialog.open)return;state.doctors=result.doctors;renderDoctors();}
   catch(error){if(currentGeneration===generation)status(error.code||'health24_unavailable');}
