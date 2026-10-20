@@ -7,6 +7,16 @@
  const still=document.querySelector('.hero-static');
  if(!hero||!video)return;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ const mobile=matchMedia('(max-width:760px)');
+ const source=video.querySelector('source');
+ const desktopSrc=source?.getAttribute('src');
+ const desktopPoster=video.getAttribute('poster');
+ const selectFilm=()=>{
+  if(!source)return;
+  source.src=mobile.matches&&video.dataset.mobileSrc?video.dataset.mobileSrc:desktopSrc;
+  video.poster=mobile.matches&&video.dataset.mobilePoster?video.dataset.mobilePoster:desktopPoster;
+  if(!reduced.matches&&!navigator.connection?.saveData){video.preload='auto';video.load();}
+ };
  const connection=navigator.connection;
  let visible=hero.getBoundingClientRect().bottom>0&&hero.getBoundingClientRect().top<innerHeight,posterReady=false,failed=false,finished=false,pending=false,blocked=false,retryTimer,interruptions=0;
  const allowed=()=>!failed&&!reduced.matches&&!connection?.saveData;
@@ -64,9 +74,16 @@
  window.addEventListener('pagehide',()=>video.pause());
  reduced.addEventListener('change',play);
  connection?.addEventListener?.('change',play);
+ mobile.addEventListener('change',()=>{
+  clearTimeout(retryTimer);finished=false;failed=false;blocked=false;pending=false;interruptions=0;
+  if(frameRequest!==null&&video.cancelVideoFrameCallback)video.cancelVideoFrameCallback(frameRequest);
+  frameRequest=null;video.classList.remove('is-playing');hero.classList.remove('is-finished','is-revealing','is-static','is-playing-film');
+  posterReady=true;if(allowed())hero.classList.add('is-playing-film');selectFilm();play();
+ });
  const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;play()},{threshold:.05});observer.observe(hero);
  // Load the video after its poster is available.
  if(allowed())hero.classList.add('is-playing-film');
+ selectFilm();
  const start=()=>{posterReady=true;play()};
  if(!poster||poster.complete)start();else {poster.addEventListener('load',start,{once:true});poster.addEventListener('error',start,{once:true})}
 })();

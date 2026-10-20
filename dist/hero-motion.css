@@ -101,3 +101,14 @@
  .hero-service-shape:focus-visible{outline-offset:2px}
 }
 @media(prefers-reduced-motion:reduce){.hero-mobile-brand{transition:none;opacity:1!important}}
+
+/* Portrait film with real, accessible captions and CTA, matching the desktop type. */
+.hero-media>picture{display:contents}
+@media(max-width:760px){
+ .hero-media{aspect-ratio:720/1158}
+ .hero-mobile-brand{display:none!important}
+ .hero-message{position:absolute;top:122cqw;left:0;transform:none;width:100%;height:38.84cqw;margin:0;padding:0 16px 12px;gap:12px;justify-content:center;background:#eef1f0}
+ .hero-message p{max-width:32ch;font-family:inherit;font-size:clamp(16px,4.4vw,20px);font-weight:600;line-height:1.35;margin:0}
+ .hero-book{font-family:"DM Sans",Manrope,Arial,sans-serif;font-size:18px;min-height:50px;padding:12px 24px;flex-shrink:0}
+ .hero-service-shape{font-family:inherit}
+}

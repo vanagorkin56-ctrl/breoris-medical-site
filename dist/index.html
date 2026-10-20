@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="health24-booking.css?v=2">
 <link rel="stylesheet" href="refresh.css?v=1">
 <link rel="stylesheet" href="service-pages.css?v=1">
-<link rel="stylesheet" href="hero-motion.css?v=readable-8">
+<link rel="stylesheet" href="hero-motion.css?v=mobile-film-9">
 <link rel="preload" as="image" type="image/webp" href="assets/motion/breoris-opening-hold.webp" fetchpriority="high">
 </head>
 <body>
@@ -39,8 +39,7 @@
 <main id="main">
   <section class="hero" id="top" aria-label="Breoris Medical">
     <div class="hero-stage">
-      <div class="hero-media" aria-hidden="true"><img class="hero-poster" src="assets/motion/breoris-opening-first.webp" width="1440" height="816" alt="" fetchpriority="high"><img class="hero-static" src="assets/motion/breoris-opening-hold.webp" width="1440" height="816" alt=""><video class="hero-video" muted playsinline preload="auto" poster="assets/motion/breoris-opening-first.webp" aria-hidden="true"><source src="assets/motion/breoris-opening-smooth.mp4?v=1" type="video/mp4"></video><p class="hero-mobile-brand" translate="no"><span>BREORIS</span><span>MEDICAL</span></p>
-      </div>
+      <div class="hero-media" aria-hidden="true"><picture><source media="(max-width:760px)" srcset="assets/motion/breoris-mobile-first.webp"><img class="hero-poster" src="assets/motion/breoris-opening-first.webp" width="1440" height="816" alt="" fetchpriority="high"></picture><picture><source media="(max-width:760px)" srcset="assets/motion/breoris-mobile-hold.webp"><img class="hero-static" src="assets/motion/breoris-opening-hold.webp" width="1440" height="816" alt=""></picture><video class="hero-video" muted playsinline preload="none" poster="assets/motion/breoris-opening-first.webp" data-mobile-src="assets/motion/breoris-opening-mobile.mp4?v=1" data-mobile-poster="assets/motion/breoris-mobile-first.webp" aria-hidden="true"><source src="assets/motion/breoris-opening-smooth.mp4?v=1" type="video/mp4"></video></div>
       <nav class="hero-services" aria-label="Послуги клініки">
         <button class="hero-service-shape shape-ultrasound" type="button" data-service="Ультразвукова діагностика"><span>УЗД</span><span class="shape-link" aria-hidden="true">↗</span></button>
         <a class="hero-service-shape shape-consultations" href="#likari"><span>Консультації лікарів</span><span class="shape-link" aria-hidden="true">↗</span></a>
@@ -106,7 +105,7 @@
 <script src="google-reviews.js?v=1" defer></script>
 <script src="vendor/gsap.min.js" defer></script>
 <script src="vendor/ScrollTrigger.min.js" defer></script>
-<script src="hero-motion.js?v=video-7" defer></script>
+<script src="hero-motion.js?v=mobile-film-9" defer></script>
 <script src="ui-motion.js" defer></script>
 <script src="patient-review-carousel.js" defer></script>
 </body>
