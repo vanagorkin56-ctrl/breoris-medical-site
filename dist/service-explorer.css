@@ -1,0 +1,43 @@
+/* Service discovery uses the clinic's existing typography and blue palette. */
+.service-explorer{background:#f4f8fa;color:#163c5a;scroll-margin-top:100px}
+.service-explorer-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:32px}
+.service-explorer-heading h2{font-size:clamp(32px,4vw,54px);line-height:1.15;letter-spacing:-.035em;margin:0 0 16px}
+.service-explorer-heading p{font-size:18px;line-height:1.65;max-width:50ch}
+.service-explorer-heading>a{flex-shrink:0;font-size:17px}
+.service-search label{display:block;font-size:17px;font-weight:600;margin-bottom:10px}
+.service-search-field{display:flex;gap:12px;align-items:center;max-width:780px}
+.service-search input{width:100%;min-width:0;background:white;color:#163c5a;border:1px solid #a9bdc8;border-radius:10px;padding:17px 20px;font:inherit;font-size:18px;min-height:58px}
+.service-search-field button{flex-shrink:0;background:transparent;border:0;color:#235b92;font:inherit;text-decoration:underline;min-height:48px;cursor:pointer}
+.service-search>p{font-size:15px;line-height:1.6;margin-top:10px;color:#48616f}
+.service-filters{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.service-filters button{border:1px solid #b1c6d1;border-radius:100px;background:transparent;padding:12px 20px;font:inherit;font-size:16px;color:#163c5a;cursor:pointer;min-height:48px}
+.service-filters button[aria-pressed=true]{background:#235b92;border-color:#235b92;color:white}
+.service-result-count{font-size:15px;color:#48616f;margin:22px 0 14px;min-height:24px}
+#service-list.service-card-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.service-card{display:flex;flex-direction:column;min-height:210px;border:1px solid #cad9e1;border-radius:18px;padding:24px;background:#fff;color:#163c5a;text-decoration:none;transition:border-color .18s,background .18s}
+.service-card:hover{border-color:#235b92;background:#edf5f9}
+.service-card-group{font-size:13px;line-height:1.4;color:#48616f;margin-bottom:24px}
+.service-card h3{font-size:24px;line-height:1.3;font-weight:600;letter-spacing:-.025em;margin:0 0 26px;overflow-wrap:anywhere}
+.service-card-bottom{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;margin-top:auto}
+.service-card .service-price{font-size:16px;line-height:1.5;color:#235b92}
+.service-card-arrow{font-size:26px;line-height:1}
+.service-explorer [hidden]{display:none!important}
+.service-explorer :is(a,button,input):focus-visible{outline:3px solid #235b92;outline-offset:4px}
+.service-explorer-bottom{display:flex;gap:24px;justify-content:space-between;align-items:center;margin-top:28px}
+.service-explorer-bottom p{font-size:15px;line-height:1.6;max-width:50ch;color:#48616f}
+.service-help{display:flex;justify-content:space-between;gap:28px;align-items:center;margin-top:40px;padding:28px 32px;background:#e3eef4;border-radius:18px}
+.service-help h3{font-size:25px;line-height:1.3;margin:0 0 10px;letter-spacing:-.02em}
+.service-help p{font-size:17px;line-height:1.65;max-width:49ch}
+.service-help>div:last-child{display:flex;flex-direction:column;align-items:center;gap:16px;flex-shrink:0}
+.service-empty{padding:32px;background:white;border-radius:16px}.service-empty h3{font-size:24px}.service-empty p{font-size:18px;line-height:1.6;margin:16px 0}
+.service-page-price{display:flex;flex-direction:column;gap:8px;padding:20px 24px;border-radius:14px;background:#eaf3f7;margin-bottom:24px}
+.service-page-price>span{font-size:16px}.service-page-price>strong{font-size:30px;color:#235b92}
+.service-price-table-wrap{overflow-x:auto;margin:24px 0}.service-price-table{width:100%;border-collapse:collapse;text-align:left}.service-price-table caption{text-align:left;font-size:18px;font-weight:600;margin-bottom:16px}.service-price-table th,.service-price-table td{font-size:17px;line-height:1.6;padding:15px 12px;border-bottom:1px solid #d3dfe1;vertical-align:top}.service-price-table th{font-weight:400;width:70%}.service-price-table td{font-weight:600}.service-price-table small{display:block;font-weight:400;font-size:14px;color:#48616f}
+@media(max-width:1000px){#service-list.service-card-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.service-explorer-heading{align-items:flex-start;flex-direction:column}.service-help{align-items:flex-start}}
+@media(max-width:760px){#service-list.service-card-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.service-explorer.section{padding:48px 20px}.service-card{padding:18px 16px;min-height:190px;border-radius:14px}.service-card h3{font-size:21px;margin-bottom:20px}.service-card-group{font-size:12px;margin-bottom:20px}.service-card .service-price{font-size:16px}.service-filters{gap:8px}.service-filters button{font-size:15px;padding:10px 14px}.service-search-field{flex-wrap:wrap}.service-search input{font-size:16px;padding:16px}.service-help{flex-direction:column;padding:24px}.service-help>div:last-child{align-items:flex-start}.service-explorer-bottom{flex-direction:column;align-items:flex-start}.service-help h3{font-size:24px}.service-help p{font-size:18px}.service-price-table th,.service-price-table td{padding:12px 6px;font-size:16px}}
+@media(prefers-reduced-motion:reduce){.service-card{transition:none}}
+.clinic-gallery{background:white}.clinic-gallery>div:first-child{max-width:700px;margin-bottom:30px}.clinic-gallery h2{font-size:clamp(32px,4vw,50px);line-height:1.2;margin-bottom:16px;letter-spacing:-.03em}.clinic-gallery p{font-size:18px;line-height:1.7}.clinic-gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.clinic-gallery figure{margin:0;min-width:0}.clinic-gallery img{display:block;width:100%;height:400px;object-fit:cover;border-radius:18px}.clinic-gallery figcaption{font-size:18px;line-height:1.5;margin-top:14px}.clinic-gallery figure:last-child img{object-position:50% 65%}@media(max-width:760px){.clinic-gallery-grid{gap:14px}.clinic-gallery img{height:240px;border-radius:12px}.clinic-gallery figcaption{font-size:16px}}
+@media(max-width:760px){.service-explorer-heading{gap:12px;margin-bottom:22px}.service-explorer-heading>a{display:none}.service-search>p{display:none}.service-filters{flex-wrap:nowrap;overflow-x:auto;padding:4px 3px 8px;margin-inline:-3px;-webkit-overflow-scrolling:touch}.service-filters button{white-space:nowrap;flex-shrink:0}.service-result-count{margin-top:14px}}
+.service-card-arrow{flex-shrink:0}.service-card-bottom .service-price{min-width:0;overflow-wrap:anywhere}
+@media(min-width:381px) and (max-width:760px){.service-card h3{font-size:20px;letter-spacing:-.04em}}
+@media(max-width:380px){#service-list.service-card-grid{grid-template-columns:1fr}.service-card{min-height:150px}.service-card h3{font-size:24px;overflow-wrap:normal}.service-card-group{margin-bottom:16px}.service-card-bottom{align-items:center}}
