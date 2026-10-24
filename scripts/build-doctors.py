@@ -24,6 +24,7 @@ def template(filename, **values):
 
 def shared(fragment, root):
     fragment = fragment.replace('src="assets/', f'src="{root}assets/')
+    fragment = fragment.replace('href="ua/', f'href="{root}ua/')
     fragment = re.sub(r'href="#([^"]*)"', lambda m: f'href="{root}index.html#{m[1]}"', fragment)
     fragment = fragment.replace(f'href="{root}index.html#likari"', f'href="{root}ua/doctors/index.html"')
     fragment = re.sub(r'(<select class="language-select"[^>]*>)[\s\S]*?</select>', r'\1<option value="uk">UA</option></select>', fragment)

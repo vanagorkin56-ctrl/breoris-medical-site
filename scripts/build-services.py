@@ -6,6 +6,7 @@ import importlib.util
 import json
 import re
 import service_discovery as discovery
+import mobile_layout
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -30,7 +31,7 @@ def render(content,title,description,path):
     schema={'@context':'https://schema.org','@graph':[{'@type':'WebPage','@id':url,'url':url,'name':title,'description':description,'inLanguage':'uk','about':{'@type':'MedicalClinic','name':'Breoris Medical','url':ORIGIN+'/'}},{'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Головна','item':ORIGIN+'/'},{'@type':'ListItem','position':2,'name':'Послуги','item':ORIGIN+'/ua/services/'}]+([{'@type':'ListItem','position':3,'name':title,'item':url}] if path!='ua/services/' else [])}]}
     root='../../../' if path!='ua/services/' else '../../'
     page=base.shell(root,title,description,url,ORIGIN+'/assets/breoris-medical.jpg',content,schema)
-    page=page.replace('</head>',f'<link rel="stylesheet" href="{root}service-pages.css?v=1"><link rel="stylesheet" href="{root}service-explorer.css?v=2"></head>')
+    page=page.replace('</head>',f'<link rel="stylesheet" href="{root}service-pages.css?v=1"><link rel="stylesheet" href="{root}service-explorer.css?v=2"><link rel="stylesheet" href="{root}blog.css?v=1"></head>')
     target=DIST/path/'index.html';target.parent.mkdir(parents=True,exist_ok=True);target.write_text(page)
 
 hub='<nav class="doctor-breadcrumbs" aria-label="Навігаційний ланцюжок"><a href="../../index.html">Головна</a><span>›</span><span aria-current="page">Послуги</span></nav><section class="service-intro"><p class="doctor-eyebrow">BREORIS MEDICAL · Дніпро</p><h1>Напрями та послуги клініки</h1><p>Дізнайтеся, як проходить консультація або обстеження, що взяти із собою та як погодити візит. Оберіть потрібний напрям.</p></section>'
@@ -51,7 +52,7 @@ for r in records:
     source_html=f'<p class="service-source">Додаткова інформація: <a href="{source[1]}" target="_blank" rel="noopener noreferrer">{source[0]} ↗</a></p>' if source else ''
     content=f'''<nav class="doctor-breadcrumbs" aria-label="Навігаційний ланцюжок"><a href="../../../index.html">Головна</a><span>›</span><a href="../">Послуги</a><span>›</span><span aria-current="page">{e(name)}</span></nav>
 <article class="service-article"><header class="service-intro"><p class="doctor-eyebrow">BREORIS MEDICAL · {e(group)}</p><h1>{e(r['title'])} у Дніпрі</h1><p>{e(r['intro'])}</p><div class="service-actions"><button class="button primary" type="button" data-service="{e(name)}">Записатися</button><a class="text-link" href="tel:+380975323664">+380 97 532 36 64</a></div><p class="service-location">Дніпро, вул. Української Добровольчої армії, 2-Б</p></header>
-<div class="service-body"><section><h2>З якими питаннями допоможемо</h2><ul>{''.join('<li>'+e(s)+'</li>' for s in r['scope'])}</ul></section><section><h2>Як проходить візит</h2><p>{e(r['visit'])}</p></section><section><h2>Як підготуватися</h2><p>{e(r['preparation'])}</p></section>{doctors}<section><h2>Вартість і запис</h2>{discovery.price_section(name,price_data)}<p>Для лікарів із розкладом Health24 сайт показує доступні дати й час. Для інших спеціалістів можна обрати бажане вікно та залишити заявку: прийом підтвердить адміністратор. Якщо потрібної послуги або часу немає у формі, зателефонуйте до клініки.</p></section><section><h2>Поширене запитання</h2><details class="service-faq"><summary>{e(r['faq']['question'])}</summary><p>{e(r['faq']['answer'])}</p></details></section>{source_html}<section><h2>Інші послуги цього напряму</h2><div class="service-related">{''.join(f'<a href="../{e(x["slug"])}/">{e(x["name"])}</a>' for x in related)}</div><a class="text-link" href="../">Усі напрями клініки ↗</a></section></div></article>'''
+<div class="service-body"><section><h2>З якими питаннями допоможемо</h2><ul>{''.join('<li>'+e(s)+'</li>' for s in r['scope'])}</ul></section><section class="service-blog-link"><h2>Про візит і підготовку</h2><p>Як проходить візит, що взяти із собою та що уточнити перед прийомом — у матеріалі нашого блогу.</p><a href="../../blog/{e(r['slug'])}/">{e(mobile_layout.blog_title(r))} ↗</a></section>{doctors}<section><h2>Вартість і запис</h2>{discovery.price_section(name,price_data)}<p>Для лікарів із розкладом Health24 сайт показує доступні дати й час. Для інших спеціалістів можна обрати бажане вікно та залишити заявку: прийом підтвердить адміністратор. Якщо потрібної послуги або часу немає у формі, зателефонуйте до клініки.</p></section><section><h2>Поширене запитання</h2><details class="service-faq"><summary>{e(r['faq']['question'])}</summary><p>{e(r['faq']['answer'])}</p></details></section>{source_html}<section><h2>Інші послуги цього напряму</h2><div class="service-related">{''.join(f'<a href="../{e(x["slug"])}/">{e(x["name"])}</a>' for x in related)}</div><a class="text-link" href="../">Усі напрями клініки ↗</a></section></div></article>'''
     description=f"{r['title']} у Breoris Medical у Дніпрі. Дізнайтеся про формат візиту, підготовку, лікарів та умови запису до клініки."
     render(content,r['title']+' у Дніпрі — Breoris Medical',description,path)
 (DIST/'service-routes.js').write_text('/* Generated by scripts/build-services.py. */\nwindow.BreorisServiceRoutes = '+json.dumps(service_routes,ensure_ascii=False,indent=2)+';\n')
@@ -75,6 +76,7 @@ if match:
 if 'service-explorer.css' not in home:home=home.replace('</head>','<link rel="stylesheet" href="service-explorer.css?v=2">\n</head>')
 if 'service-explorer.js' not in home:home=home.replace('<script src="app.js', '<script src="service-explorer.js?v=1" defer></script>\n<script src="app.js')
 home=home.replace('app.js?v=5','app.js?v=6')
+home=mobile_layout.enhance_home(home,records,catalog)
 (DIST/'index.html').write_text(home)
 # Preserve all existing doctor URLs when adding the service URLs.
 import xml.etree.ElementTree as ET
