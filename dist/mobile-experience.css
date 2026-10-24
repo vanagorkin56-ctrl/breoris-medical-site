@@ -47,4 +47,4 @@
 }
 @media(max-width:360px){.mobile-swipe-track{grid-auto-columns:94%!important}#doctor-grid .doctor-photo{height:285px}.service-explorer:not([data-show-all]) .service-card h3{font-size:19px}}
 @media(prefers-reduced-motion:reduce){.mobile-swipe-track{scroll-behavior:auto}}
-@media(max-width:760px){#doctor-grid .doctor-photo img{transform:scale(1.16);transform-origin:center top}}
+@media(max-width:760px){#doctor-grid .doctor-photo img{transform:scale(1.38);transform-origin:center top;object-position:center top}}
