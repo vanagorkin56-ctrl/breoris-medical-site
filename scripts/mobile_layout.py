@@ -1,5 +1,9 @@
 """Idempotent homepage changes shared by preview and production staging."""
 import html
+import json
+from pathlib import Path
+
+ARTICLES = {a["slug"]: a for a in json.loads((Path(__file__).resolve().parents[1]/"data/blog-articles.json").read_text())}
 import re
 import ui_refinements
 import clinic_gallery
@@ -7,10 +11,11 @@ import clinic_gallery
 e=lambda s:html.escape(str(s),quote=True)
 
 def blog_title(record):
-    return record['title']+' — що варто знати перед візитом'
+    return ARTICLES[record['slug']]['title']
 
 def card(record,group,root='ua/blog/'):
-    return f'<a class="blog-card" href="{root}{e(record["slug"])}/" data-blog-group="{e(group)}" data-blog-search="{e(record["name"]+" "+record["title"])}"><span class="blog-card-category">{e(group)}</span><h3>{e(blog_title(record))}</h3><p>{e(record["intro"])}</p><span class="blog-read">Читати статтю <span aria-hidden="true">↗</span></span></a>'
+    article=ARTICLES[record['slug']]
+    return f'<a class="blog-card" href="{root}{e(record["slug"])}/" data-blog-group="{e(group)}" data-blog-search="{e(record["name"]+" "+article["title"]+" "+" ".join(article["queries"]))}"><span class="blog-card-category">{e(group)}</span><h3>{e(blog_title(record))}</h3><p>{e(article["description"])}</p><span class="blog-read">Читати статтю <span aria-hidden="true">↗</span></span></a>'
 
 def remove_repeat_intro(home):
     home=re.sub(r'<section class="hero-follow section"[^>]*>.*?</section>\s*','',home,count=1,flags=re.S)
@@ -39,4 +44,4 @@ def enhance_home(home,records,catalog):
     if 'mobile-experience.js' not in home:home=home.replace('</body>','<script src="mobile-experience.js?v=1" defer></script>\n</body>')
     home=re.sub(r'app.js\?v=[^" ]+', 'app.js?v=mobile-7',home)
     home=re.sub(r'i18n.js\?v=[^" ]+', 'i18n.js?v=mobile-blog-1',home)
-    return remove_repeat_intro(clinic_gallery.update_home(ui_refinements.home('\n'.join(line.rstrip() for line in home.split('\n')))))
+    return re.sub(r'i18n.js\?v=[^" ]+', 'i18n.js?v=research-20261025', remove_repeat_intro(clinic_gallery.update_home(ui_refinements.home('\n'.join(line.rstrip() for line in home.split('\n'))))))
