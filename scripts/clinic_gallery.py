@@ -4,10 +4,10 @@ import json
 import re
 
 PHOTOS = [
+    ('day-hospital-room.jpg', 960, 1280, 'Палата денного стаціонару', 'Палата денного стаціонару Breoris Medical з функціональним ліжком', 'Day hospital room', 'Breoris Medical day hospital room with an adjustable bed'),
     ('consultation-room.jpg', 1280, 960, 'Гінекологічний кабінет', 'Гінекологічний кабінет Breoris Medical з оглядовим кріслом', 'Gynaecology room', 'Breoris Medical gynaecology room with an examination chair'),
     ('treatment-room.jpg', 960, 1280, 'Процедурний кабінет', 'Процедурний кабінет Breoris Medical з кушеткою та робочою зоною', 'Treatment room', 'Breoris Medical treatment room with an examination couch and work area'),
     ('massage-room.jpg', 1052, 1280, 'Масажний кабінет', 'Масажний кабінет Breoris Medical з масажним столом', 'Massage room', 'Breoris Medical massage room with a massage table'),
-    ('day-hospital-room.jpg', 960, 1280, 'Палата денного стаціонару', 'Палата денного стаціонару Breoris Medical з функціональним ліжком', 'Day hospital room', 'Breoris Medical day hospital room with an adjustable bed'),
 ]
 
 def update_home(source):
