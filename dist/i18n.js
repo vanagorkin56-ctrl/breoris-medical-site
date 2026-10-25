@@ -286,6 +286,11 @@
     language = next; localStorage.setItem('breoris-language', next); document.documentElement.lang = next;
     if (updateUrl) { try { const url = new URL(location.href); url.searchParams.set('lang', next); history.replaceState(null, '', url); } catch {} }
     document.querySelectorAll('.language-select').forEach(select => select.value = next);
+    const clinicMap = document.querySelector('.map-frame iframe');
+    if (clinicMap) {
+      const mapUrl = clinicMap.getAttribute('src').replace(/!1s(?:ru|uk|en)!2sua/g, '!1s' + next + '!2sua');
+      if (mapUrl !== clinicMap.getAttribute('src')) clinicMap.setAttribute('src', mapUrl);
+    }
     document.querySelectorAll('meta[name=description],meta[property="og:description"]').forEach(meta => {
       meta.dataset.original ??= meta.content;
       if (meta.getAttribute('property') === 'og:description') meta.content = next === 'uk' ? 'Точна діагностика, уважний лікар і зрозумілий наступний крок у Breoris Medical.' : next === 'ru' ? 'Точная диагностика, внимательный врач и понятный следующий шаг в Breoris Medical.' : 'Accurate diagnostics, a caring doctor and a clear next step at Breoris Medical.';
