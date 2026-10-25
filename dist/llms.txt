@@ -9,7 +9,7 @@
 - Phone: +380 97 532 36 64
 - Hours: Monday–Friday 08:00–18:00; Saturday 08:00–14:00
 - Appointment requests: phone, Telegram, or the appointment form on the website
-- Website languages: Ukrainian, Russian and English
+- Website languages: Ukrainian and English
 
 ## Services
 
@@ -23,12 +23,11 @@ Treatment and recovery: procedure room, day hospital, infusion therapy, therapeu
 
 ## Appointment details
 
-The website appointment flow is a demonstration. It does not send or store personal information and does not confirm availability. A requested appointment time requires confirmation from the clinic.
+The website shows available appointment times for integrated Health24 doctors. For other doctors, visitors can request a preferred time for confirmation by the clinic administrator. The booking result shown by the form determines whether an appointment is confirmed or awaiting confirmation.
 
 ## Languages
 
 - Ukrainian: https://www.breoris-medical.com/?lang=uk
-- Russian: https://www.breoris-medical.com/?lang=ru
 - English: https://www.breoris-medical.com/?lang=en
 
 ## Notes

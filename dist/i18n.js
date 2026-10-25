@@ -254,8 +254,10 @@
   });
   for (const [source, [ru, en]] of Object.entries(physicianTerms)) { dictionaries.ru[source] = ru; dictionaries.en[source] = en; }
   const original = new WeakMap();
-  let language = new URLSearchParams(location.search).get('lang') || localStorage.getItem('breoris-language') || 'uk';
-  if (!['uk','ru','en'].includes(language)) language = 'uk';
+  const localeParams = new URLSearchParams(location.search);
+  const requestedLanguage = localeParams.get('lang') || localStorage.getItem('breoris-language') || 'uk';
+  let language = requestedLanguage === 'en' ? 'en' : 'uk';
+  const normalizeLegacyUrl = localeParams.has('lang') && !['uk','en'].includes(localeParams.get('lang'));
   const norm = value => value.replace(/\s+/g, ' ').trim();
   function translateTextNode(node) {
     if (!original.has(node)) original.set(node, node.nodeValue);
@@ -280,7 +282,7 @@
     });
   }
   function setLanguage(next, updateUrl = true) {
-    if (!['uk','ru','en'].includes(next)) return;
+    if (!['uk','en'].includes(next)) next = 'uk';
     language = next; localStorage.setItem('breoris-language', next); document.documentElement.lang = next;
     if (updateUrl) { try { const url = new URL(location.href); url.searchParams.set('lang', next); history.replaceState(null, '', url); } catch {} }
     document.querySelectorAll('.language-select').forEach(select => select.value = next);
@@ -312,5 +314,5 @@
   document.addEventListener('change', event => { if (event.target.matches('.language-select')) setLanguage(event.target.value); });
   const observer = new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => { if (node.nodeType === Node.TEXT_NODE) translateTextNode(node); else if (node.nodeType === Node.ELEMENT_NODE) translateTree(node); })));
   observer.observe(document.body, {childList:true,subtree:true});
-  setLanguage(language, false);
+  setLanguage(language, normalizeLegacyUrl);
 })();
