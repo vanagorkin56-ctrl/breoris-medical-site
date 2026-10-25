@@ -253,6 +253,8 @@
     'Консультації лікарів, УЗД та аналізи у Дніпрі. Пояснимо результати та наступні кроки.':'Doctor consultations, ultrasound and lab tests in Dnipro. We explain your results and what to do next.'
   });
   for (const [source, [ru, en]] of Object.entries(physicianTerms)) { dictionaries.ru[source] = ru; dictionaries.en[source] = en; }
+  // clinic-gallery:translations
+  Object.assign(dictionaries.en, {"Гінекологічний кабінет": "Gynaecology room", "Гінекологічний кабінет Breoris Medical з оглядовим кріслом": "Breoris Medical gynaecology room with an examination chair", "Процедурний кабінет": "Treatment room", "Процедурний кабінет Breoris Medical з кушеткою та робочою зоною": "Breoris Medical treatment room with an examination couch and work area", "Масажний кабінет": "Massage room", "Масажний кабінет Breoris Medical з масажним столом": "Breoris Medical massage room with a massage table", "Палата денного стаціонару": "Day hospital room", "Палата денного стаціонару Breoris Medical з функціональним ліжком": "Breoris Medical day hospital room with an adjustable bed"});
   const original = new WeakMap();
   const localeParams = new URLSearchParams(location.search);
   const requestedLanguage = localeParams.get('lang') || localStorage.getItem('breoris-language') || 'uk';

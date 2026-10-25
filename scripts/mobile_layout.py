@@ -2,6 +2,7 @@
 import html
 import re
 import ui_refinements
+import clinic_gallery
 
 e=lambda s:html.escape(str(s),quote=True)
 
@@ -33,4 +34,4 @@ def enhance_home(home,records,catalog):
     if 'mobile-experience.js' not in home:home=home.replace('</body>','<script src="mobile-experience.js?v=1" defer></script>\n</body>')
     home=re.sub(r'app.js\?v=[^" ]+', 'app.js?v=mobile-7',home)
     home=re.sub(r'i18n.js\?v=[^" ]+', 'i18n.js?v=mobile-blog-1',home)
-    return ui_refinements.home('\n'.join(line.rstrip() for line in home.split('\n')))
+    return clinic_gallery.update_home(ui_refinements.home('\n'.join(line.rstrip() for line in home.split('\n'))))
