@@ -41,7 +41,7 @@ def enhance_home(home,records,catalog):
         home=home.replace('<h3>Клініка</h3>','<h3>Клініка</h3><a href="ua/blog/">Блог</a>',1)
     for file in ['blog.css','mobile-experience.css']:
         if file not in home:home=home.replace('</head>',f'<link rel="stylesheet" href="{file}?v=1">\n</head>')
-    if 'mobile-experience.js' not in home:home=home.replace('</body>','<script src="mobile-experience.js?v=1" defer></script>\n</body>')
+    if 'mobile-experience.js' not in home:home=home.replace('</body>','<script src="mobile-experience.js?v=quality-20261026" defer></script>\n</body>')
     home=re.sub(r'app.js\?v=[^" ]+', 'app.js?v=mobile-7',home)
     home=re.sub(r'i18n.js\?v=[^" ]+', 'i18n.js?v=mobile-blog-1',home)
     return re.sub(r'i18n.js\?v=[^" ]+', 'i18n.js?v=research-20261025', remove_repeat_intro(clinic_gallery.update_home(ui_refinements.home('\n'.join(line.rstrip() for line in home.split('\n'))))))

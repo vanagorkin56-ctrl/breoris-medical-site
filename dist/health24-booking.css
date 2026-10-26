@@ -19,3 +19,10 @@
 @media(max-width:600px){#health24-booking-dialog{padding:30px 20px}.h24-fields{grid-template-columns:1fr}.h24-date-search{grid-template-columns:1fr}.h24-steps{gap:10px;font-size:12px}.h24-actions .primary{font-size:15px;padding:14px 18px}.h24-help{font-size:13px}}
 
 .h24-price{padding:14px 16px;border-left:3px solid #64bccc;background:#f0f8f8;color:#153c4e;font-size:14px;line-height:1.7;margin:18px 0}
+
+/* Readable appointment information, including consent and uncertain status. */
+@media(max-width:600px){
+ .h24-intro,.h24-hint,.h24-help,.h24-consent,.h24-more,.h24-reference,#h24-back,#h24-status,#h24-context,.h24-summary,#h24-doctor-note{font-size:16px;line-height:1.6}
+ .h24-steps{font-size:14px}
+ .h24-days button,.h24-times button{font-size:16px}
+}

@@ -33,14 +33,14 @@
     };
     function update() {
       const cards = children(), current = index();
-      const text = translations[window.BreorisLocale?.language || 'uk'];
+      const text = translations[window.BreorisLocale?.language] || translations.uk;
       controls.hidden = !mobile.matches;
-      prev.disabled = current === 0;
+      prev.disabled = !cards.length || current === 0;
       next.disabled = current >= cards.length-1;
       prev.setAttribute('aria-label',text[0]);
       next.setAttribute('aria-label',text[1]);
       controls.setAttribute('aria-label',text[labelIndex]);
-      counter.textContent = `${current+1} / ${cards.length}`;
+      counter.textContent = `${cards.length ? current+1 : 0} / ${cards.length}`;
       if (mobile.matches) {
         track.tabIndex = 0;
         track.setAttribute('role','region');
@@ -49,19 +49,19 @@
         track.removeAttribute('tabindex');track.removeAttribute('role');track.removeAttribute('aria-label');
       }
     }
-    function move(direction) {
+    function move(direction, immediate = false) {
       const cards = children();
       const target = cards[Math.max(0,Math.min(cards.length-1,index()+direction))];
       if (!target) return;
-      track.scrollTo({left:target.offsetLeft-cards[0].offsetLeft,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+      track.scrollTo({left:target.offsetLeft-cards[0].offsetLeft,behavior:immediate || matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
     }
-    prev.addEventListener('click',()=>move(-1));
-    next.addEventListener('click',()=>move(1));
+    prev.addEventListener('click',event=>move(-1, event.detail === 0));
+    next.addEventListener('click',event=>move(1, event.detail === 0));
     track.addEventListener('keydown',event=>{
       if (!mobile.matches || event.target!==track || !['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
       event.preventDefault();
       if(event.key==='Home'||event.key==='End')track.scrollTo({left:event.key==='Home'?0:track.scrollWidth,behavior:'instant'});
-      else move(event.key==='ArrowRight'?1:-1);
+      else move(event.key==='ArrowRight'?1:-1, true);
     });
     track.addEventListener('scroll',()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(update)},{passive:true});
     new ResizeObserver(update).observe(track);
