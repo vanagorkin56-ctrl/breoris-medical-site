@@ -18,6 +18,7 @@ def card(record,group,root='ua/blog/'):
     return f'<a class="blog-card" href="{root}{e(record["slug"])}/" data-blog-group="{e(group)}" data-blog-search="{e(record["name"]+" "+article["title"]+" "+" ".join(article["queries"]))}"><span class="blog-card-category">{e(group)}</span><h3>{e(blog_title(record))}</h3><p>{e(article["description"])}</p><span class="blog-read">Читати статтю <span aria-hidden="true">↗</span></span></a>'
 
 def remove_repeat_intro(home):
+    home=re.sub(r'<section class="statement section"[^>]*>.*?</section>\s*','',home,count=1,flags=re.S)
     home=re.sub(r'<section class="hero-follow section"[^>]*>.*?</section>\s*','',home,count=1,flags=re.S)
     home=re.sub(r'(<div class="hero-message">)<p>(.*?)</p>',r'\1<h1>\2</h1>',home,count=1,flags=re.S)
     return home.replace('hero-motion.css?v=mobile-film-9','hero-motion.css?v=compact-home-1')

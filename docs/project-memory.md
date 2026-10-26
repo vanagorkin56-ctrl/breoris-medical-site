@@ -12,6 +12,7 @@ A clinic website for patients in Dnipro, including older visitors using phones. 
 - Services follow the first screen. On phones doctors, our approach, gallery and blog use swipe tracks with explicit left/right arrows and counters; no automatic advance.
 - Gallery starts with the day hospital ward, then gynecology, procedure room and massage room. No near-duplicate lounge photographs.
 - Feature label: “Денний стаціонар та інфузійна терапія”; stable booking value remains “Денний стаціонар”.
+- Removed the pale statement banner “Breoris MEDICAL — коли важливо…” on 26 October 2026 at the user’s request, on all viewports. Additional services lead directly into the blog.
 - Removed the repeated “Не просто результати…” introduction and large lounge photograph. Do not restore them through a generator.
 - Blog has 26 individually written articles. Editorial source is `data/blog-articles.json`; query research is in `docs/blog-research-2026-10-25.md`. Keyword hypotheses are not measured demand.
 
