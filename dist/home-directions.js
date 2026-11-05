@@ -6,7 +6,7 @@
   let index = 0, timer, visible = true;
   function schedule() {
     clearInterval(timer);
-    if (visible && !document.hidden && !document.querySelector('dialog[open]')) timer = setInterval(() => show(index + 1), 3000);
+    if (visible && !document.hidden && !document.querySelector('dialog[open]')) timer = setInterval(() => show(index + 1), 5000);
   }
   function show(next) {
     index = (next + slides.length) % slides.length;
