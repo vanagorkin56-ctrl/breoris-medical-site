@@ -19,3 +19,7 @@
 .direction-controls button{color:#235b92;border-color:#9abfc7;background:#ffffff50}.direction-controls button:hover{background:#fff}.direction-dots button{background:transparent}.direction-dots span{background:#94b9c2}.direction-dots [aria-pressed=true] span{background:#235b92}.direction-hero :focus-visible{outline-color:#235b92}
 .campaign-logo{background:transparent;border-radius:0;padding:0;width:145px}.campaign-logo img{filter:none}
 .direction-photo figcaption{background:linear-gradient(transparent,rgba(26,76,105,.88) 55%,#164363)}
+
+/* Keep campaign branding clear of faces on the first two posters. */
+.direction-photo .campaign-logo{top:10px;left:12px;width:112px}
+@media(max-width:760px){.direction-photo .campaign-logo{top:8px;left:10px;width:100px}}
