@@ -13,6 +13,7 @@ class Inspect(HTMLParser):
   for key in ('src','href'):
    if key in d:self.urls.append(d[key])
 paths=[Path('dist/index.html'),*Path('dist/ua/doctors').glob('*/index.html'),Path('dist/ua/doctors/index.html'),*Path('dist/ua/blog').glob('*/index.html'),Path('dist/ua/blog/index.html'),*Path('dist/ua/services').glob('*/index.html'),Path('dist/ua/services/index.html')]
+paths += list(Path('dist/ua/directions').glob('*/index.html')) + list(Path('dist/en/directions').glob('*/index.html'))
 errors=[]
 for p in paths:
  a=Inspect();a.feed(p.read_text())

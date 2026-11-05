@@ -1,0 +1,89 @@
+[
+  {
+    "slug": "neurology-center",
+    "image": "assets/campaigns/neurology-portrait.jpg",
+    "portrait": false,
+    "uk": {
+      "title": "Центр сучасної неврології",
+      "intro": "Діагностика, лікування та реабілітація під керівництвом Наталії Валеріївни Томах.",
+      "alt": "Рекламна сцена консультації з образом Наталії Томах",
+      "caption": "Наталія Томах · лікар-невролог",
+      "paragraphs": [
+        "Центр сучасної неврології Breoris Medical працює під керівництвом Наталії Валеріївни Томах — кандидата медичних наук, доцента, лікаря-невролога вищої категорії.",
+        "Центр спеціалізується на комплексній діагностиці, лікуванні та реабілітації пацієнтів із захворюваннями нервової системи.",
+        "Наші фахівці працюють із головним болем і мігренню, запамороченням, болем у спині та шиї, порушеннями чутливості, а також складними неврологічними захворюваннями — розсіяним склерозом, хворобою Паркінсона, епілепсією та судинними патологіями головного мозку.",
+        "Основа нашої роботи — мультидисциплінарний підхід, що об’єднує досвід неврологів, лікаря фізичної та реабілітаційної медицини й інших спеціалістів.",
+        "Від діагностики до індивідуального плану лікування та відновлення — з увагою до якості життя кожного пацієнта."
+      ]
+    },
+    "en": {
+      "title": "Centre for modern neurology",
+      "intro": "Diagnosis, treatment and rehabilitation led by neurologist Nataliia Tomakh.",
+      "alt": "Promotional consultation scene featuring the likeness of Nataliia Tomakh",
+      "caption": "Nataliia Tomakh · neurologist",
+      "paragraphs": [
+        "The Breoris Medical Centre for Modern Neurology is led by Nataliia Tomakh, Candidate of Medical Sciences, Associate Professor and highest-category neurologist.",
+        "The centre specialises in comprehensive diagnosis, treatment and rehabilitation for people with nervous system conditions.",
+        "Our specialists see patients with headaches and migraine, dizziness, back and neck pain, sensory disturbances, multiple sclerosis, Parkinson’s disease, epilepsy and cerebrovascular conditions.",
+        "Our multidisciplinary approach brings together neurologists, a physical and rehabilitation medicine physician and other specialists.",
+        "From diagnosis to an individual treatment and rehabilitation plan, we focus on each patient’s quality of life."
+      ]
+    }
+  },
+  {
+    "slug": "women-men-health",
+    "image": "assets/campaigns/women-men-premium.jpg",
+    "uk": {
+      "title": "Здоров’я жінки та чоловіка",
+      "intro": "Консультації гінеколога, уролога, ендокринолога та кардіолога. Профілактичні обстеження й лікування.",
+      "alt": "Рекламна візуалізація: жінка та чоловік на консультації",
+      "caption": "Консультації спеціалістів · профілактичні обстеження",
+      "paragraphs": [
+        "У Breoris Medical ми розглядаємо здоров’я жінки та чоловіка комплексно, враховуючи взаємозв’язок гормональної, репродуктивної, серцево-судинної та інших систем організму.",
+        "Наші фахівці — гінекологи, урологи, ендокринологи, кардіологи, терапевти та лікарі інших спеціальностей — працюють разом, щоб не лише усунути симптоми, а й виявити їхні причини.",
+        "Від профілактичних обстежень і діагностики вікових змін до лікування захворювань та індивідуальних програм збереження здоров’я."
+      ]
+    },
+    "en": {
+      "title": "Women’s and men’s health",
+      "intro": "Gynaecology, urology, endocrinology and cardiology consultations. Preventive examinations and treatment.",
+      "alt": "Promotional visual: a woman and man attending a consultation",
+      "caption": "Specialist consultations · preventive examinations",
+      "paragraphs": [
+        "At Breoris Medical, we consider women’s and men’s health as a whole, including the connections between hormonal, reproductive, cardiovascular and other body systems.",
+        "Gynaecologists, urologists, endocrinologists, cardiologists, physicians and other specialists work together to address symptoms and investigate their causes.",
+        "Care ranges from preventive examinations and assessment of age-related changes to treatment and individual health programmes."
+      ]
+    }
+  },
+  {
+    "slug": "public-health-programmes",
+    "image": "assets/campaigns/public-programmes-premium.jpg",
+    "uk": {
+      "title": "Медичні програми НСЗУ",
+      "intro": "Декларація з терапевтом, первинна допомога та скринінг 40+. Уточніть умови участі перед візитом.",
+      "alt": "Рекламна візуалізація: відвідувачка в зоні очікування клініки",
+      "caption": "Первинна допомога · декларація з терапевтом",
+      "paragraphs": [
+        "Breoris Medical — приватна клініка, яка співпрацює з Національною службою здоров’я України та надає медичні послуги в межах Програми медичних гарантій.",
+        "У клініці можна укласти декларацію з терапевтом та отримувати первинну медичну допомогу в межах відповідного пакета послуг.",
+        "Окремо можна уточнити можливість проходження скринінгу здоров’я 40+ відповідно до умов державної програми.",
+        "Перед записом адміністратор пояснить, які послуги доступні за програмою, які документи потрібні та чи необхідне направлення. Послуги поза умовами програми можуть бути платними.",
+        "Ми поєднуємо можливості державного фінансування із сучасною діагностикою, професійністю лікарів та комфортом приватної клініки."
+      ]
+    },
+    "en": {
+      "title": "NHSU medical programmes",
+      "intro": "Register with a physician, access primary care and ask about screening for people aged 40+. Check eligibility before visiting.",
+      "alt": "Promotional visual: a visitor in the clinic waiting area",
+      "caption": "Primary care · register with a physician",
+      "paragraphs": [
+        "Breoris Medical is a private clinic working with the National Health Service of Ukraine and providing care under the Medical Guarantees Programme.",
+        "You can sign a declaration with a physician and receive primary care within the relevant service package.",
+        "You can also ask about access to health screening for people aged 40+, subject to the terms of the state programme.",
+        "Before booking, our administrator will explain available services, required documents and referral requirements. Services outside programme coverage may be chargeable.",
+        "We combine public funding opportunities with modern diagnostics, professional care and the comfort of a private clinic."
+      ]
+    }
+  }
+]
