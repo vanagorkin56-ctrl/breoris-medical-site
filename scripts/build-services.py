@@ -31,7 +31,7 @@ def render(content,title,description,path):
     schema={'@context':'https://schema.org','@graph':[{'@type':'WebPage','@id':url,'url':url,'name':title,'description':description,'inLanguage':'uk','about':{'@type':'MedicalClinic','name':'Breoris Medical','url':ORIGIN+'/'}},{'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Головна','item':ORIGIN+'/'},{'@type':'ListItem','position':2,'name':'Послуги','item':ORIGIN+'/ua/services/'}]+([{'@type':'ListItem','position':3,'name':title,'item':url}] if path!='ua/services/' else [])}]}
     root='../../../' if path!='ua/services/' else '../../'
     page=base.shell(root,title,description,url,ORIGIN+'/assets/breoris-medical.jpg',content,schema)
-    page=page.replace('</head>',f'<link rel="stylesheet" href="{root}service-pages.css?v=1"><link rel="stylesheet" href="{root}service-explorer.css?v=2"><link rel="stylesheet" href="{root}blog.css?v=1"></head>')
+    page=page.replace('</head>',f'<link rel="stylesheet" href="{root}service-pages.css?v=1"><link rel="stylesheet" href="{root}service-explorer.css?v=20261106-adaptive3"><link rel="stylesheet" href="{root}blog.css?v=1"><link rel="stylesheet" href="{root}service-pictograms.css?v=20261106-mobile"></head>')
     target=DIST/path/'index.html';target.parent.mkdir(parents=True,exist_ok=True);target.write_text(page)
 
 hub='<nav class="doctor-breadcrumbs" aria-label="Навігаційний ланцюжок"><a href="../../index.html">Головна</a><span>›</span><span aria-current="page">Послуги</span></nav><section class="service-intro"><h1>Напрями та послуги клініки</h1></section>'
@@ -73,7 +73,7 @@ if match:
     home=home[:match.start()]+home[match.end():]
     position=home.index(end)+len(end)
     home=home[:position]+'\n  '+doctors_section+home[position:]
-if 'service-explorer.css' not in home:home=home.replace('</head>','<link rel="stylesheet" href="service-explorer.css?v=2">\n</head>')
+if 'service-explorer.css' not in home:home=home.replace('</head>','<link rel="stylesheet" href="service-explorer.css?v=20261106-adaptive3">\n</head>')
 if 'service-explorer.js' not in home:home=home.replace('<script src="app.js', '<script src="service-explorer.js?v=1" defer></script>\n<script src="app.js')
 home=home.replace('app.js?v=5','app.js?v=6')
 home=mobile_layout.enhance_home(home,records,catalog)

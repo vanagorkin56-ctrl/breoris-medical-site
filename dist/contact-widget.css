@@ -21,3 +21,15 @@
 @keyframes contact-panel-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:760px){.contact-widget{right:16px;bottom:calc(18px + env(safe-area-inset-bottom))}.contact-toggle{width:52px;height:52px}.contact-panel{bottom:68px}}
 @media(prefers-reduced-motion:reduce){.contact-widget *,.contact-widget *::before{animation:none!important;transition:none!important}}
+
+@media(max-width:760px){.contact-widget{bottom:calc(84px + env(safe-area-inset-bottom))}.contact-panel{max-height:calc(100dvh - 190px);overflow:auto}}
+/* Share the bottom action bar rather than cover the page or carousel controls. */
+@media(max-width:760px){
+ body:has(.mobile-booking) .mobile-booking{padding-right:76px;gap:10px}
+ body:has(.mobile-booking) .mobile-booking>a{font-size:12px}
+ body:has(.mobile-booking) .mobile-booking .button{padding:12px 14px;gap:10px;font-size:13px}
+ body:has(.mobile-booking) .contact-widget{right:14px;bottom:max(12px,env(safe-area-inset-bottom))}
+ body:has(.mobile-booking) .contact-toggle{width:44px;height:44px;box-shadow:none;animation:none}
+ body:has(.mobile-booking) .contact-toggle:before{display:none}
+ body:has(.mobile-booking) .contact-toggle svg{width:23px;height:23px}
+}

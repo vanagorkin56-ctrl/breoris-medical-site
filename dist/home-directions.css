@@ -31,3 +31,37 @@
 .home-clinic .direction-eyebrow{font-size:.75rem;font-weight:600;line-height:1.5;letter-spacing:.08em}
 .home-clinic .text-link{font-family:inherit;font-size:1rem;margin-top:6px}
 @media(max-width:760px){.home-clinic h2{font-size:1.875rem}.home-clinic p:not(.direction-eyebrow){font-size:1rem;line-height:1.7}}
+
+/* Mobile campaign: image first, one supporting paragraph and one clear link. */
+@media(max-width:760px){
+ .direction-hero{padding:0 0 20px;scroll-margin-top:80px;background:#e7f2f4}
+ .direction-slide{display:flex;flex-direction:column;gap:0}
+ .direction-photo{order:0;max-width:none;width:100%;aspect-ratio:1/1.06;max-height:560px}
+ .direction-photo>img{object-position:58% 34%}
+ .direction-photo figcaption{padding:90px 24px 22px;gap:0;background:linear-gradient(transparent,rgba(17,57,81,.88))}
+ .direction-photo figcaption strong{font-size:clamp(27px,7.4vw,40px);max-width:18ch;text-transform:none;line-height:1.12;letter-spacing:-.035em}
+ .direction-photo .campaign-kicker,.direction-photo .campaign-caption,.direction-photo figcaption small{display:none}
+ .direction-photo .campaign-logo{top:14px;left:18px;width:105px}
+ .direction-copy{order:1;width:100%;padding:20px 24px 0;text-align:center}
+ .direction-copy .direction-eyebrow{display:none}
+ .direction-copy h2{position:absolute;width:1px;height:1px;min-height:0;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+ .direction-summary{font-size:16px;line-height:1.5;min-height:72px;max-width:36ch;margin:auto;text-wrap:pretty}
+ .direction-actions{justify-content:center;margin-top:15px}
+ .direction-actions .direction-book{display:none}
+ .direction-more{display:inline-flex;align-items:center;justify-content:center;gap:20px;min-height:50px;padding:10px 12px 10px 24px;border:1px solid #8aafbd;border-radius:40px;font-size:16px;font-weight:500}
+ .direction-more:after{content:'↗';display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#235b92;color:#fff;font-size:24px}
+ .direction-controls{justify-content:center;gap:10px;margin:14px 20px 0}
+ .direction-controls button{width:44px;min-width:44px;height:44px}
+ .direction-dots button{width:32px;min-width:32px}
+ .direction-count{min-width:44px;text-align:center}
+ .header{height:80px;padding:10px 18px;gap:14px}
+ .header .brand{width:120px}.header .brand img{height:auto}
+ .header-actions{gap:8px}.header-actions>.button{display:none}
+ .header .header-phone{display:grid!important;place-items:center;width:44px;height:44px;min-width:44px;border:1px solid #cfdee5;border-radius:50%;font-size:0}
+ .header-phone:before{content:'';width:20px;height:20px;background:#235b92;mask:url('assets/ui/tabler/phone.svg') center/contain no-repeat;-webkit-mask:url('assets/ui/tabler/phone.svg') center/contain no-repeat}
+ .header .language-select{width:48px;min-height:44px;padding:8px 5px;font-size:13px;border-radius:50%}
+ .header .menu-toggle{width:44px;min-width:44px;height:44px;border:1px solid #cfdee5;border-radius:50%;padding:12px}
+ .home-clinic.section{padding:40px 20px;gap:24px}.home-clinic>img{aspect-ratio:4/3;border-radius:18px}.home-clinic h2{font-size:30px}
+}
+@media(max-width:360px){.header{padding-inline:12px;gap:8px}.header .brand{width:100px}.header-actions{gap:4px}.direction-copy{padding-inline:20px}.direction-summary{min-height:96px}.direction-photo figcaption{padding-inline:20px}}
+@media(max-width:760px){.direction-summary{min-height:96px}}
