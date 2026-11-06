@@ -11,9 +11,8 @@
   const status = root.querySelector('#service-results');
   let group = 'all', expanded = root.dataset.showAll === 'true';
   const copy = {
-    ru: ['Найти услугу или направление','Например: УЗИ, кардиолог, щитовидка','Показать все услуги','Показать меньше','Найдено направлений:','Показано направлений:'],
-    en: ['Find a service or specialty','For example: ultrasound, cardiology, thyroid','Show all services','Show fewer','Specialties found:','Specialties shown:'],
-    uk: ['Знайти послугу або напрям','Наприклад: УЗД, кардіолог, щитовидка','Показати всі послуги','Показати менше','Знайдено напрямів:','Показано напрямів:']
+    en: ['Find a service or specialty','Search services or specialties','Show all services','Show fewer','Specialties found:','Specialties shown:'],
+    uk: ['Знайти послугу або напрям','Пошук послуги або напряму','Показати всі послуги','Показати менше','Знайдено напрямів:','Показано напрямів:']
   };
   const normalize = value => value.toLocaleLowerCase().normalize('NFKC').replace(/[’'`\-–]/g,' ').replace(/\s+/g,' ').trim();
   function render() {
