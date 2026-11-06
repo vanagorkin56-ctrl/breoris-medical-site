@@ -31,7 +31,7 @@ def enhance_home(home,records,catalog):
         record=next(r for r in records if r['slug']==slug)
         group=next(g for g,names in catalog['groups'].items() if record['name'] in names)
         cards+=card(record,group)
-    block=start+'<section class="blog-preview section" id="blog" aria-labelledby="blog-title"><div class="blog-preview-heading"><div><h2 id="blog-title">Блог клініки</h2><p>Про консультації, обстеження та підготовку до візиту.</p></div><a class="text-link" href="ua/blog/">Усі статті ↗</a></div><div class="blog-preview-grid">'+cards+'</div></section>'+end
+    block=start+'<section class="blog-preview section" id="blog" aria-labelledby="blog-title"><div class="blog-preview-heading"><div><h2 id="blog-title">Блог клініки</h2></div><a class="text-link" href="ua/blog/">Усі статті ↗</a></div><div class="blog-preview-grid">'+cards+'</div></section>'+end
     if start in home:home=home[:home.index(start)]+block+home[home.index(end)+len(end):]
     else:home=home.replace('<section class="reviews section"',block+'\n  <section class="reviews section"',1)
     # Keep all anchors and route slugs intact.

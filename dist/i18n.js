@@ -64,127 +64,130 @@
     'Відгуки пацієнтів':'Patient reviews','Враження людей про Breoris Medical на Google Maps.':'What patients say about Breoris Medical on Google Maps.','Перегляньте актуальні оцінки та відгуки пацієнтів на Google Maps.':'See current patient ratings and reviews on Google Maps.','Читати відгуки в Google Maps ↗':'Read reviews on Google Maps ↗'
   });
   const priceTerms = {
-    'Консультація ортопеда-травматолога':['Консультация ортопеда-травматолога','Orthopaedic and trauma consultation'],
-    'Міофасціальний реліз':['Миофасциальный релиз','Myofascial release'],
-    'Внутрішньосуглобове введення / пункція + УЗД контроль':['Внутрисуставное введение / пункция + УЗИ контроль','Intra-articular injection / puncture + ultrasound guidance'],
-    'Паравертебральна блокада':['Паравертебральная блокада','Paravertebral block'],
-    'Консультація гінеколога':['Консультация гинеколога','Gynaecology consultation'],
-    'Консультація + УЗД органів малого таза':['Консультация + УЗИ органов малого таза','Consultation + pelvic ultrasound'],
-    'Відеокольпоскопія':['Видеокольпоскопия','Video colposcopy'],'Біопсія':['Биопсия','Biopsy'],
-    'УЗД щитоподібної залози':['УЗИ щитовидной железы','Thyroid ultrasound'],
-    'УЗД органів черевної порожнини':['УЗИ органов брюшной полости','Abdominal ultrasound'],
-    'УЗД нирок та сечового міхура':['УЗИ почек и мочевого пузыря','Kidney and bladder ultrasound'],
-    'УЗД молочних залоз':['УЗИ молочных желез','Breast ultrasound'],
-    'УЗД м’яких тканин':['УЗИ мягких тканей','Soft tissue ultrasound'],
-    'УЗД суглоба':['УЗИ сустава','Joint ultrasound'],
-    'ЕхоКГ / УЗД серця':['ЭхоКГ / УЗИ сердца','Echocardiogram / heart ultrasound'],
-    'УЗД судин голови та шиї':['УЗИ сосудов головы и шеи','Head and neck vessel ultrasound'],
-    'УЗД судин нижніх кінцівок: артерії + вени':['УЗИ сосудов нижних конечностей: артерии + вены','Lower limb vessel ultrasound: arteries + veins'],
-    'Доплерографія ниркових судин':['Допплерография почечных сосудов','Renal vessel Doppler'],
-    'УЗД передміхурової залози + нирки + сечовий міхур':['УЗИ предстательной железы + почки + мочевой пузырь','Prostate + kidney + bladder ultrasound'],
-    'УЗД органів калитки':['УЗИ органов мошонки','Testicular ultrasound'],
-    'ЕЕГ':['ЭЭГ','EEG'],'ЕКГ':['ЭКГ','ECG'],'ЕКГ з розшифровкою':['ЭКГ с расшифровкой','ECG with interpretation'],
-    'Добове моніторування артеріального тиску':['Суточное мониторирование артериального давления','24-hour blood pressure monitoring'],
-    'Внутрішньом’язове введення':['Внутримышечное введение','Intramuscular injection'],
-    'Внутрішньовенне введення':['Внутривенное введение','Intravenous injection'],
-    'Виїзд лікаря додому':['Выезд врача на дом','Doctor home visit']
-  };
-  for(const [source,[ru,en]] of Object.entries(priceTerms)){dictionaries.en[source]=en}
+  "Консультація ортопеда-травматолога": "Orthopaedic and trauma consultation",
+  "Міофасціальний реліз": "Myofascial release",
+  "Внутрішньосуглобове введення / пункція + УЗД контроль": "Intra-articular injection / puncture + ultrasound guidance",
+  "Паравертебральна блокада": "Paravertebral block",
+  "Консультація гінеколога": "Gynaecology consultation",
+  "Консультація + УЗД органів малого таза": "Consultation + pelvic ultrasound",
+  "Відеокольпоскопія": "Video colposcopy",
+  "Біопсія": "Biopsy",
+  "УЗД щитоподібної залози": "Thyroid ultrasound",
+  "УЗД органів черевної порожнини": "Abdominal ultrasound",
+  "УЗД нирок та сечового міхура": "Kidney and bladder ultrasound",
+  "УЗД молочних залоз": "Breast ultrasound",
+  "УЗД м’яких тканин": "Soft tissue ultrasound",
+  "УЗД суглоба": "Joint ultrasound",
+  "ЕхоКГ / УЗД серця": "Echocardiogram / heart ultrasound",
+  "УЗД судин голови та шиї": "Head and neck vessel ultrasound",
+  "УЗД судин нижніх кінцівок: артерії + вени": "Lower limb vessel ultrasound: arteries + veins",
+  "Доплерографія ниркових судин": "Renal vessel Doppler",
+  "УЗД передміхурової залози + нирки + сечовий міхур": "Prostate + kidney + bladder ultrasound",
+  "УЗД органів калитки": "Testicular ultrasound",
+  "ЕЕГ": "EEG",
+  "ЕКГ": "ECG",
+  "ЕКГ з розшифровкою": "ECG with interpretation",
+  "Добове моніторування артеріального тиску": "24-hour blood pressure monitoring",
+  "Внутрішньом’язове введення": "Intramuscular injection",
+  "Внутрішньовенне введення": "Intravenous injection",
+  "Виїзд лікаря додому": "Doctor home visit"
+};
+  for(const [source,en] of Object.entries(priceTerms)){dictionaries.en[source]=en}
   const physicianTerms = {
-    'Кандидат медичних наук, доцент':['Кандидат медицинских наук, доцент','Candidate of Medical Sciences, Associate Professor'],
-    'Заступник медичного директора':['Заместитель медицинского директора','Deputy Medical Director'],
-    'Лікар-невролог вищої категорії':['Врач-невролог высшей категории','Senior neurologist'],
-    'Член та учасник Європейської академії неврології (EAN), Спільноти рухових розладів (MDS), Української протиепілептичної Ліги':['Член Европейской академии неврологии (EAN), Общества двигательных расстройств (MDS) и Украинской противоэпилептической лиги','Member of the European Academy of Neurology (EAN), the Movement Disorder Society (MDS) and the Ukrainian Anti-Epileptic League'],
-    'Член та учасник Європейської академії неврології (EAN), Спільноти рухових розладів (MDS)':['Член Европейской академии неврологии (EAN) и Общества двигательных расстройств (MDS)','Member of the European Academy of Neurology (EAN) and the Movement Disorder Society (MDS)'],
-    'Лікар-невролог':['Врач-невролог','Neurologist'],
-    'Лікар-ендокринолог':['Врач-эндокринолог','Endocrinologist'],
-    'Лікар-гінеколог':['Врач-гинеколог','Gynaecologist'],
-    'Лікар-ортопед-травматолог':['Врач-ортопед-травматолог','Orthopaedic traumatologist'],
-    'Лікар фізичної та реабілітаційної медицини':['Врач физической и реабилитационной медицины','Physical and rehabilitation medicine physician'],
-    'Фахівець з лікування травм, захворювань суглобів, кісток, зв’язок та хребта':['Специалист по лечению травм и заболеваний суставов, костей, связок и позвоночника','Specialist in the treatment of injuries and conditions affecting joints, bones, ligaments and the spine'],
-    'Судинні захворювання головного мозку':['Сосудистые заболевания головного мозга','Cerebrovascular conditions'],
-    'Розсіяний склероз':['Рассеянный склероз','Multiple sclerosis'],
-    'Хвороба Паркінсона':['Болезнь Паркинсона','Parkinson’s disease'],
-    'Епілепсія':['Эпилепсия','Epilepsy'],
-    'Електроенцефалографія':['Электроэнцефалография','Electroencephalography'],
-    'Превентивна медицина':['Превентивная медицина','Preventive medicine'],
-    'Голкорефлексотерапія':['Иглорефлексотерапия','Acupuncture'],
-    'Стрес асоційовані стани та функціональні порушення':['Стресс-ассоциированные состояния и функциональные нарушения','Stress-related conditions and functional disorders'],
-    'Краніо-сакральна терапія':['Краниосакральная терапия','Craniosacral therapy'],
-    'Ожиріння та надмірна маса тіла':['Ожирение и избыточная масса тела','Obesity and overweight'],
-    'Цукровий діабет':['Сахарный диабет','Diabetes mellitus'],
-    'Захворювання наднирників':['Заболевания надпочечников','Adrenal gland disorders'],
-    'Захворювання щитоподібної залози':['Заболевания щитовидной железы','Thyroid disorders'],
-    'Патології гіпоталамо-гіпофізарної системи':['Заболевания гипоталамо-гипофизарной системы','Hypothalamic and pituitary disorders'],
-    'Головний та лицьовий біль, мігрень':['Головная и лицевая боль, мигрень','Headache, facial pain and migraine'],
-    'Болі у спині':['Боль в спине','Back pain'],
-    'Порушення пам’яті':['Нарушения памяти','Memory disorders'],
-    'Нейропатії різного генезу':['Нейропатии различного происхождения','Neuropathies of various causes'],
-    'Цереброваскулярні захворювання':['Цереброваскулярные заболевания','Cerebrovascular diseases'],
-    'Гормональні порушення':['Гормональные нарушения','Hormonal disorders'],
-    'Естетична гінекологія':['Эстетическая гинекология','Aesthetic gynaecology'],
-    'Відеокольпоскопія':['Видеокольпоскопия','Video colposcopy'],
-    'Менопауза та ЗГТ':['Менопауза и ЗГТ','Menopause and hormone replacement therapy'],
-    'Лікування доброякісних утворень (поліпи, кісти, міома)':['Лечение доброкачественных образований (полипы, кисты, миома)','Treatment of benign conditions (polyps, cysts and fibroids)'],
-    'Захворювання шийки матки':['Заболевания шейки матки','Cervical conditions'],
-    'Спортивні та побутові травми':['Спортивные и бытовые травмы','Sports and everyday injuries'],
-    'Патології хребта':['Патологии позвоночника','Spinal conditions'],
-    'Лікар-гастроентеролог':['Врач-гастроэнтеролог','Gastroenterologist'],
-    'Допомагає повернути свободу руху без болю та дискомфорту.':['Помогает вернуть свободу движений без боли и дискомфорта.','Helps patients regain freedom of movement without pain or discomfort.'],
-    'Член Української гастроентерологічної асоціації':['Член Украинской гастроэнтерологической ассоциации','Member of the Ukrainian Gastroenterological Association'],
-    'Захворювання шлунку та дванадцятипалої кишки':['Заболевания желудка и двенадцатиперстной кишки','Stomach and duodenal conditions'],
-    'Захворювання підшлункової залози':['Заболевания поджелудочной железы','Pancreatic conditions'],
-    'Захворювання жовчного міхура та жовчовивідних шляхів':['Заболевания желчного пузыря и желчевыводящих путей','Gallbladder and bile duct conditions'],
-    'Захворювання тонкого та товстого кишківника':['Заболевания тонкого и толстого кишечника','Small and large bowel conditions'],
-    'Патології печінки':['Заболевания печени','Liver conditions'],
-    'Функціональні захворювання шлунково-кишкового тракту':['Функциональные заболевания желудочно-кишечного тракта','Functional gastrointestinal disorders'],
-    'Харчова непереносимість':['Пищевая непереносимость','Food intolerance'],
-    'Лікар УЗД':['Врач УЗИ','Ultrasound specialist'],
-    'Лікар функціональної діагностики вищої категорії':['Врач функциональной диагностики высшей категории','Senior functional diagnostics specialist'],
-    'Терапевт вищої категорії':['Терапевт высшей категории','Senior primary care physician'],
-    'УЗД судин головного мозку та шиї':['УЗИ сосудов головного мозга и шеи','Ultrasound of the brain and neck vessels'],
-    'УЗД верхніх та нижніх кінцівок':['УЗИ верхних и нижних конечностей','Ultrasound of the upper and lower limbs'],
-    'Добове моніторування ЕКГ, АТ':['Суточное мониторирование ЭКГ и артериального давления','24-hour ECG and blood pressure monitoring'],
-    'УЗД серця':['УЗИ сердца','Cardiac ultrasound'],
-    'Лікар-хірург-уролог':['Врач-хирург-уролог','Urologist and surgeon'],
-    'Спеціаліст з малоінвазивної хірургії та ендоскопічної урології':['Специалист по малоинвазивной хирургии и эндоскопической урологии','Specialist in minimally invasive surgery and endoscopic urology'],
-    'Варикоцеле':['Варикоцеле','Varicocele'],
-    'Водянка яєчка':['Водянка яичка','Hydrocele'],
-    'Утворення яєчка':['Образования яичка','Testicular masses'],
-    'Малоінвазивна хірургія':['Малоинвазивная хирургия','Minimally invasive surgery'],
-    'Ендоскопічна урологія':['Эндоскопическая урология','Endoscopic urology'],
-    'Фімоз (звуження крайньої плоті)':['Фимоз (сужение крайней плоти)','Phimosis (foreskin tightness)'],
-    'Інфекції нижніх та верхніх сечовивідних шляхів':['Инфекции верхних и нижних мочевыводящих путей','Upper and lower urinary tract infections'],
-    'Доброякісна гіперплазія передміхурової залози (ДГПЗ)':['Доброкачественная гиперплазия предстательной железы (ДГПЖ)','Benign prostatic hyperplasia (BPH)'],
-    'Онкологічні патології в урології':['Онкологические заболевания в урологии','Urologic cancers'],
-    'Лікар-дерматовенеролог дорослий та дитячий, вищої категорії':['Дерматовенеролог высшей категории для взрослых и детей','Senior dermatologist and venereologist for adults and children'],
-    'Діагностика та лікування шкірних захворювань':['Диагностика и лечение заболеваний кожи','Diagnosis and treatment of skin conditions'],
-    'Діагностика та лікування ІПСШ':['Диагностика и лечение ИППП','Diagnosis and treatment of sexually transmitted infections'],
-    'Дерматоскопія та видалення новоутворень':['Дерматоскопия и удаление новообразований','Dermoscopy and lesion removal'],
-    'Трихологія':['Трихология','Trichology'],
-    'Загальний лікувальний масаж':['Общий лечебный массаж','General therapeutic massage'],
-    'Масажі при неврологічних станах':['Массаж при неврологических состояниях','Massage for neurological conditions'],
-    'Лікар з фізичної та реабілітаційної медицини':['Врач физической и реабилитационной медицины','Physical and rehabilitation medicine physician'],
-    'Медичний масаж':['Медицинский массаж','Medical massage'],
-    'Кінезіотерапія та кінезіотейпування':['Кинезиотерапия и кинезиотейпирование','Kinesiotherapy and kinesio taping'],
-    'Реабілітація хворих після травм та захворювань опорно-рухового апарату':['Реабилитация после травм и заболеваний опорно-двигательного аппарата','Rehabilitation after injuries and musculoskeletal conditions'],
-    'Реабілітація при хворобах неврологічного профілю':['Реабилитация при неврологических заболеваниях','Rehabilitation for neurological conditions'],
-    'Кандидат медичних наук':['Кандидат медицинских наук','Candidate of Medical Sciences'],
-    'Доцент кафедри загальної практики — сімейної медицини та внутрішніх хвороб Запорізького державного медико-фармацевтичного університету':['Доцент кафедры общей практики, семейной медицины и внутренних болезней Запорожского государственного медико-фармацевтического университета','Associate Professor in the Department of General Practice, Family Medicine and Internal Medicine at Zaporizhzhia State Medical and Pharmaceutical University'],
-    'Пароксизмальні стани':['Пароксизмальные состояния','Paroxysmal disorders'],
-    'Головні болі різної етіології':['Головные боли различной этиологии','Headaches of various causes'],
-    'Мігрень':['Мигрень','Migraine'],
-    'Запаморочення':['Головокружение','Dizziness'],
-    'Лікування та профілактика серцево-судинних захворювань: ішемічна хвороба серця, аритмії, кардіоміопатії, міокардити, перикардити, гіпертонічна хвороба, дисліпідемії, серцева недостатність, функціональні порушення':['Лечение и профилактика сердечно-сосудистых заболеваний: ишемической болезни сердца, аритмий, кардиомиопатий, миокардитов, перикардитов, гипертонии, дислипидемии, сердечной недостаточности и функциональных нарушений','Treatment and prevention of cardiovascular conditions, including coronary artery disease, arrhythmias, cardiomyopathies, myocarditis, pericarditis, hypertension, dyslipidaemia, heart failure and functional disorders'],
-    'Лікування та профілактика захворювань опорно-рухового апарату: артрити, спондиліти, системні захворювання сполучної тканини, подагра, остеопороз':['Лечение и профилактика заболеваний опорно-двигательного аппарата: артрита, спондилита, системных заболеваний соединительной ткани, подагры и остеопороза','Treatment and prevention of musculoskeletal conditions, including arthritis, spondylitis, systemic connective tissue diseases, gout and osteoporosis']
-  };
+  "Кандидат медичних наук, доцент": "Candidate of Medical Sciences, Associate Professor",
+  "Заступник медичного директора": "Deputy Medical Director",
+  "Лікар-невролог вищої категорії": "Senior neurologist",
+  "Член та учасник Європейської академії неврології (EAN), Спільноти рухових розладів (MDS), Української протиепілептичної Ліги": "Member of the European Academy of Neurology (EAN), the Movement Disorder Society (MDS) and the Ukrainian Anti-Epileptic League",
+  "Член та учасник Європейської академії неврології (EAN), Спільноти рухових розладів (MDS)": "Member of the European Academy of Neurology (EAN) and the Movement Disorder Society (MDS)",
+  "Лікар-невролог": "Neurologist",
+  "Лікар-ендокринолог": "Endocrinologist",
+  "Лікар-гінеколог": "Gynaecologist",
+  "Лікар-ортопед-травматолог": "Orthopaedic traumatologist",
+  "Лікар фізичної та реабілітаційної медицини": "Physical and rehabilitation medicine physician",
+  "Фахівець з лікування травм, захворювань суглобів, кісток, зв’язок та хребта": "Specialist in the treatment of injuries and conditions affecting joints, bones, ligaments and the spine",
+  "Судинні захворювання головного мозку": "Cerebrovascular conditions",
+  "Розсіяний склероз": "Multiple sclerosis",
+  "Хвороба Паркінсона": "Parkinson’s disease",
+  "Епілепсія": "Epilepsy",
+  "Електроенцефалографія": "Electroencephalography",
+  "Превентивна медицина": "Preventive medicine",
+  "Голкорефлексотерапія": "Acupuncture",
+  "Стрес асоційовані стани та функціональні порушення": "Stress-related conditions and functional disorders",
+  "Краніо-сакральна терапія": "Craniosacral therapy",
+  "Ожиріння та надмірна маса тіла": "Obesity and overweight",
+  "Цукровий діабет": "Diabetes mellitus",
+  "Захворювання наднирників": "Adrenal gland disorders",
+  "Захворювання щитоподібної залози": "Thyroid disorders",
+  "Патології гіпоталамо-гіпофізарної системи": "Hypothalamic and pituitary disorders",
+  "Головний та лицьовий біль, мігрень": "Headache, facial pain and migraine",
+  "Болі у спині": "Back pain",
+  "Порушення пам’яті": "Memory disorders",
+  "Нейропатії різного генезу": "Neuropathies of various causes",
+  "Цереброваскулярні захворювання": "Cerebrovascular diseases",
+  "Гормональні порушення": "Hormonal disorders",
+  "Естетична гінекологія": "Aesthetic gynaecology",
+  "Відеокольпоскопія": "Video colposcopy",
+  "Менопауза та ЗГТ": "Menopause and hormone replacement therapy",
+  "Лікування доброякісних утворень (поліпи, кісти, міома)": "Treatment of benign conditions (polyps, cysts and fibroids)",
+  "Захворювання шийки матки": "Cervical conditions",
+  "Спортивні та побутові травми": "Sports and everyday injuries",
+  "Патології хребта": "Spinal conditions",
+  "Лікар-гастроентеролог": "Gastroenterologist",
+  "Допомагає повернути свободу руху без болю та дискомфорту.": "Helps patients regain freedom of movement without pain or discomfort.",
+  "Член Української гастроентерологічної асоціації": "Member of the Ukrainian Gastroenterological Association",
+  "Захворювання шлунку та дванадцятипалої кишки": "Stomach and duodenal conditions",
+  "Захворювання підшлункової залози": "Pancreatic conditions",
+  "Захворювання жовчного міхура та жовчовивідних шляхів": "Gallbladder and bile duct conditions",
+  "Захворювання тонкого та товстого кишківника": "Small and large bowel conditions",
+  "Патології печінки": "Liver conditions",
+  "Функціональні захворювання шлунково-кишкового тракту": "Functional gastrointestinal disorders",
+  "Харчова непереносимість": "Food intolerance",
+  "Лікар УЗД": "Ultrasound specialist",
+  "Лікар функціональної діагностики вищої категорії": "Senior functional diagnostics specialist",
+  "Терапевт вищої категорії": "Senior primary care physician",
+  "УЗД судин головного мозку та шиї": "Ultrasound of the brain and neck vessels",
+  "УЗД верхніх та нижніх кінцівок": "Ultrasound of the upper and lower limbs",
+  "Добове моніторування ЕКГ, АТ": "24-hour ECG and blood pressure monitoring",
+  "УЗД серця": "Cardiac ultrasound",
+  "Лікар-хірург-уролог": "Urologist and surgeon",
+  "Спеціаліст з малоінвазивної хірургії та ендоскопічної урології": "Specialist in minimally invasive surgery and endoscopic urology",
+  "Варикоцеле": "Varicocele",
+  "Водянка яєчка": "Hydrocele",
+  "Утворення яєчка": "Testicular masses",
+  "Малоінвазивна хірургія": "Minimally invasive surgery",
+  "Ендоскопічна урологія": "Endoscopic urology",
+  "Фімоз (звуження крайньої плоті)": "Phimosis (foreskin tightness)",
+  "Інфекції нижніх та верхніх сечовивідних шляхів": "Upper and lower urinary tract infections",
+  "Доброякісна гіперплазія передміхурової залози (ДГПЗ)": "Benign prostatic hyperplasia (BPH)",
+  "Онкологічні патології в урології": "Urologic cancers",
+  "Лікар-дерматовенеролог дорослий та дитячий, вищої категорії": "Senior dermatologist and venereologist for adults and children",
+  "Діагностика та лікування шкірних захворювань": "Diagnosis and treatment of skin conditions",
+  "Діагностика та лікування ІПСШ": "Diagnosis and treatment of sexually transmitted infections",
+  "Дерматоскопія та видалення новоутворень": "Dermoscopy and lesion removal",
+  "Трихологія": "Trichology",
+  "Загальний лікувальний масаж": "General therapeutic massage",
+  "Масажі при неврологічних станах": "Massage for neurological conditions",
+  "Лікар з фізичної та реабілітаційної медицини": "Physical and rehabilitation medicine physician",
+  "Медичний масаж": "Medical massage",
+  "Кінезіотерапія та кінезіотейпування": "Kinesiotherapy and kinesio taping",
+  "Реабілітація хворих після травм та захворювань опорно-рухового апарату": "Rehabilitation after injuries and musculoskeletal conditions",
+  "Реабілітація при хворобах неврологічного профілю": "Rehabilitation for neurological conditions",
+  "Кандидат медичних наук": "Candidate of Medical Sciences",
+  "Доцент кафедри загальної практики — сімейної медицини та внутрішніх хвороб Запорізького державного медико-фармацевтичного університету": "Associate Professor in the Department of General Practice, Family Medicine and Internal Medicine at Zaporizhzhia State Medical and Pharmaceutical University",
+  "Пароксизмальні стани": "Paroxysmal disorders",
+  "Головні болі різної етіології": "Headaches of various causes",
+  "Мігрень": "Migraine",
+  "Запаморочення": "Dizziness",
+  "Лікування та профілактика серцево-судинних захворювань: ішемічна хвороба серця, аритмії, кардіоміопатії, міокардити, перикардити, гіпертонічна хвороба, дисліпідемії, серцева недостатність, функціональні порушення": "Treatment and prevention of cardiovascular conditions, including coronary artery disease, arrhythmias, cardiomyopathies, myocarditis, pericarditis, hypertension, dyslipidaemia, heart failure and functional disorders",
+  "Лікування та профілактика захворювань опорно-рухового апарату: артрити, спондиліти, системні захворювання сполучної тканини, подагра, остеопороз": "Treatment and prevention of musculoskeletal conditions, including arthritis, spondylitis, systemic connective tissue diseases, gout and osteoporosis"
+};
   Object.assign(dictionaries.en, {
     'Сучасна клініка діагностики та медицини':'A modern clinic for diagnostics and medical care',
     'Куточок зони очікування Breoris Medical':'Part of the Breoris Medical waiting area',
     'Зрозумілий наступний крок.':'A clear next step.',
     'Консультації лікарів, УЗД та аналізи у Дніпрі. Пояснимо результати та наступні кроки.':'Doctor consultations, ultrasound and lab tests in Dnipro. We explain your results and what to do next.'
   });
-  for (const [source, [ru, en]] of Object.entries(physicianTerms)) { dictionaries.en[source] = en; }
+  for (const [source, en] of Object.entries(physicianTerms)) { dictionaries.en[source] = en; }
   // clinic-gallery:translations
   Object.assign(dictionaries.en, {"Гінекологічний кабінет": "Gynaecology room", "Гінекологічний кабінет Breoris Medical з оглядовим кріслом": "Breoris Medical gynaecology room with an examination chair", "Процедурний кабінет": "Treatment room", "Процедурний кабінет Breoris Medical з кушеткою та робочою зоною": "Breoris Medical treatment room with an examination couch and work area", "Масажний кабінет": "Massage room", "Масажний кабінет Breoris Medical з масажним столом": "Breoris Medical massage room with a massage table", "Палата денного стаціонару": "Day hospital room", "Палата денного стаціонару Breoris Medical з функціональним ліжком": "Breoris Medical day hospital room with an adjustable bed"});
   // infusion-feature:translations
@@ -228,21 +231,21 @@
     document.querySelectorAll('.language-select').forEach(select => select.value = next);
     const clinicMap = document.querySelector('.map-frame iframe');
     if (clinicMap) {
-      const mapUrl = clinicMap.getAttribute('src').replace(/!1s(?:ru|uk|en)!2sua/g, '!1s' + next + '!2sua');
+      const mapUrl = clinicMap.getAttribute('src').replace(/!1s(?:uk|en)!2sua/g, '!1s' + next + '!2sua');
       if (mapUrl !== clinicMap.getAttribute('src')) clinicMap.setAttribute('src', mapUrl);
     }
     document.querySelectorAll('meta[name=description],meta[property="og:description"]').forEach(meta => {
       meta.dataset.original ??= meta.content;
-      if (meta.getAttribute('property') === 'og:description') meta.content = next === 'uk' ? 'Точна діагностика, уважний лікар і зрозумілий наступний крок у Breoris Medical.' : next === 'ru' ? 'Точная диагностика, внимательный врач и понятный следующий шаг в Breoris Medical.' : 'Accurate diagnostics, a caring doctor and a clear next step at Breoris Medical.';
-      else meta.content = next === 'uk' ? meta.dataset.original : next === 'ru' ? 'Breoris Medical — многопрофильная клиника в Днепре: врачи, УЗИ, анализы и комплексные обследования.' : 'Breoris Medical is a multispecialty clinic in Dnipro, Ukraine, offering doctor consultations, ultrasound, lab tests and health check-ups.';
+      if (meta.getAttribute('property') === 'og:description') meta.content = next === 'uk' ? 'Точна діагностика, уважний лікар і зрозумілий наступний крок у Breoris Medical.' : 'Accurate diagnostics, a caring doctor and a clear next step at Breoris Medical.';
+      else meta.content = next === 'uk' ? meta.dataset.original : 'Breoris Medical is a multispecialty clinic in Dnipro, Ukraine, offering doctor consultations, ultrasound, lab tests and health check-ups.';
     });
     const socialTitle = document.querySelector('meta[property="og:title"]');
-    if (socialTitle) socialTitle.content = {uk:'Breoris Medical — медична клініка у Дніпрі',ru:'Breoris Medical — медицинская клиника в Днепре',en:'Breoris Medical — medical clinic in Dnipro, Ukraine'}[next];
+    if (socialTitle) socialTitle.content = {uk:'Breoris Medical — медична клініка у Дніпрі',en:'Breoris Medical — medical clinic in Dnipro, Ukraine'}[next];
     const socialLocale = document.querySelector('meta[property="og:locale"]');
-    if (socialLocale) socialLocale.content = {uk:'uk_UA',ru:'ru_UA',en:'en_US'}[next];
+    if (socialLocale) socialLocale.content = {uk:'uk_UA',en:'en_US'}[next];
     const canonical = document.querySelector('link[rel="canonical"]');
     if (canonical) canonical.href = `https://www.breoris-medical.com/?lang=${next}`;
-    const title = {uk:'Breoris Medical — медична клініка у Дніпрі',ru:'Breoris Medical — медицинская клиника в Днепре',en:'Breoris Medical — medical clinic in Dnipro, Ukraine'};
+    const title = {uk:'Breoris Medical — медична клініка у Дніпрі',en:'Breoris Medical — medical clinic in Dnipro, Ukraine'};
     document.title = title[next]; translateTree();
   }
   Object.assign(dictionaries.en, {'Консультації лікарів':'Doctor consultations','Онлайн-запис до лікарів':'Book a doctor online'});
@@ -251,6 +254,7 @@
   // Mobile blog navigation, October 2026.
   Object.assign(dictionaries.en, {"Блог": "Blog", "Блог клініки": "Clinic blog", "Про консультації, обстеження та підготовку до візиту.": "About consultations, examinations and preparing for your visit.", "Усі статті ↗": "All articles ↗", "Читати статтю": "Read article (Ukrainian)", "УЗД — що варто знати перед візитом": "Ultrasound — what to know before your visit", "Консультація невролога — що варто знати перед візитом": "Neurology consultation — what to know before your visit", "Check-up здоров’я — що варто знати перед візитом": "Check-up programmes — what to know before your visit"});
   Object.assign(dictionaries.en, {"Неврологія — напрям, пов’язаний із роботою нервової системи. На консультації у Breoris Medical можна обговорити скарги, попередні висновки та питання подальшого спостереження у невролога.": "Neurology concerns the nervous system. At a Breoris Medical consultation, you can discuss symptoms, previous medical findings and follow-up with a neurologist.", "УЗД — дослідження, яке використовує звукові хвилі для отримання зображень внутрішніх структур. У Breoris Medical зазначені дослідження внутрішніх органів, судин і суглобів. Потрібний вид УЗД уточніть перед записом.": "Ultrasound uses sound waves to produce images of internal structures. Breoris Medical lists examinations of internal organs, blood vessels and joints. Confirm the examination you need before booking.", "Check-up у Breoris Medical — програма обстеження, склад якої узгоджується відповідно до мети звернення. У клініці зазначені передопераційні, студентські та спортивні програми.": "A Breoris Medical check-up is an examination programme agreed according to the purpose of your visit. The clinic lists pre-operative, student and sports programmes."});
+  Object.assign(dictionaries.en, {"Перед візитом":"Before your visit","Додаткові послуги":"Additional services","Запис на прийом":"Book an appointment"});
   window.BreorisLocale = { get language(){return language}, t(value){return dictionaries[language]?.[value] || value}, setLanguage, translateTree };
   document.addEventListener('change', event => { if (event.target.matches('.language-select')) setLanguage(event.target.value); });
   const observer = new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => { if (node.nodeType === Node.TEXT_NODE) translateTextNode(node); else if (node.nodeType === Node.ELEMENT_NODE) translateTree(node); })));

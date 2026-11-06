@@ -34,8 +34,8 @@ def render(content,title,description,path):
     page=page.replace('</head>',f'<link rel="stylesheet" href="{root}service-pages.css?v=1"><link rel="stylesheet" href="{root}service-explorer.css?v=2"><link rel="stylesheet" href="{root}blog.css?v=1"></head>')
     target=DIST/path/'index.html';target.parent.mkdir(parents=True,exist_ok=True);target.write_text(page)
 
-hub='<nav class="doctor-breadcrumbs" aria-label="Навігаційний ланцюжок"><a href="../../index.html">Головна</a><span>›</span><span aria-current="page">Послуги</span></nav><section class="service-intro"><p class="doctor-eyebrow">BREORIS MEDICAL · Дніпро</p><h1>Напрями та послуги клініки</h1><p>Дізнайтеся, як проходить консультація або обстеження, що взяти із собою та як погодити візит. Оберіть потрібний напрям.</p></section>'
-hub+=discovery.homepage(records,catalog,price_data).replace('href="ua/services/', 'href="').replace('class="services service-explorer section"', 'class="services service-explorer section" data-show-all="true"')
+hub='<nav class="doctor-breadcrumbs" aria-label="Навігаційний ланцюжок"><a href="../../index.html">Головна</a><span>›</span><span aria-current="page">Послуги</span></nav><section class="service-intro"><h1>Напрями та послуги клініки</h1></section>'
+hub+=discovery.homepage(records,catalog,price_data).replace('href="ua/services/', 'href="').replace('class="services service-explorer section"', 'class="services service-explorer section" data-show-all="true"').replace('<div class="service-explorer-heading"><div><h2 id="services-title">Послуги клініки</h2></div></div>', '<h2 id="services-title" class="visually-hidden">Каталог послуг</h2>').replace('<a class="text-link" href="">Каталог усіх послуг ↗</a>', '')
 hub+='<script src="../../service-explorer.js?v=1" defer></script>'
 render(hub,'Медичні послуги у Дніпрі — Breoris Medical','Консультації лікарів, УЗД, аналізи, check-up і відновлення у Breoris Medical у Дніпрі: опис напрямів, підготовка та запис.','ua/services/')
 for r in records:
