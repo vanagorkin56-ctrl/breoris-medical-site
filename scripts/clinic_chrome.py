@@ -2,7 +2,7 @@
 import re
 from pathlib import Path
 
-VERSION = '20261110-client-1'
+VERSION = '20261110-client-2'
 ICONS = {
  'phone':'<path d="M5 3h4l2 5-3 2a13 13 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 5a2 2 0 0 1 2-2Z"/>',
  'pin':'<path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
@@ -29,7 +29,7 @@ def enhance(page,root='',lang='uk'):
  return page
 
 def hide_home_sections(page):
- for cls in ['trust','feature','additional']:
+ for cls in ['trust','feature','additional','clinic-gallery']:
   page=re.sub(r'<section class="'+cls+r' section"(?! hidden)', '<section class="'+cls+' section" hidden',page)
  return page
 

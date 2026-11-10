@@ -35,3 +35,31 @@ body:has(.direction-hero) .footer{background:#e0ecef}
 }
 @media(max-width:360px){body .header{padding-inline:12px;gap:6px}body .header .brand{width:100px}body .header-actions{gap:4px}.clinic-strip{padding-inline:10px}.clinic-strip-inner{font-size:11px}.header-call-number{font-size:23px}}
 @media(prefers-reduced-motion:reduce){.header-call-panel{animation:none}.header-call-toggle{transition:none}}
+
+/* Selected words lead the eye; paragraphs keep a stable, readable colour. */
+.text-focus{color:#1a6571;font-weight:600}
+[data-focus-shine=true] .text-focus{color:#1a6571;background-image:linear-gradient(105deg,#174f69 15%,#167581 42%,#174f69 65%);background-size:240% 100%;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:editorial-shine 8s cubic-bezier(.45,0,.55,1) infinite}
+.direction-hero .text-focus{color:#bcece6}
+.direction-hero [data-focus-shine=true] .text-focus{background-image:linear-gradient(105deg,#bcece6 15%,#fff 42%,#bcece6 65%)}
+@keyframes editorial-shine{0%,35%{background-position:100% 50%}80%,100%{background-position:0% 50%}}
+
+/* Instagram keeps its familiar colours in the strip and contact links. */
+.clinic-strip .strip-social{width:36px;height:36px;min-height:36px;justify-content:center;border-radius:11px;background:radial-gradient(circle at 28% 100%,#feda75 0%,#fa7e1e 24%,#d62976 52%,#962fbf 76%,#4f5bd5 100%);flex-shrink:0}
+.clinic-strip .strip-social svg{color:#fff;width:24px;height:24px}
+a[href*="instagram.com"] .contact-icon{box-sizing:content-box;padding:7px;border-radius:11px;background:radial-gradient(circle at 28% 100%,#feda75 0%,#fa7e1e 24%,#d62976 52%,#962fbf 76%,#4f5bd5 100%);color:#fff;width:22px;height:22px}
+
+/* Alternate blue, aqua and light surfaces without adding decorative copy. */
+body:has(.direction-hero) .home-clinic{background:#d8eeea}
+body .service-explorer#poslugi{background:#e1ebf6}
+body:has(.direction-hero) .doctors{background:#cbe5e1}
+body:has(.direction-hero) .blog-preview{background:#235b92;color:#fff}
+body:has(.direction-hero) .blog-preview-heading .text-link{color:#fff;border-color:#a6d6df}
+body:has(.direction-hero) .blog-card{background:#f6fafb;border-color:#d6e6ed;color:#163c5a}
+body:has(.direction-hero) .blog-card:hover{background:#fff}
+body:has(.direction-hero) .blog-preview .mobile-carousel-position{color:#fff}
+body:has(.direction-hero) .blog-preview .mobile-carousel-controls button{background:#f6fafb;color:#235b92;border-color:#bcece6}
+body:has(.direction-hero) .blog-preview .mobile-carousel-controls button:focus-visible{outline-color:#bcece6}
+body:has(.direction-hero) .reviews{background:#d7eeeb}
+body:has(.direction-hero) .location{background:#e6eff6}
+@media(prefers-reduced-motion:reduce){[data-focus-shine=true] .text-focus{animation:none;background:none;-webkit-text-fill-color:currentColor}}
+@media(forced-colors:active){.text-focus,[data-focus-shine=true] .text-focus{color:CanvasText;background:none;-webkit-text-fill-color:currentColor}}

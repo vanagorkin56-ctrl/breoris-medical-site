@@ -65,3 +65,25 @@
 }
 @media(max-width:360px){.header{padding-inline:12px;gap:8px}.header .brand{width:100px}.header-actions{gap:4px}.direction-copy{padding-inline:20px}.direction-summary{min-height:96px}.direction-photo figcaption{padding-inline:20px}}
 @media(max-width:760px){.direction-summary{min-height:96px}}
+
+/* A stronger brand canvas, with one quiet aqua panel behind the photograph. */
+.direction-hero{background:linear-gradient(90deg,#235b92 0%,#235b92 65%,#b9e5e1 65%,#b9e5e1 100%);color:#fff;padding-bottom:24px}
+.direction-copy h2{color:#fff;max-width:13ch}
+.direction-copy .direction-eyebrow{color:#bcece6}
+.direction-summary{color:#f2f8fc}
+.direction-book{background:#fff!important;color:#235b92!important}
+.direction-book:hover{background:#d8f0ec!important}
+.direction-more{color:#fff;border-color:#a6d6df}
+.direction-controls button{color:#fff;border-color:#98bfda;background:transparent}
+.direction-controls button:hover{background:#ffffff18}
+.direction-dots span{background:#91b3d1}
+.direction-dots [aria-pressed=true] span{background:#bcece6}
+.direction-hero :focus-visible{outline-color:#bcece6}
+.direction-photo{border-radius:16px;box-shadow:0 12px 28px #163c5a14}
+.direction-photo .text-focus{font-weight:inherit}
+@media(max-width:760px){
+ .direction-hero{background:#235b92;padding:0 0 20px}
+ .direction-photo{border-radius:0;box-shadow:none}
+ .direction-more{border-color:#b2d6e1}
+ .direction-more:after{background:#bcece6;color:#174672}
+}
