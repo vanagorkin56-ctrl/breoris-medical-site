@@ -1,5 +1,6 @@
 """Idempotent homepage changes shared by preview and production staging."""
 import html
+import clinic_chrome
 import json
 from pathlib import Path
 
@@ -45,4 +46,4 @@ def enhance_home(home,records,catalog):
     if 'mobile-experience.js' not in home:home=home.replace('</body>','<script src="mobile-experience.js?v=quality-20261026" defer></script>\n</body>')
     home=re.sub(r'app.js\?v=[^" ]+', 'app.js?v=mobile-7',home)
     home=re.sub(r'i18n.js\?v=[^" ]+', 'i18n.js?v=mobile-blog-1',home)
-    return re.sub(r'i18n.js\?v=[^" ]+', 'i18n.js?v=research-20261025', remove_repeat_intro(clinic_gallery.update_home(ui_refinements.home('\n'.join(line.rstrip() for line in home.split('\n'))))))
+    return clinic_chrome.hide_home_sections(re.sub(r'i18n.js\?v=[^" ]+', 'i18n.js?v=research-20261025', remove_repeat_intro(clinic_gallery.update_home(ui_refinements.home('\n'.join(line.rstrip() for line in home.split('\n')))))))

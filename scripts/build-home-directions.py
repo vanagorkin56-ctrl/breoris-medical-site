@@ -27,14 +27,9 @@ s=re.sub(r'i18n.js\?[^" ]+', 'i18n.js?v=directions-20261106',s)
 i=(D/'i18n.js').read_text();i=re.sub(r'  // home-directions:translations\n.*?\n(?=  const original)', '',i,flags=re.S)
 i=i.replace('  const original =', '  // home-directions:translations\n  Object.assign(dictionaries.en, '+json.dumps(translations,ensure_ascii=False)+');\n  const original =')
 (D/'i18n.js').write_text(i)
-for lang in ('uk','en'):
- folder='ua' if lang=='uk' else 'en'
- for r in rows:
-  c=r[lang]; target=D/folder/'directions'/r['slug'];target.mkdir(parents=True,exist_ok=True)
-  home='Головна' if lang=='uk' else 'Home';call='Записатися за телефоном' if lang=='uk' else 'Call to book';details='Обговоріть ваш запит з адміністратором' if lang=='uk' else 'Discuss your needs with our administrator'
-  other='en' if lang=='uk' else 'ua'; label='EN' if lang=='uk' else 'UA'
-  body=''.join(f'<p>{E(p)}</p>' for p in c['paragraphs'])
-  note=('<small>'+E('Рекламна візуалізація на основі фотографій клініки' if lang=='uk' else 'Promotional visual based on clinic photographs')+'</small>') if r.get('image','').startswith('assets/campaigns/') else ''
-  page=f'''<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{E(c['title'])} | Breoris Medical</title><meta name="description" content="{E(c['intro'])}"><link rel="canonical" href="https://www.breoris-medical.com/{folder}/directions/{r['slug']}/"><link rel="stylesheet" href="../../../home-directions.css?v=20261106-adaptive3"></head><body class="direction-page"><header><a href="../../../?lang={lang}"><img src="../../../assets/logo.png" width="150" alt="Breoris Medical"></a><nav><a href="../../../?lang={lang}">{home}</a><a href="../../../{other}/directions/{r['slug']}/" lang="{'en' if lang=='uk' else 'uk'}">{label}</a></nav></header><main><a href="../../../?lang={lang}">← {home}</a><h1>{E(c['title'])}</h1><p class="direction-lead">{E(c['intro'])}</p><figure><img src="../../../{r['image']}" alt="{E(c['alt'])}" width="1536" height="1024">{note}</figure><div class="direction-prose">{body}<h2>{details}</h2><a class="direction-page-cta" href="tel:+380975323664">{call} ↗</a><p>+380 97 532 36 64</p></div></main></body></html>'''
-  (target/'index.html').write_text(page)
+from direction_pages import build as build_direction_pages
+from clinic_chrome import enhance,hide_home_sections
+home=(D/'index.html').read_text()
+(D/'index.html').write_text(enhance(hide_home_sections(home)))
+build_direction_pages()
 print('Built homepage and 6 direction pages')
