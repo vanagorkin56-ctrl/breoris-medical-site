@@ -150,5 +150,102 @@
         "mobileIntro": "Register with a physician, primary care and screening for people aged 40+."
       }
     }
+  },
+  {
+    "slug": "ekopfo-preparation",
+    "image": "assets/campaigns/abstract-ekopfo-nov13.jpg",
+    "bookingService": "Підготовка до ЕКОПФО",
+    "uk": {
+      "title": "Підготовка до ЕКОПФО",
+      "intro": "Консультації лікарів, обстеження та підготовка медичних документів для направлення на оцінювання.",
+      "alt": "Концептуальна композиція: медичні документи в прозорій м’ятній папці за фактурним склом.",
+      "caption": "Медична підготовка та документи",
+      "paragraphs": [
+        "У Breoris Medical організовуємо медичну підготовку до оцінювання повсякденного функціонування особи (ЕКОПФО): консультації профільних лікарів, необхідні обстеження, аналіз наявної документації та підготовку документів для направлення.",
+        "Перший крок — консультація лікаря. Лікар аналізує історію захворювання та медичні висновки, оцінює наявність медичних показань для направлення й визначає, яких обстежень або консультацій бракує.",
+        "За потреби можуть бути рекомендовані консультації терапевта, кардіолога, ендокринолога, невролога, ортопеда-травматолога, УЗД та інші діагностичні дослідження. Перелік визначається індивідуально, залежно від захворювання й наявної документації.",
+        "Після необхідних обстежень лікар повторно переглядає документи, результати досліджень та висновки спеціалістів. Якщо медичних показань недостатньо, пояснює причини та рекомендує подальші дії.",
+        "За наявності підстав лікар узагальнює медичні висновки й результати досліджень, перевіряє повноту документації та відображає функціональні обмеження, пов’язані зі станом здоров’я. Лікуючий лікар, який веде основне захворювання або стан, формує електронне направлення та додає необхідні медичні документи.",
+        "Первинна консультація оплачується за стандартним прайсом. Оформлення документів для ЕКОПФО за наявності медичних показань — 5 000–8 000 грн. Остаточну вартість і склад послуги уточніть у клініці до оформлення.",
+        "У вартість оформлення входять повторна консультація, координація, підготовка та подання документів до системи ЕКОПФО. Додаткові обстеження й консультації оплачуються окремо. За відсутності медичних показань повторна консультація оплачується за стандартним прайсом.",
+        "Далі справа передається на розгляд експертної команди. Рішення за результатами оцінювання, зокрема щодо встановлення або продовження інвалідності, ухвалює експертна команда. Підготовка документів не гарантує певного рішення."
+      ],
+      "imageNote": "Концептуальна рекламна візуалізація.",
+      "ctaTitle": "Почніть із консультації лікаря",
+      "ctaText": "Оберіть лікаря відповідного профілю. Візьміть на консультацію наявні медичні висновки та результати обстежень."
+    },
+    "en": {
+      "title": "Preparation for EKOPFO",
+      "intro": "Doctor consultations, examinations and preparation of medical documents for a referral for assessment.",
+      "alt": "Conceptual composition: medical documents in a translucent mint folder behind textured glass.",
+      "caption": "Medical preparation and documents",
+      "paragraphs": [
+        "Breoris Medical coordinates medical preparation for assessment of a person’s daily functioning (EKOPFO): specialist consultations, necessary examinations, review of existing records and preparation of documents for referral.",
+        "The first step is a doctor consultation. The doctor reviews your medical history and reports, assesses whether there are medical indications for referral and identifies any missing examinations or specialist opinions.",
+        "If needed, the doctor may recommend consultations with a physician, cardiologist, endocrinologist, neurologist or orthopaedic trauma specialist, ultrasound and other diagnostic examinations. The list is individual and depends on your condition and existing documents.",
+        "After the required examinations, the doctor reviews the records, test results and specialist reports again. If medical indications are insufficient, the doctor explains the reasons and recommends next steps.",
+        "Where grounds for referral exist, the doctor brings together medical reports and examination results, checks the completeness of the records and describes health-related functional limitations. The treating doctor responsible for the main condition creates the electronic referral and attaches the necessary medical documents.",
+        "The first consultation is charged at the standard clinic rate. Document preparation for EKOPFO, where medically indicated, costs UAH 5,000–8,000. Confirm the final fee and scope with the clinic before proceeding.",
+        "The document preparation fee includes a follow-up consultation, coordination, preparation and submission of documents to the EKOPFO system. Additional examinations and consultations are charged separately. If there are no medical indications, the follow-up consultation is charged at the standard rate.",
+        "The case is then submitted to an expert team. The expert team makes the assessment decision, including any decision on establishing or extending disability status. Document preparation does not guarantee a particular outcome."
+      ],
+      "imageNote": "Conceptual promotional visual.",
+      "ctaTitle": "Start with a doctor consultation",
+      "ctaText": "Choose a doctor for your main condition. Bring your existing medical reports and examination results to the consultation."
+    },
+    "campaign": {
+      "theme": "documents",
+      "image": "assets/campaigns/abstract-ekopfo-nov13.jpg",
+      "directionLink": true,
+      "uk": {
+        "question": "Готуєтесь до ЕКОПФО?",
+        "accent": [
+          "ЕКОПФО?"
+        ],
+        "caption": "Консультації та підготовка документів",
+        "alt": "Концептуальна композиція: медичні документи в прозорій м’ятній папці за фактурним склом.",
+        "mobileIntro": "Консультації лікарів та підготовка медичних документів для направлення."
+      },
+      "en": {
+        "question": "Preparing for EKOPFO?",
+        "accent": [
+          "EKOPFO?"
+        ],
+        "caption": "Consultations and document preparation",
+        "alt": "Conceptual composition: medical documents in a translucent mint folder behind textured glass.",
+        "mobileIntro": "Doctor consultations and medical document preparation for referral."
+      }
+    },
+    "sources": [
+      {
+        "title": "Матеріали Breoris Medical, надані клієнтом",
+        "url": "https://www.instagram.com/breoris_medical/",
+        "files": [
+          "IMG_7075.PNG",
+          "IMG_7076.PNG",
+          "IMG_7077.PNG",
+          "IMG_7078.PNG",
+          "IMG_7079.PNG",
+          "IMG_7080.PNG",
+          "IMG_7081.PNG",
+          "IMG_7082.PNG",
+          "IMG_7083.PNG"
+        ],
+        "scope": "clinic service, stages and price",
+        "checked": "2026-11-13"
+      },
+      {
+        "title": "МОЗ: які документи потрібні для оцінювання повсякденного функціонування",
+        "url": "https://moz.gov.ua/uk/yaki-dokumenti-potribni-dlya-ocinyuvannya-povsyakdennogo-funkcionuvannya",
+        "scope": "treating doctor prepares referral",
+        "checked": "2026-11-13"
+      },
+      {
+        "title": "МОЗ: маршрут пацієнта в системі оцінювання повсякденного функціонування",
+        "url": "https://moz.gov.ua/uk/news/marshrut-paciyenta-v-sistemi-ocinyuvannya-povsyakdennogo-funkcionuvannya",
+        "scope": "expert team makes assessment decision",
+        "checked": "2026-11-13"
+      }
+    ]
   }
 ]

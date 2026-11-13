@@ -1,5 +1,14 @@
 # Breoris Medical: project memory
 
+## Fourth campaign: preparation for EKOPFO — 13 November 2026
+
+- User requested a fourth live homepage slide, using clinic-supplied Instagram screenshots IMG_7075–7083.PNG as service information. Added “Підготовка до ЕКОПФО” with the poster heading “Готуєтесь до ЕКОПФО?” and the same desktop copy/photo layout, mobile adaptation, selectable UA/EN typography and 5-second advance as the existing series.
+- Generated one new conceptual editorial photograph with built-in image_gen: real-looking medical document folder, ivory paper and metal clip behind textured glass. No doctor likeness, real clinic interior or patient records are depicted. Original PNG and exact generation prompt are saved in the workspace release folder; the website uses a 1086×1448 JPEG. Palette: muted teal `#286a76`, white and mint accents, consistent with the existing blue/mint series. Do not replace earlier approved slide images.
+- Both new poster and “Дізнатися більше” links open the matching UA/EN direction page. Added detailed clinic-supplied consultation/examination/review/referral stages and the documented conditional UAH 5,000–8,000 preparation fee. Initial consultation and additional examinations/consultations are separately charged as described by the clinic. No consultation fee or physician assignment was invented. Standard booking receives the EKOPFO context; existing scheduling-service limitations remain unchanged.
+- General referral/decision wording checked against the Ministry of Health pages on required documents and the patient pathway on 13 November. The treating physician prepares the referral; the expert team makes the assessment decision. New pages link these official sources and distinguish clinic-supplied service fees from official process information.
+- Carousel count and End key derive from slide count (four); last/first navigation works. Added cancelled-touch recovery so an interrupted gesture can resume the existing autoplay schedule. Generator supports `--direction ekopfo-preparation` to create only the new two direction pages, preserving existing six. Sitemap appends the two new URLs.
+- Checked desktop 1440×900, mobile 390×660 UA and 320×568 EN: no horizontal overflow, content/action above the fixed bar, four dots and correct links/count. Mobile new direction page puts its title and booking action before the photograph. Static checks passed 75 public pages / 69 sitemap URLs; affected Python/JavaScript syntax and whitespace checks passed. Booking dialog context inspected; no real appointment submitted.
+
 ## Homepage responsive correction — 13 November 2026
 
 - User reported a broken mobile logo and a cropped-looking desktop opening. Optimized the genuine transparent PNG in place from 6563×3088 / 878,518 bytes to 656×308 / 104,916 bytes; no branding or image generation. New homepage logo URL includes a cache version, and the shared header constrains its aspect ratio and height.

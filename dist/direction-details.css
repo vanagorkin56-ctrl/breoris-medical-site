@@ -13,6 +13,13 @@
 .direction-detail-cta h2{font-size:clamp(30px,3vw,44px)}.direction-detail-cta p{font-size:18px;line-height:1.6;margin-top:12px}.direction-detail-cta .button{font-size:17px;min-height:58px;flex-shrink:0}
 .direction-related{padding:64px max(5vw,24px);background:#e4eef7}.direction-related h2{font-size:32px;margin-bottom:25px}.direction-related>div{display:grid;grid-template-columns:1fr 1fr;gap:20px}.direction-related a{display:flex;align-items:center;justify-content:space-between;gap:22px;border-top:1px solid #aec7d6;padding:22px 0;min-height:85px;font-size:22px;font-weight:500}.direction-related a>span:last-child{font-size:30px;color:#235b92}
 .direction-detail-footer{display:flex;gap:35px;align-items:center;justify-content:space-between;padding:32px max(5vw,24px);background:#fff;font-size:16px}.direction-detail-footer>span{font-size:13px;color:#56717c}
+.direction-detail[data-direction=ekopfo-preparation] .direction-detail-top{background:#d8eeea}
+.direction-detail[data-direction=ekopfo-preparation] .direction-detail-photo img{object-position:50% 48%}
+.direction-detail[data-direction=ekopfo-preparation] .direction-text-section a{color:#235b92;text-decoration:underline;text-underline-offset:4px}
+.direction-detail[data-direction=ekopfo-preparation] .button>span{display:flex;align-items:center}
+.direction-detail[data-direction=ekopfo-preparation] .button svg{width:22px;height:22px}
+.direction-detail[data-direction=ekopfo-preparation] .direction-related a>span:last-child{display:flex;flex:0 0 24px}
+.direction-detail[data-direction=ekopfo-preparation] .direction-related svg{width:24px;height:24px}
 @media(max-width:760px){
  .direction-detail-top{padding:20px 20px 32px}.direction-breadcrumbs{font-size:12px;margin-bottom:22px;gap:8px}
  .direction-detail-hero{display:flex;flex-direction:column;gap:25px}.direction-detail-photo{order:0;width:100%}.direction-detail-copy{order:1;width:100%}.direction-detail-photo img{height:310px;border-radius:18px;object-position:58% 32%}.direction-detail-photo figcaption{font-size:10px}
@@ -21,5 +28,8 @@
  .direction-detail-cta{padding:32px 20px;display:block}.direction-detail-cta h2{font-size:30px}.direction-detail-cta p{font-size:17px}.direction-detail-cta .button{margin-top:23px}
  .direction-related{padding:36px 20px}.direction-related h2{font-size:28px}.direction-related>div{grid-template-columns:1fr;gap:0}.direction-related a{font-size:20px}
  .direction-detail-footer{flex-wrap:wrap;padding:28px 20px 106px;gap:22px}.direction-detail-footer img{width:130px}.direction-detail-footer>span{width:100%}
+ .direction-detail[data-direction=ekopfo-preparation] .direction-detail-copy{order:0}
+ .direction-detail[data-direction=ekopfo-preparation] .direction-detail-photo{order:1}
+ .direction-detail[data-direction=ekopfo-preparation] .direction-detail-photo img{height:230px}
 }
 @media(prefers-reduced-motion:no-preference){.direction-detail-copy{animation:direction-copy-in 240ms cubic-bezier(.23,1,.32,1)}@keyframes direction-copy-in{from{opacity:.3;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}}

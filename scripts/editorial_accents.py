@@ -15,5 +15,6 @@ def attrs(uk,en,uk_terms,en_terms,shine=False):
 HERO_TERMS={
  'neurology-center':(['сучасної неврології'],['modern neurology']),
  'women-men-health':(['жінки та чоловіка'],['Women’s and men’s']),
- 'public-health-programmes':(['НСЗУ'],['NHSU'])
+ 'public-health-programmes':(['НСЗУ'],['NHSU']),
+ 'ekopfo-preparation':(['ЕКОПФО'],['EKOPFO'])
 }

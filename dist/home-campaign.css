@@ -15,6 +15,11 @@
   --campaign-body:#365b6e; --campaign-button:#235b92; --campaign-button-ink:#fff;
   --campaign-line:#9fbacd; --campaign-dot:#9bb9ce;
 }
+.direction-hero[data-theme=documents] {
+  --campaign-bg:#286a76; --campaign-ink:#fff; --campaign-accent:#c3efeb;
+  --campaign-body:#edf7f6; --campaign-button:#fff; --campaign-button-ink:#235b92;
+  --campaign-line:#a3d0d0; --campaign-dot:#9dc6c9;
+}
 .direction-hero .direction-slides{max-width:none;margin:0}
 .direction-hero .direction-slide{grid-template-columns:52% 48%;gap:0;align-items:stretch;min-height:clamp(500px,calc(100svh - 158px),780px)}
 .direction-hero .direction-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(48px,8svh,92px) clamp(28px,5.7vw,110px) 104px;min-width:0}
@@ -45,6 +50,9 @@
 .direction-slide[data-theme=prevention] .campaign-article>span{top:6.5cqw;bottom:auto;background:#163c5a36}
 .direction-slide[data-theme=screening] .direction-photo>img{object-position:50% 53%}
 .direction-slide[data-theme=screening] .direction-photo:after{background:linear-gradient(180deg,rgba(226,247,245,.76),rgba(226,247,245,.38) 30%,transparent 49%,rgba(12,47,73,.15) 69%,rgba(12,47,73,.88))}
+.direction-slide[data-theme=documents] .direction-photo>img{object-position:50% 48%}
+.direction-slide[data-theme=documents] .direction-photo:after{background:linear-gradient(180deg,#103e4970,transparent 48%,#103e49a8)}
+.direction-hero .direction-slide[data-theme=documents] .campaign-question{font-size:12cqw;max-width:12ch;line-height:1.07}
 .direction-hero .direction-photo .campaign-screening{color:#163c5a;font-weight:500;max-width:none}
 .campaign-screening-word{display:block;font-size:7.7cqw;letter-spacing:-.04em;line-height:1.1;margin-bottom:1.3cqw}
 .campaign-age{font-size:32cqw;letter-spacing:-.075em;line-height:1;display:block}
@@ -67,6 +75,7 @@
  .direction-slide[data-theme=prevention] .direction-photo>img{inset:0;height:100%;object-position:50% 38%}
  .direction-slide[data-theme=prevention] .campaign-question{font-size:clamp(34px,10.5cqw,46px)!important;line-height:1.04}
  .direction-slide[data-theme=prevention] .campaign-article>span{top:5.8cqw}
+ .direction-hero .direction-slide[data-theme=documents] .campaign-question{font-size:clamp(31px,9.8cqw,43px);max-width:12ch}
  .campaign-screening-word{font-size:6cqw}.campaign-age{font-size:24cqw}.campaign-age>span{font-size:16cqw}
  .direction-hero .direction-copy{order:1;justify-content:flex-start;text-align:left;padding:18px 22px 0;width:100%}
  .direction-hero .direction-copy h2{position:static;width:auto;height:auto;min-height:0;clip:auto;overflow:visible;white-space:normal;font-size:26px;line-height:1.16;letter-spacing:-.045em;margin:0 0 10px;max-width:18ch}
