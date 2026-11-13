@@ -10,6 +10,7 @@
   }
   function show(next) {
     index = (next + slides.length) % slides.length;
+    hero.dataset.theme = slides[index].dataset.theme || 'neurology';
     slides.forEach((slide,i) => slide.hidden = i !== index);
     dots.forEach((dot,i) => dot.setAttribute('aria-pressed',String(i===index)));
     hero.querySelector('.direction-count').textContent = `0${index+1} / 03`;

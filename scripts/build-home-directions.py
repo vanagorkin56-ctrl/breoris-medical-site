@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """Build approved November 2026 homepage campaign and direction pages."""
 from pathlib import Path
-import json,re,html
+import json,re,html,sys
 from editorial_accents import attrs,marked,HERO_TERMS
 from clinic_about import render as render_clinic_about
+from home_campaign import render_photo
 ROOT=Path(__file__).resolve().parents[1]; D=ROOT/'dist'
 rows=json.loads((ROOT/'data/home-directions.json').read_text())
 E=html.escape
@@ -12,9 +13,10 @@ translations['Пошук послуги або напряму']='Search services
 slides=[]
 for i,r in enumerate(rows):
  u=r['uk']; uk_terms,en_terms=HERO_TERMS[r['slug']]; focus=attrs(u['title'],r['en']['title'],uk_terms,en_terms,True); translations.update({v:r['en'][k] for k,v in u.items() if isinstance(v,str)})
- logo = '<div class="campaign-logo"><img src="assets/logo.png" alt="Breoris Medical"></div>' if r['slug'] != 'public-health-programmes' else ''
- slides.append(f'''<article class="direction-slide" id="direction-{i}" {'hidden' if i else ''} aria-labelledby="direction-title-{i}"><div class="direction-copy"><h2 id="direction-title-{i}" {focus}>{marked(u['title'],uk_terms)}</h2><p class="direction-summary">{E(u['intro'])}</p><div class="direction-actions"><button type="button" class="button direction-book" data-book>Записатися <span aria-hidden="true">↗</span></button><a class="direction-more" data-direction-link="{r['slug']}" href="ua/directions/{r['slug']}/">Дізнатися більше</a></div></div><figure class="direction-photo"><img src="{r['image']}" alt="{E(u['alt'])}" width="1536" height="1024" {'fetchpriority="high"' if i==0 else ''}>{logo}<figcaption><span class="campaign-kicker">BREORIS MEDICAL</span><strong {focus}>{marked(u['title'],uk_terms)}</strong><span class="campaign-caption">{E(u['caption'])}</span><small>BREORIS MEDICAL / ДНІПРО</small></figcaption></figure></article>''')
-hero='''<!-- home-directions:start --><section class="direction-hero" id="top" aria-label="Напрями Breoris Medical" aria-roledescription="carousel"><h1 class="visually-hidden">Breoris Medical — медичний центр у Дніпрі</h1><div class="direction-slides">'''+''.join(slides)+'''</div><div class="direction-controls"><button type="button" data-direction-prev aria-label="Попередній слайд">←</button><div class="direction-dots">'''+''.join(f'<button type="button" data-direction-index="{i}" aria-label="{E(r["uk"]["title"])}" aria-controls="direction-{i}" aria-pressed="{str(i==0).lower()}"><span></span></button>' for i,r in enumerate(rows))+'''</div><span class="direction-count" aria-hidden="true">01 / 03</span><button type="button" data-direction-next aria-label="Наступний слайд">→</button></div></section><!-- home-directions:end -->'''
+ campaign=r['campaign']; photo=render_photo(r,i,translations)
+ slides.append(f'''<article class="direction-slide" id="direction-{i}" data-theme="{campaign['theme']}" {'hidden' if i else ''} aria-labelledby="direction-title-{i}"><div class="direction-copy"><h2 id="direction-title-{i}" {focus}>{marked(u['title'],uk_terms)}</h2><p class="direction-summary campaign-full-summary">{E(u['intro'])}</p><p class="direction-summary campaign-mobile-summary">{E(campaign['uk']['mobileIntro'])}</p><div class="direction-actions"><button type="button" class="button direction-book" data-book>Записатися <span aria-hidden="true">↗</span></button><a class="direction-more" data-direction-link="{r['slug']}" href="ua/directions/{r['slug']}/">Дізнатися більше</a></div></div>{photo}</article>''')
+
+hero='''<!-- home-directions:start --><section class="direction-hero" data-theme="neurology" id="top" aria-label="Напрями Breoris Medical" aria-roledescription="carousel"><h1 class="visually-hidden">Breoris Medical — медичний центр у Дніпрі</h1><div class="direction-slides">'''+''.join(slides)+'''</div><div class="direction-controls"><button type="button" data-direction-prev aria-label="Попередній слайд">←</button><div class="direction-dots">'''+''.join(f'<button type="button" data-direction-index="{i}" aria-label="{E(r["uk"]["title"])}" aria-controls="direction-{i}" aria-pressed="{str(i==0).lower()}"><span></span></button>' for i,r in enumerate(rows))+'''</div><span class="direction-count" aria-hidden="true">01 / 03</span><button type="button" data-direction-next aria-label="Наступний слайд">→</button></div></section><!-- home-directions:end -->'''
 hero+=render_clinic_about()
 s=(D/'index.html').read_text()
 if '<!-- home-directions:start -->' in s:s=re.sub(r'<!-- home-directions:start -->.*?<!-- home-about:end -->',lambda _:hero,s,flags=re.S)
@@ -30,6 +32,9 @@ s=re.sub(r'home-directions.css\?[^" ]+', 'home-directions.css?v=20261110-about4'
 s=re.sub(r'i18n.js\?[^" ]+', 'i18n.js?v=20261110-about4',s)
 if 'clinic-about.css' not in s:s=s.replace('</head>','<link rel="stylesheet" href="clinic-about.css?v=20261110-journal1"></head>')
 if 'editorial-accents.js' not in s:s=s.replace('</body>','<script src="editorial-accents.js?v=20261110-1" defer></script></body>')
+if 'home-campaign.css' not in s:s=s.replace('</head>','<link rel="stylesheet" href="home-campaign.css?v=20261113-full1"></head>')
+s=re.sub(r'home-directions.js\?[^" ]+', 'home-directions.js?v=20261113-colours1',s)
+s=re.sub(r'i18n.js\?[^" ]+', 'i18n.js?v=20261113-campaign1',s)
 (D/'index.html').write_text(s)
 i=(D/'i18n.js').read_text();i=re.sub(r'  // home-directions:translations\n.*?\n(?=  const original)', '',i,flags=re.S)
 i=i.replace('  const original =', '  // home-directions:translations\n  Object.assign(dictionaries.en, '+json.dumps(translations,ensure_ascii=False)+');\n  const original =')
@@ -38,5 +43,5 @@ from direction_pages import build as build_direction_pages
 from clinic_chrome import enhance,hide_home_sections
 home=(D/'index.html').read_text()
 (D/'index.html').write_text(enhance(hide_home_sections(home)))
-build_direction_pages()
-print('Built homepage and 6 direction pages')
+if '--home-only' not in sys.argv:build_direction_pages()
+print('Built homepage campaign' if '--home-only' in sys.argv else 'Built homepage and 6 direction pages')

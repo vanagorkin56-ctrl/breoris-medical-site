@@ -28,6 +28,29 @@
         "Our multidisciplinary approach brings together neurologists, a physical and rehabilitation medicine physician and other specialists.",
         "From diagnosis to an individual treatment and rehabilitation plan, we focus on each patient’s quality of life."
       ]
+    },
+    "campaign": {
+      "theme": "neurology",
+      "image": "assets/campaigns/abstract-neurology-nov13.jpg",
+      "article": "nevrolohiia",
+      "uk": {
+        "question": "Болить голова?",
+        "accent": [
+          "голова?"
+        ],
+        "caption": "Коли звернутися до невролога",
+        "alt": "Концептуальний профіль жінки за матовим склом у блакитному світлі.",
+        "mobileIntro": "Діагностика, лікування та реабілітація. Керівниця — Наталія Томах."
+      },
+      "en": {
+        "question": "Headache?",
+        "accent": [
+          "Headache?"
+        ],
+        "caption": "When to see a neurologist",
+        "alt": "Conceptual profile of a woman behind frosted glass in blue light.",
+        "mobileIntro": "Diagnosis, treatment and rehabilitation led by Nataliia Tomakh."
+      }
     }
   },
   {
@@ -54,6 +77,29 @@
         "Gynaecologists, urologists, endocrinologists, cardiologists, physicians and other specialists work together to address symptoms and investigate their causes.",
         "Care ranges from preventive examinations and assessment of age-related changes to treatment and individual health programmes."
       ]
+    },
+    "campaign": {
+      "theme": "prevention",
+      "image": "assets/campaigns/abstract-prevention-nov13.jpg",
+      "article": "profilaktychni-obstezhennia",
+      "uk": {
+        "question": "Чи потрібен огляд?",
+        "accent": [
+          "огляд?"
+        ],
+        "caption": "Профілактика для жінок і чоловіків",
+        "alt": "Концептуальні постаті жінки та чоловіка за фактурним склом.",
+        "mobileIntro": "Консультації спеціалістів, профілактичні обстеження й лікування."
+      },
+      "en": {
+        "question": "Time for a check-up?",
+        "accent": [
+          "check-up?"
+        ],
+        "caption": "Preventive care for women and men",
+        "alt": "Conceptual figures of a woman and a man behind textured glass.",
+        "mobileIntro": "Specialist consultations, preventive examinations and treatment."
+      }
     }
   },
   {
@@ -84,6 +130,25 @@
         "Before booking, our administrator will explain available services, required documents and referral requirements. Services outside programme coverage may be chargeable.",
         "We combine public funding opportunities with modern diagnostics, professional care and the comfort of a private clinic."
       ]
+    },
+    "campaign": {
+      "theme": "screening",
+      "image": "assets/campaigns/abstract-screening-nov13.jpg",
+      "article": "skryninh-40-plus",
+      "uk": {
+        "question": "Скринінг 40+",
+        "accent": [],
+        "caption": "Як обрати заклад і записатися",
+        "alt": "Концептуальна оптична лінза збільшує деталі листка на світлому м’ятному тлі.",
+        "mobileIntro": "Декларація з терапевтом, первинна допомога та скринінг 40+."
+      },
+      "en": {
+        "question": "Screening 40+",
+        "accent": [],
+        "caption": "How to choose a clinic and book",
+        "alt": "A conceptual optical lens magnifies a leaf on a pale mint background.",
+        "mobileIntro": "Register with a physician, primary care and screening for people aged 40+."
+      }
     }
   }
 ]

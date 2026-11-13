@@ -1,5 +1,15 @@
 # Breoris Medical: project memory
 
+## Approved homepage campaign — 13 November 2026
+
+- User approved installation of the revised campaign on the live site after reviewing version 03. Photographs fill the entire right panel with no surrounding mint frame, corners or inset card. Desktop service copy is positioned lower, with a top inset of roughly 100–145px.
+- Reuse the approved abstract photographic series: anonymous profile behind frosted glass, woman and man behind textured glass, and an optical lens over a leaf. These are conceptual campaign images; do not describe them as clinic patients, rooms or physicians. Published JPEG copies preserve the approved photographs while reducing transfer size.
+- Each slide has its own left-side palette: neurology blue `#235b92`, women's/men's health mint `#d8eeea`, NHSU pale blue `#dcebf5`. Controls and text follow the active theme. Poster headlines remain selectable, bilingual HTML text: “Болить голова?”, “Чи потрібен огляд?”, “Скринінг 40+”. Poster links open the related existing Ukrainian articles.
+- Retain the three service directions, their factual descriptions, direction-page links, normal booking triggers and 5-second automatic advance. Do not restore the repeated clinic/location eyebrow or over-photo logo.
+- Mobile uses a full-width near-square photograph followed by a compact service heading, short description and actions. At 320px the full description and booking action are above the fixed booking bar; slide controls can require a short scroll. No text truncation or horizontal overflow.
+- Source: `data/home-directions.json` campaign fields and `scripts/home_campaign.py`; generator supports `--home-only` to preserve existing direction pages. Layout is in `dist/home-campaign.css`.
+- Local verification: 72 public pages passed link/asset, anchor, H1 and canonical checks; affected JavaScript and Python syntax passed. Visually checked all three themes at desktop and mobile, UA/EN switching, 320/390px overflow and photo placement. Standard booking dialog opens locally; the static local server does not provide the clinic API. No appointment submitted. Live verification is recorded in the release note.
+
 Updated 26 October 2026. This is the current decision record; older reports are historical evidence.
 
 ## Purpose and audience
