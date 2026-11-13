@@ -4,6 +4,8 @@ import clinic_chrome
 import ui_refinements
 import json
 import re
+import argparse
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from string import Template
 
@@ -52,8 +54,9 @@ def facts(d):
     if 'experienceYears' in d:
         rows.append(('Досвід роботи', years(d['experienceYears'])))
     rows.append(('Спеціальність', ', '.join(d['specialties']) + ('. ' + d['category'] if d.get('category') else '')))
-    rows.append(('Спеціалізація', ', '.join(d['specialties'])))
-    if 'experienceYears' in d:
+    if not d.get('compactFacts'):
+        rows.append(('Спеціалізація', ', '.join(d['specialties'])))
+    if 'experienceYears' in d and not d.get('compactFacts'):
         rows.append(('Стаж', years(d['experienceYears'])))
     for key, label in [('education', 'Освіта'), ('degree', 'Науковий ступінь'), ('patientGroups', 'Приймає')]:
         value = d.get(key)
@@ -82,7 +85,9 @@ def sections(d, root):
             price = service.get('price')
             text = ('від ' if service.get('qualifier') == 'from' else '') + f'{price:,} грн'.replace(',', ' ') if price is not None else ''
             items.append(f'<li><span>{e(service["name"])}</span><strong>{e(text)}</strong></li>')
-        result += '<section><h2>Послуги та вартість</h2><ul class="physician-prices">' + ''.join(items) + '</ul><p class="physician-source">За даними DOC.UA від 06.10.2026. Вартість візиту підтвердить адміністратор.</p></section>'
+        heading = d.get('servicesHeading', 'Послуги та вартість')
+        note = d.get('servicesSourceNote', 'За даними DOC.UA від 06.10.2026. Вартість візиту підтвердить адміністратор.')
+        result += '<section><h2>' + e(heading) + '</h2><ul class="physician-prices">' + ''.join(items) + '</ul><p class="physician-source">' + e(note) + '</p></section>'
     return result
 
 def forms(page_doctor):
@@ -95,7 +100,9 @@ def shell(root, title, description, canonical, image, content, schema, page_doct
     structured = json.dumps(schema, ensure_ascii=False).replace('<', '\\u003c')
     return clinic_chrome.enhance(ui_refinements.stylesheet(head,root) + f'<body class="doctor-page" data-page-doctor="{e(page_doctor)}"><a class="skip" href="#main">Перейти до змісту</a>' + shared(HEADER, root) + '<main id="main" class="doctor-main">' + content + '</main>' + shared(FOOTER, root) + forms(page_doctor) + '<div class="mobile-booking"><a href="tel:+380975323664">+380 97 532 36 64</a><button class="button primary" type="button" data-book>Записатися</button></div>' + f'<script type="application/ld+json">{structured}</script><script src="{root}health24-booking.js?v=3" defer></script><script src="{root}doctor-pages-config.js" defer></script><script src="{root}doctor-pages.js" defer></script></body></html>\n', root)
 
-def build():
+def build(only_doctor=None):
+    if only_doctor and only_doctor not in {d['id'] for d in DOCTORS}:
+        raise ValueError('Unknown doctor: ' + only_doctor)
     # Consultation minima use the same source as individual physician pages.
     specialty_services = {'Терапевт': 'Терапія', 'Невролог': 'Неврологія', 'Кардіолог': 'Кардіологія', 'Кардіоревматолог': 'Ревматологія', 'Ендокринолог': 'Ендокринологія', 'Гастроентеролог': 'Гастроентерологія', 'Ортопед-травматолог': 'Ортопедія та травматологія', 'Акушер-гінеколог': 'Гінекологія', 'Дерматолог': 'Дерматологія'}
     consultation_minima = {}
@@ -121,11 +128,13 @@ def build():
         urls.append(canonical)
         routes[d['id']] = relative
         specialty = ', '.join(d['specialties'])
-        experience = f' з досвідом {years(d["experienceYears"])}' if 'experienceYears' in d else ''
+        experience = f'. Досвід роботи — {years(d["experienceYears"])}' if 'experienceYears' in d else ''
         title = f'{d["name"]} — {specialty}{experience}'
         description = f'{d["name"]} — {specialty.lower()}{experience}. BREORIS MEDICAL, Дніпро. Запишіться онлайн на консультацію або зателефонуйте до клініки.'
         badge = f'<p class="physician-experience">Досвід роботи: {years(d["experienceYears"])}</p>' if 'experienceYears' in d else ''
-        content = template('doctor.html', root=root, name=e(d['name']), id=e(d['id']), photo=e(root + d['image']['src']), photo_width=d['image']['width'], photo_height=d['image']['height'], specialties=e(specialty), experience_badge=badge, facts=facts(d), sections=sections(d, root), rating=rating(d), source_url=e(d['sourceUrl']))
+        if d.get('showPatientGroupsInSummary'):
+            badge += '<p class="physician-experience">' + e(' · '.join(d['patientGroups'])) + '</p>'
+        content = template('doctor.html', root=root, name=e(d['name']), id=e(d['id']), photo=e(root + d['image']['src']), photo_width=d['image']['width'], photo_height=d['image']['height'], specialties=e(specialty), experience_badge=badge, facts=facts(d), sections=sections(d, root), rating=rating(d), source_url=e(d['sourceUrl']), source_title=e(d.get('sourceTitle', 'Профіль лікаря')), source_label=e(d.get('sourceLabel', 'DOC.UA')), source_date=e(d.get('sourceDate', '06.10.2026')))
         if d['id'] == 'tomakh':
             content = content.replace('За даними DOC.UA від 06.10.2026. Вартість візиту підтвердить адміністратор.', 'Вартість консультації уточнено 06.10.2026. Вартість інших послуг підтвердить адміністратор.')
         consultation = next((service for service in d.get('services', []) if service['name'] in ('Консультація', 'Консультативний прийом') and service.get('price') is not None), None)
@@ -145,10 +154,13 @@ def build():
             panels, flags=re.S)
         content = content[:start] + panels + content[end:]
         person = {'@type': 'Person', '@id': canonical + '#doctor', 'name': d['name'], 'url': canonical, 'image': ORIGIN + '/' + d['image']['src'], 'jobTitle': specialty, 'worksFor': {'@id': clinic['@id']}, 'sameAs': d['sourceUrl']}
+        if d.get('sourceIsDoctorProfile') is False:
+            person.pop('sameAs')
         schema = {'@context': 'https://schema.org', '@graph': [person, clinic, {'@type': 'BreadcrumbList', 'itemListElement': [{'@type': 'ListItem', 'position': 1, 'name': 'Головна', 'item': ORIGIN + '/'}, {'@type': 'ListItem', 'position': 2, 'name': 'Лікарі', 'item': ORIGIN + '/ua/doctors/'}, {'@type': 'ListItem', 'position': 3, 'name': d['name'], 'item': canonical}]}]}
         output = DIST / relative
         output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(shell(root, title, description, canonical, person['image'], content, schema, d['id']), encoding='utf-8')
+        if not only_doctor or d['id'] == only_doctor:
+            output.write_text(shell(root, title, description, canonical, person['image'], content, schema, d['id']), encoding='utf-8')
         exp = f'<p>Стаж: {years(d["experienceYears"])}</p>' if 'experienceYears' in d else ''
         cards.append(f'<article class="physician-directory-card"><a href="{e(d["slug"])}/index.html"><img src="../../{e(d["image"]["src"])}" width="{d["image"]["width"]}" height="{d["image"]["height"]}" alt="Фотографія {e(d["name"])}" title="{e(d["name"])}" loading="lazy"><h2>{e(d["name"])}</h2></a><div class="card-details"><p>{e(specialty)}</p>{exp}</div><button class="button primary" type="button" data-book data-physician="{e(d["id"])}">Записатися</button></article>')
     content = template('doctors.html', root='../../', cards=''.join(cards))
@@ -158,8 +170,14 @@ def build():
     services_file = ROOT / 'data/services.json'
     if services_file.exists():
         urls += [ORIGIN + '/ua/services/'] + [ORIGIN + '/ua/services/' + s['slug'] + '/' for s in json.loads(services_file.read_text())]
+    # Preserve existing article and direction URLs during a focused doctor update.
+    sitemap = DIST / 'sitemap.xml'
+    existing_urls = [n.text for n in ET.parse(sitemap).findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}loc')] if sitemap.exists() else []
+    urls = list(dict.fromkeys(existing_urls + urls))
     (DIST / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'  <url><loc>{e(url)}</loc></url>\n' for url in urls) + '</urlset>\n', encoding='utf-8')
-    print(f'Generated {len(DOCTORS)} profiles, directory, routes and sitemap.')
+    print(f'Generated {only_doctor or str(len(DOCTORS)) + " profiles"}, directory, routes and sitemap.')
 
 if __name__ == '__main__':
-    build()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--doctor', help='Write only this profile while updating shared directory and routes')
+    build(parser.parse_args().doctor)

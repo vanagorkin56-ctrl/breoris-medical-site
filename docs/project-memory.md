@@ -1,5 +1,14 @@
 # Breoris Medical: project memory
 
+## Added physician — 13 November 2026
+
+- Added **Подгорна Дар’я Андріївна** (use the clinic's supplied spelling, not “Підгорна”), ID `podhorna`, profile `/ua/doctors/podhorna-daria-andriivna/`.
+- Clinic-supplied screenshots IMG_9729.PNG and IMG_7048–7050.PNG establish ultrasound diagnostics, 3 years' experience, adults and children aged 2+, education, continuing education and ten listed ultrasound studies. No unsupported fees or qualifications were added.
+- User explicitly requested cropping the supplied screenshot without generation. Published portrait is an exact 320×420 pixel crop at x=195, y=145; no generated face or background. Instagram interface and viewer thumbnails are excluded.
+- Added to homepage roster, ultrasound filter, doctor directory, route map and sitemap; UA/EN homepage name translations included. Existing physician profiles are preserved by the new `build-doctors.py --doctor podhorna` option. Sitemap updates preserve article and direction URLs.
+- Health24's public directory did not include this physician on 13 November. The existing administrator-confirmed callback directory automatically includes her through the shared roster. Do not invent a Health24 ID or available hours. Clinic staff must add request windows through the existing administration flow.
+- Local verification: 73 public pages and 67 unique sitemap URLs passed link/assets, anchors, H1 and canonical checks; new portrait, facts and all ten studies inspected; ultrasound filter returns five specialists including her. No horizontal overflow at 390px. Five existing callback tests and affected JavaScript/Python syntax checks passed. No real appointment submitted.
+
 ## Approved homepage campaign — 13 November 2026
 
 - User approved installation of the revised campaign on the live site after reviewing version 03. Photographs fill the entire right panel with no surrounding mint frame, corners or inset card. Desktop service copy is positioned lower, with a top inset of roughly 100–145px.

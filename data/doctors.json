@@ -10,7 +10,7 @@
   "sourceClinicUrl": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
   "referenceUrl": "https://helyos.com.ua/ua/team-member/odnoromanenko-irina-anatolevna",
   "retrievedAt": "2026-10-06",
-  "collectionStatus": "All ten profiles reviewed via DOC.ua, user videos or screenshots. Only visible professional facts included; unshown fields remain omitted.",
+  "collectionStatus": "Professional profiles use previously reviewed sources and clinic-supplied materials. Unshown fields remain omitted.",
   "doctors": [
     {
       "id": "mishchenko",
@@ -803,6 +803,100 @@
       "sourceNotes": [
         "На картці відділення у відео 02:12 є напис «Діти з 10 років», а у профілі — «Дорослі». Вікові обмеження прийому потрібно підтвердити у клініки."
       ]
+    },
+    {
+      "id": "podhorna",
+      "slug": "podhorna-daria-andriivna",
+      "name": "Подгорна Дар’я Андріївна",
+      "specialties": [
+        "Лікар ультразвукової діагностики"
+      ],
+      "sourceUrl": "https://www.instagram.com/breoris_medical/",
+      "sourceAccess": "clinic-supplied-screenshots",
+      "sourceIsDoctorProfile": false,
+      "sourceTitle": "Інформація про лікаря",
+      "sourceLabel": "Матеріали Breoris Medical",
+      "sourceDate": "13.11.2026",
+      "retrievedAt": "2026-11-13",
+      "image": {
+        "src": "assets/doctors/podhorna.jpg",
+        "originalAsset": "IMG_9729.PNG",
+        "provenance": "Портрет із наданого користувачем матеріалу клініки; за явним проханням користувача виконано лише обрізання без генерації.",
+        "crop": {
+          "x": 195,
+          "y": 145,
+          "width": 320,
+          "height": 420
+        },
+        "width": 320,
+        "height": 420
+      },
+      "experienceYears": 3,
+      "patientGroups": [
+        "Дорослі",
+        "Діти віком від 2 років"
+      ],
+      "education": [
+        "ДГМУ — спеціалізація «Внутрішні хвороби»",
+        "Вінницький національний медичний університет ім. М. І. Пирогова — спеціалізація з ультразвукової діагностики"
+      ],
+      "courses": [
+        "Регулярна участь у майстер-класах, онлайн- та офлайн-науково-практичних конференціях"
+      ],
+      "servicesHeading": "Ультразвукові дослідження",
+      "services": [
+        {
+          "name": "УЗД органів черевної порожнини"
+        },
+        {
+          "name": "УЗД щитоподібної та прищитоподібних залоз"
+        },
+        {
+          "name": "Дуплексне / доплерографічне дослідження екстракраніальних судин"
+        },
+        {
+          "name": "Еластографія печінки"
+        },
+        {
+          "name": "Урологічні дослідження: нирки, сечовий міхур та сечовидільна система у чоловіків і жінок"
+        },
+        {
+          "name": "УЗД передміхурової залози трансабдомінально та трансректально"
+        },
+        {
+          "name": "УЗД молочних залоз"
+        },
+        {
+          "name": "УЗД м’яких тканин"
+        },
+        {
+          "name": "УЗД лімфатичних вузлів"
+        },
+        {
+          "name": "УЗД органів калитки з доплерографією"
+        }
+      ],
+      "servicesSourceNote": "Вартість конкретного дослідження уточнюйте в адміністратора перед записом.",
+      "fieldSources": {
+        "name": "IMG_9729.PNG — матеріал клініки українською",
+        "patientGroups": "IMG_9729.PNG",
+        "experienceYears": "IMG_7048.PNG — профіль DOC.UA",
+        "education": "IMG_7049.PNG — профіль DOC.UA",
+        "courses": "IMG_7050.PNG — профіль DOC.UA",
+        "services": "IMG_9729.PNG та IMG_7050.PNG"
+      },
+      "screenshotEvidence": {
+        "files": [
+          "IMG_9729.PNG",
+          "IMG_7048.PNG",
+          "IMG_7049.PNG",
+          "IMG_7050.PNG"
+        ],
+        "reviewedAt": "2026-11-13"
+      },
+      "compactFacts": true,
+      "showPatientGroupsInSummary": true
     }
-  ]
+  ],
+  "updatedAt": "2026-11-13"
 }
