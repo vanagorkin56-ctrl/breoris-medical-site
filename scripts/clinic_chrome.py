@@ -2,7 +2,7 @@
 import re
 from pathlib import Path
 
-VERSION = '20261110-client-2'
+VERSION = '20261113-responsive1'
 ICONS = {
  'phone':'<path d="M5 3h4l2 5-3 2a13 13 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 5a2 2 0 0 1 2-2Z"/>',
  'pin':'<path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
@@ -20,6 +20,7 @@ def strip(lang='uk'):
 
 def enhance(page,root='',lang='uk'):
  if '<header class="header"' not in page:return page
+ page=re.sub(r'(src="[^\"]*assets/logo.png)(?:\?[^\"]*)?"',r'\1?v=20261113-web"',page)
  page=re.sub(r'<!-- clinic-strip:start -->.*?<!-- clinic-strip:end -->', '', page, flags=re.S)
  page=page.replace('<header class="header"',strip(lang)+'<header class="header"',1)
  page=re.sub(r'<link[^>]+href="[^\"]*clinic-chrome.css[^\"]*"[^>]*>','',page)

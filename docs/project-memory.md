@@ -1,5 +1,13 @@
 # Breoris Medical: project memory
 
+## Homepage responsive correction — 13 November 2026
+
+- User reported a broken mobile logo and a cropped-looking desktop opening. Optimized the genuine transparent PNG in place from 6563×3088 / 878,518 bytes to 656×308 / 104,916 bytes; no branding or image generation. New homepage logo URL includes a cache version, and the shared header constrains its aspect ratio and height.
+- Desktop campaign now uses available viewport height with natural content growth; copy size and spacing adapt to window height. Right-side photographs still fill the full panel. Removed the second slide's extra image zoom and moved poster link arrows to the upper right, clear of the contact widget.
+- Mobile image height adapts to viewport height, with a compact 72px header (64px on the narrowest phones). Copy is never clipped. Mobile booking remains in the opaque fixed bottom bar; the duplicate inline booking button is hidden, leaving “Дізнатися більше” under each description. SVG arrows replace emoji-prone diagonal arrow characters in the campaign. Per-slide palettes, genuine branding and 5-second autoplay are preserved.
+- Generator changes preserve unrelated translation blocks, including the newly added Podhorna physician. Source and generated homepage were updated together; unrelated direction pages were not regenerated.
+- Verified all three themes at 1280×720, plus the full-panel layout at 1440×900. At 390×660 and 320×568 the logo loads and supporting copy/action remains above the fixed bar; slide controls can require a short scroll at the smallest size. UA/EN narrow-phone checks, menu positioning, phone disclosure/Escape and horizontal overflow checks passed. 73 public pages / 67 sitemap URLs passed the static checker. No physical iPhone or appointment submission was used for QA.
+
 ## Added physician — 13 November 2026
 
 - Added **Подгорна Дар’я Андріївна** (use the clinic's supplied spelling, not “Підгорна”), ID `podhorna`, profile `/ua/doctors/podhorna-daria-andriivna/`.
@@ -7,6 +15,7 @@
 - User explicitly requested cropping the supplied screenshot without generation. Published portrait is an exact 320×420 pixel crop at x=195, y=145; no generated face or background. Instagram interface and viewer thumbnails are excluded.
 - Added to homepage roster, ultrasound filter, doctor directory, route map and sitemap; UA/EN homepage name translations included. Existing physician profiles are preserved by the new `build-doctors.py --doctor podhorna` option. Sitemap updates preserve article and direction URLs.
 - Health24's public directory did not include this physician on 13 November. The existing administrator-confirmed callback directory automatically includes her through the shared roster. Do not invent a Health24 ID or available hours. Clinic staff must add request windows through the existing administration flow.
+- Live verification after that publication found HTTP 503 `service_unavailable` from the callback availability endpoint for both `podhorna` and the existing `pavlova`. Treat this as an unresolved shared scheduling-service dependency, not an empty calendar or verified online booking. It was not altered by the responsive homepage correction.
 - Local verification: 73 public pages and 67 unique sitemap URLs passed link/assets, anchors, H1 and canonical checks; new portrait, facts and all ten studies inspected; ultrasound filter returns five specialists including her. No horizontal overflow at 390px. Five existing callback tests and affected JavaScript/Python syntax checks passed. No real appointment submitted.
 
 ## Approved homepage campaign — 13 November 2026

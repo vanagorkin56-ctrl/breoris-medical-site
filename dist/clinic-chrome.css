@@ -6,6 +6,8 @@
 .clinic-strip a:hover{text-decoration:underline;text-underline-offset:4px}.strip-phone{font-weight:600;white-space:nowrap}.strip-hours{white-space:nowrap}.strip-social{padding:6px}
 body .header nav{font-size:18px;font-weight:500;gap:24px}body .header #navigation a{min-height:48px;display:flex;align-items:center}
 body .header-actions{gap:18px}body .header{gap:24px}
+body .header .brand{display:block;line-height:0}
+body .header .brand img{display:block;width:100%;max-height:72px;height:auto;aspect-ratio:656/308;object-fit:contain}
 .header-call{position:relative;flex-shrink:0}
 .header-call-toggle{display:grid;place-items:center;width:50px;height:50px;border:1px solid #c0d4df;border-radius:50%;background:#f1f7fa;color:#235b92;transition:background-color 160ms cubic-bezier(.23,1,.32,1),transform 120ms cubic-bezier(.23,1,.32,1)}
 .header-call-toggle svg{width:23px;height:23px}.header-call-toggle:active{transform:scale(.96)}.header-call-toggle[aria-expanded=true]{background:#235b92;color:white}
@@ -27,13 +29,14 @@ body:has(.direction-hero) .footer{background:#e0ecef}
 @media(max-width:1100px){.strip-address{display:none!important}.clinic-strip-inner{gap:14px}.clinic-strip .strip-social{display:none}}
 @media(max-width:760px){
  .clinic-strip{padding:5px 16px}.clinic-strip-inner{min-height:30px;font-size:12px;gap:10px;justify-content:center}.clinic-strip a,.strip-hours{min-height:30px;gap:6px}.clinic-strip svg{width:16px;height:16px}.clinic-strip .strip-hours>span{font-size:11px;max-width:145px;white-space:normal;line-height:1.4}.clinic-strip .strip-hours svg{display:none}
- body .header{height:80px;padding:10px 16px;gap:12px}body .header .brand{width:120px}body .header .brand img{height:auto}
- body .header-actions{gap:8px}body .header-actions>.button{display:none}body .header-call-toggle{width:44px;height:44px}body .header nav{top:80px;font-size:20px}
+ body .header{height:72px;padding:8px 16px;gap:12px}body .header .brand{width:120px;flex:0 0 120px}body .header .brand img{height:auto;max-height:56px}
+ body .header-actions{gap:8px}body .header-actions>.button{display:none}body .header-call-toggle{width:44px;height:44px}body .header nav{top:72px;font-size:20px}
  body .header .language-select{min-height:44px;width:48px;padding:8px 5px;font-size:13px}
  .header-call-panel{right:-52px;top:calc(100% + 14px)}
  body .header .menu-toggle{width:44px;min-width:44px;height:44px;padding:10px;border:1px solid #cfdee5;border-radius:50%}
+ body .mobile-booking{background:#fff;border-top:1px solid #dce4e7}
 }
-@media(max-width:360px){body .header{padding-inline:12px;gap:6px}body .header .brand{width:100px}body .header-actions{gap:4px}.clinic-strip{padding-inline:10px}.clinic-strip-inner{font-size:11px}.header-call-number{font-size:23px}}
+@media(max-width:360px){body .header{height:64px;padding-inline:12px;gap:6px}body .header nav{top:64px}body .header .brand{width:100px;flex-basis:100px}body .header-actions{gap:4px}.clinic-strip{padding-inline:10px}.clinic-strip-inner{font-size:11px}.header-call-number{font-size:23px}}
 @media(prefers-reduced-motion:reduce){.header-call-panel{animation:none}.header-call-toggle{transition:none}}
 
 /* Selected words lead the eye; paragraphs keep a stable, readable colour. */
