@@ -3,13 +3,13 @@ const {createHash,createHmac,randomUUID,timingSafeEqual}=require('node:crypto');
 const {configuration,createClient}=require('./health24');
 const {validDate}=require('./health24-schedule');
 const profiles=require('../data/doctors.json').doctors;
+const {canonical,specialtyMismatch}=require('./doctor-specialties');
 let client,key,catalogCache,catalogAt=0;
 const attempts=new Map(),limits=new Map();
 const mapped={595920:'tomakh',595938:'sokrut',596094:'sokrut',596096:'sushko',596803:'sushko',596308:'orlov',596330:'hrytsai',658345:'mishchenko',663338:'pokaichuk'};
 function consultationFrom(siteId,specialty){
  const profile=profiles.find(row=>row.id===siteId);
- const canonical=value=>value==='Невропатолог'?'Невролог':value;
- if(!profile?.specialties.some(value=>canonical(value)===canonical(specialty)))return null;
+ if(canonical(specialty)==='Лікар ультразвукової діагностики'||!profile?.specialties.some(value=>canonical(value)===canonical(specialty)))return null;
  const prices=profile.services.filter(row=>['Консультація','Консультативний прийом'].includes(row.name)&&Number.isFinite(row.price)&&row.price>0).map(row=>row.price);
  return prices.length?Math.min(...prices):null;
 }
@@ -26,7 +26,8 @@ async function catalog(fresh=false){
  const {client,config}=context();if(!fresh&&catalogCache&&Date.now()-catalogAt<60000)return catalogCache;
  const rows=await client.employees();
  const doctors=rows.filter(row=>row.fired===false&&!row.resource_office&&['DOCTOR','SPECIALIST'].includes(row.employee_type?.value)&&Number.isSafeInteger(row.id)&&row.id>0)
-  .map(row=>({id:row.id,name:safeText(row.name),specialty:safeText(row.position?.name_uk||row.position?.name),type:row.employee_type.value,siteId:config.environment==='production'?mapped[row.id]||null:null})).filter(row=>row.name);
+  .map(row=>({id:row.id,name:safeText(row.name),specialty:canonical(safeText(row.position?.name_uk||row.position?.name)),type:row.employee_type.value,siteId:config.environment==='production'?mapped[row.id]||null:null})).filter(row=>row.name);
+ for(const doctor of doctors)doctor.specialtyMismatch=specialtyMismatch(doctor.siteId,doctor.specialty);
  for(const doctor of doctors)doctor.consultationFrom=consultationFrom(doctor.siteId,doctor.specialty);
  catalogCache={environment:config.environment,legalEntityId:Number(config.entity),doctors};catalogAt=Date.now();return catalogCache;
 }
@@ -71,7 +72,7 @@ function isBookable(slot){
 async function availability(employeeId,start=today(),inspect=false){
  const id=Number(employeeId),current=today();
  if(!Number.isSafeInteger(id)||id<=0||!validDate(start)||start<current||start>addDays(current,90))throw new BookingError('invalid_selection');
- const list=await catalog();if(!list.doctors.some(d=>d.id===id))throw new BookingError('doctor_unavailable',404);
+ const list=await catalog();if(!list.doctors.some(d=>d.id===id&&!d.specialtyMismatch))throw new BookingError('doctor_unavailable',404);
  const end=addDays(start,13)>addDays(current,90)?addDays(current,90):addDays(start,13);
  const days=await context().client.schedule(id,start,end),result=[],statusCounts={},flagNames=new Set();let sample;
  for(const [date,slots]of Object.entries(days)){
@@ -113,7 +114,7 @@ async function book(input,ip){
  rateLimit(ip);
  const selected=verifySlot(input.token);
  const promise=(async()=>{
-  const list=await catalog(true),doctor=list.doctors.find(row=>row.id===selected.employeeId);
+  const list=await catalog(true),doctor=list.doctors.find(row=>row.id===selected.employeeId&&!row.specialtyMismatch);
   if(!doctor)throw new BookingError('doctor_unavailable',409);
   const date=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Kyiv'}).format(new Date(selected.start));
   const days=await context().client.schedule(selected.employeeId,date,date);

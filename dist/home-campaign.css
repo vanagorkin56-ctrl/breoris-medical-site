@@ -16,9 +16,9 @@
   --campaign-line:#9fbacd; --campaign-dot:#9bb9ce;
 }
 .direction-hero[data-theme=documents] {
-  --campaign-bg:#286a76; --campaign-ink:#fff; --campaign-accent:#c3efeb;
-  --campaign-body:#edf7f6; --campaign-button:#fff; --campaign-button-ink:#235b92;
-  --campaign-line:#a3d0d0; --campaign-dot:#9dc6c9;
+  --campaign-bg:#c7dbb8; --campaign-ink:#1e4038; --campaign-accent:#2f6953;
+  --campaign-body:#325746; --campaign-button:#2f6953; --campaign-button-ink:#fff;
+  --campaign-line:#718e72; --campaign-dot:#769574;
 }
 .direction-hero .direction-slides{max-width:none;margin:0}
 .direction-hero .direction-slide{grid-template-columns:52% 48%;gap:0;align-items:stretch;min-height:clamp(500px,calc(100svh - 158px),780px)}
@@ -51,7 +51,10 @@
 .direction-slide[data-theme=screening] .direction-photo>img{object-position:50% 53%}
 .direction-slide[data-theme=screening] .direction-photo:after{background:linear-gradient(180deg,rgba(226,247,245,.76),rgba(226,247,245,.38) 30%,transparent 49%,rgba(12,47,73,.15) 69%,rgba(12,47,73,.88))}
 .direction-slide[data-theme=documents] .direction-photo>img{object-position:50% 48%}
-.direction-slide[data-theme=documents] .direction-photo:after{background:linear-gradient(180deg,#103e4970,transparent 48%,#103e49a8)}
+.direction-slide[data-theme=documents] .direction-photo:after{background:linear-gradient(180deg,#ebf4e0e6,#ddebd124 46%,#e4efdbef)}
+.direction-hero .direction-slide[data-theme=documents] .direction-photo figcaption,.direction-hero .direction-slide[data-theme=documents] .campaign-article{color:#1e4038}
+.direction-hero .direction-slide[data-theme=documents] .direction-photo .text-focus{color:#2f6953}
+.direction-hero .direction-slide[data-theme=documents] .campaign-article>span{border-color:#55796199;background:#edf4e178}
 .direction-hero .direction-slide[data-theme=documents] .campaign-question{font-size:12cqw;max-width:12ch;line-height:1.07}
 .direction-hero .direction-photo .campaign-screening{color:#163c5a;font-weight:500;max-width:none}
 .campaign-screening-word{display:block;font-size:7.7cqw;letter-spacing:-.04em;line-height:1.1;margin-bottom:1.3cqw}

@@ -52,10 +52,9 @@
   const select=q('#h24-doctor');select.replaceChildren(option('',t('choose')),...state.doctors.map(d=>option(String(d.id),d.name+' — '+d.specialty)));
   const matches=state.context.doctorId?state.doctors.filter(d=>d.siteId===state.context.doctorId):[];
   const preferred={sushko:596096,sokrut:595938};
-  const mismatch=['hrytsai','pokaichuk'].includes(state.context.doctorId);
-  if(!mismatch&&matches.length===1)select.value=String(matches[0].id);
-  else if(!mismatch&&preferred[state.context.doctorId]&&matches.some(d=>d.id===preferred[state.context.doctorId]))select.value=String(preferred[state.context.doctorId]);
-  state.note=state.context.doctorId?(mismatch?'mismatch':matches.length?'':'missing'):'';
+  if(matches.length===1)select.value=String(matches[0].id);
+  else if(preferred[state.context.doctorId]&&matches.some(d=>d.id===preferred[state.context.doctorId]))select.value=String(preferred[state.context.doctorId]);
+  state.note=state.context.doctorId?(matches.length?'':'missing'):'';
   q('#h24-doctor-note').hidden=!state.note;render();
  }
  async function api(path,options={}){

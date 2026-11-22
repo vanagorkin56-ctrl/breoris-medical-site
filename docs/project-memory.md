@@ -1,5 +1,13 @@
 # Breoris Medical: project memory
 
+## Light green campaign and doctor specialty audit — 22 November 2026
+
+- User requested a lighter green fourth slide and verification of physician labels against supplied DOC.UA screenshots. Fourth theme now uses sage `#c7dbb8`, dark green text and a lighter photo overlay; approved image, layout and other three themes retained.
+- Roster/callback labels synchronized to confirmed specialties; current name Сіренко Оксана Юріївна retains internal ID `honchar`. Sushko therapy added to filters. Old Health24 “Невропатолог” is displayed as “Невролог”; ultrasound aliases normalized without applying consultation fees.
+- Health24 still calls Pokaichuk a therapist, conflicting with confirmed neurology. Gateway blocks that mismatched provider schedule/submission and offers the existing administrator-confirmed callback path instead. All provider IDs remain unchanged; a correctly updated provider specialty automatically restores direct booking.
+- User could not confirm Hrytsai. Her card remains with “Спеціальність уточнюється” and clinic phone; unverified neurology claims and booking options withheld until the clinic confirms. Arslanova retains the clinic-supplied massage label, without claiming DOC.UA verification.
+- Audit and remaining clinic dependencies: `docs/doctor-specialty-audit-2026-11-22.md`. Local release evidence: `output/doctor-audit-green-2026-11-22/`. Nineteen focused booking tests and 75-page static check passed. No real patient booking submitted. Existing callback scheduling-service dependency remains unresolved.
+
 ## Fourth campaign: preparation for EKOPFO — 13 November 2026
 
 - User requested a fourth live homepage slide, using clinic-supplied Instagram screenshots IMG_7075–7083.PNG as service information. Added “Підготовка до ЕКОПФО” with the poster heading “Готуєтесь до ЕКОПФО?” and the same desktop copy/photo layout, mobile adaptation, selectable UA/EN typography and 5-second advance as the existing series.

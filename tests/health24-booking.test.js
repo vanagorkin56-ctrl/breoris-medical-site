@@ -17,7 +17,7 @@ function harness(options={}){
  let posts=0,reads=0;
  global.fetch=async(url,request)=>{
   if(url.endsWith('/oauth/token'))return json({access_token:'server-only-token',token_type:'Bearer',expires_in:3600});
-  if(url.includes('/employees?'))return json([{id:595920,name:'Test doctor',fired:false,resource_office:false,employee_type:{value:'SPECIALIST'},position:{name_uk:options.specialty||'Невропатолог'},party_id:999,phone:'private-staff-phone'},{id:999,fired:false,name:'Resource',resource_office:true,employee_type:{value:'SPECIALIST'}}]);
+  if(url.includes('/employees?'))return json([{id:options.employeeId||595920,name:'Test doctor',fired:false,resource_office:false,employee_type:{value:'SPECIALIST'},position:{name_uk:options.specialty||'Невропатолог'},party_id:999,phone:'private-staff-phone'},{id:999,fired:false,name:'Resource',resource_office:true,employee_type:{value:'SPECIALIST'}}]);
   if(url.includes('/schedule?')){reads++;return json({[day]:[{...slot,...(options.schedule||{})}]});}
   if(url.endsWith('/visit_moderations')){
    posts++;assert.equal(request.method,'POST');assert.equal(request.redirect,'error');assert.equal(request.headers.Authorization,'Bearer server-only-token');
@@ -89,4 +89,32 @@ test('consultation quote follows the mapped doctor and never applies to another 
  for(const [specialty,price] of [['Невропатолог',1200],['Лікар з ультразвукової діагностики',null],['Терапевт',null]]){
   const h=harness({specialty});try{const result=await h.booking.catalog();assert.equal(result.doctors[0].consultationFrom,price);assert.equal(h.posts(),0);}finally{h.restore();}
  }
+});
+
+test('modern specialty labels preserve provider IDs and ultrasound does not inherit consultation fees',async()=>{
+ const h=harness();try{const result=await h.booking.catalog();assert.equal(result.doctors[0].id,595920);assert.equal(result.doctors[0].specialty,'Невролог');assert.equal(result.doctors[0].specialtyMismatch,false);}finally{h.restore();}
+ const ultrasound=harness({employeeId:596094,specialty:'Лікар з ультразвукової діагностики'});
+ try{const result=await ultrasound.booking.catalog();assert.equal(result.doctors[0].specialty,'Лікар ультразвукової діагностики');assert.equal(result.doctors[0].specialtyMismatch,false);assert.equal(result.doctors[0].consultationFrom,null);assert.equal(result.doctors[0].id,596094);}finally{ultrasound.restore();}
+});
+
+test('a conflicting specialty cannot expose slots or submit a Health24 appointment',async()=>{
+ const h=harness({employeeId:663338,specialty:'Терапевт'});
+ try{
+  const result=await h.booking.catalog();assert.equal(result.doctors[0].specialty,'Терапевт');assert.equal(result.doctors[0].specialtyMismatch,true);
+  await assert.rejects(h.booking.availability(663338,h.day),e=>e.code==='doctor_unavailable');
+  await assert.rejects(h.booking.book({attemptId:randomUUID(),token:h.booking.signSlot(663338,h.slot),patient:h.patient},'test-ip'),e=>e.code==='doctor_unavailable');
+  const {callbackDoctors}=require('../server/clinic-directory');
+  const fallback=callbackDoctors(result.doctors).find(d=>d.siteId==='pokaichuk');assert.equal(fallback.id,'callback:pokaichuk');assert.equal(fallback.specialty,'Невролог');assert.equal(fallback.mode,'callback');
+  assert.equal(h.posts(),0);assert.equal(h.reads(),0);
+ }finally{h.restore();}
+});
+
+test('a corrected provider specialty becomes directly bookable without an ID override',async()=>{
+ const h=harness({employeeId:663338,specialty:'Невролог'});
+ try{const result=await h.booking.catalog();assert.equal(result.doctors[0].specialtyMismatch,false);const slots=await h.booking.availability(663338,h.day);assert.equal(slots.employeeId,663338);assert.equal(slots.days[0].slots.length,1);assert.equal(h.posts(),0);}finally{h.restore();}
+});
+
+test('a clinician awaiting clinic confirmation is not offered in either booking path',async()=>{
+ const h=harness({employeeId:596330,specialty:'Терапевт'});
+ try{const result=await h.booking.catalog();assert.equal(result.doctors[0].specialtyMismatch,true);await assert.rejects(h.booking.availability(596330,h.day),e=>e.code==='doctor_unavailable');assert.ok(!require('../server/clinic-directory').callbackDoctors(result.doctors).some(d=>d.siteId==='hrytsai'));assert.equal(h.posts(),0);}finally{h.restore();}
 });
