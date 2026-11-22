@@ -7,6 +7,7 @@
 - Health24 still calls Pokaichuk a therapist, conflicting with confirmed neurology. Gateway blocks that mismatched provider schedule/submission and offers the existing administrator-confirmed callback path instead. All provider IDs remain unchanged; a correctly updated provider specialty automatically restores direct booking.
 - User could not confirm Hrytsai. Her card remains with “Спеціальність уточнюється” and clinic phone; unverified neurology claims and booking options withheld until the clinic confirms. Arslanova retains the clinic-supplied massage label, without claiming DOC.UA verification.
 - Audit and remaining clinic dependencies: `docs/doctor-specialty-audit-2026-11-22.md`. Local release evidence: `output/doctor-audit-green-2026-11-22/`. Nineteen focused booking tests and 75-page static check passed. No real patient booking submitted. Existing callback scheduling-service dependency remains unresolved.
+- Live rollout verified: 16 booking options for 14 confirmed/clinic-supplied clinicians, with Pokaichuk as neurology callback and Hrytsai withheld. Callback schedule still returns HTTP 503. The schedule-stage message now offers clinic phone/Telegram; it does not tell the visitor to resend a request that has not been submitted. Both initial Vercel deployments succeeded.
 
 ## Fourth campaign: preparation for EKOPFO — 13 November 2026
 
