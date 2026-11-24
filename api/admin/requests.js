@@ -7,5 +7,6 @@ module.exports=async(req,res)=>{try{
  if(req.method==='POST')return send(res,200,await crm.create(auth,body(req,8192)));
  if(req.method==='PATCH')return send(res,200,await crm.update(auth,body(req,8192)));
  const query=new URL(req.url,'https://local.invalid').searchParams;
+ if(query.get('view')==='contacts')return send(res,200,await crm.contacts(auth,query.get('search'),Number(query.get('offset')||0)));
  return send(res,200,await crm.list(auth,query.get('status')||'all',Number(query.get('offset')||0),{kind:query.get('kind'),search:query.get('search'),doctorId:query.get('doctorId'),priority:query.get('priority'),due:query.get('due')==='true',day:query.get('day')}));
 }catch(error){return fail(res,error);}};

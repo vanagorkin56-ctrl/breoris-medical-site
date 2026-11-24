@@ -3,6 +3,13 @@ const {test}=require('node:test'),assert=require('node:assert/strict'),{randomUU
 const db=require('../server/clinic-db'),crm=require('../server/clinic-crm');
 const auth={token:'fixture-auth',user:{id:'11111111-1111-4111-8111-111111111111'}};
 const record=()=>({id:randomUUID(),version:3,status:'new',doctor_id:'unassigned',requested_service:'Декларація з терапевтом',resolved_at:null});
+test('authenticated contact search reaches the private contact RPC through the shared request endpoint',async()=>{
+ const admin=require('../server/clinic-admin'),handler=require('../api/admin/requests');
+ const oldSession=admin.session,oldRequest=db.request;let response;
+ admin.session=async()=>auth;
+ db.request=async(path,options)=>{assert.equal(path,'/rest/v1/rpc/crm_contacts');assert.equal(options.token,auth.token);assert.ok(!options.service);assert.equal(options.data.p_search,'*),(phone.neq.null');assert.equal(options.data.p_offset,50);return {contacts:[],total:0};};
+ try{await handler({method:'GET',headers:{},url:'/api/admin/requests?view=contacts&search='+encodeURIComponent('*),(phone.neq.null')+'&offset=50'},{setHeader(){},status(code){assert.equal(code,200);return this;},json(body){response=body;}});assert.deepEqual(response.contacts,[]);assert.equal(response.total,0);}finally{admin.session=oldSession;db.request=oldRequest;}
+});
 test('CRM update uses persisted request type and optimistic versioning, with no public write credentials',async()=>{
  const original=db.request;let current=record(),writes=[];db.request=async(path,options)=>{assert.equal(options.token,'fixture-auth');assert.ok(!options.service);if(options.method==='PATCH'){writes.push({path,...options});return [{...current,...options.data,version:4}];}return [current];};
  try{
@@ -27,5 +34,5 @@ test('CRM uses literal query arguments, validates filters and keeps declaration 
 test('CRM routes require a session and same-origin mutations before any data access',async()=>{
  const original=db.request;let calls=0;db.request=async()=>{calls++;throw Error('must not access database');};
  const run=async(handler,req)=>{let status;await handler(req,{setHeader(){},status(value){status=value;return this;},json(){return this;}});return status;};
- try{for(const name of ['history','contacts','requests'])assert.equal(await run(require('../api/admin/'+name),{method:'GET',headers:{},url:'/api/admin/'+name}),401);assert.equal(await run(require('../api/admin/requests'),{method:'POST',headers:{origin:'https://other.example','content-type':'application/json'},body:{}}),403);assert.equal(calls,0);}finally{db.request=original;}
+ try{for(const name of ['history','requests'])assert.equal(await run(require('../api/admin/'+name),{method:'GET',headers:{},url:'/api/admin/'+name}),401);assert.equal(await run(require('../api/admin/requests'),{method:'POST',headers:{origin:'https://other.example','content-type':'application/json'},body:{}}),403);assert.equal(await run(require('../api/admin/requests'),{method:'GET',headers:{},url:'/api/admin/requests?view=contacts'}),401);assert.equal(calls,0);}finally{db.request=original;}
 });

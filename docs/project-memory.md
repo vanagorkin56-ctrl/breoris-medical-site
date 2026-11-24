@@ -1,3 +1,8 @@
+# Release preparation — 24 November 2026
+
+- Release branch `codex/client-revisions-nov24-release` contains the reviewed clinic corrections and CRM. First preview exposed the Hobby limit of 12 functions; contacts now use the authenticated requests route with `view=contacts`, reducing 13 functions to 12. No upgrade required.
+- Production database remains unchanged pending explicit approval of both prepared SQL migrations. Vercel and the Supabase dashboard are accessible. Live acceptance remains pending.
+
 # Breoris Medical: project memory
 
 ## Form photograph correction — 24 November 2026
