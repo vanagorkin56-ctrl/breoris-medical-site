@@ -52,7 +52,7 @@
       "services": [
         {
           "name": "Консультація",
-          "price": 1200,
+          "price": 1000,
           "currency": "UAH",
           "qualifier": "from"
         }
@@ -66,14 +66,16 @@
         ],
         "reviewedAt": "2026-10-06",
         "note": "Confirms existing experience 9, adult patients, rating 5.0, 2 reviews, consultation 1200 UAH at BREORIS."
-      }
+      },
+      "servicesSourceNote": "Вартість консультації уточнено клінікою 24.11.2026. Склад послуг та остаточну суму підтвердить адміністратор."
     },
     {
       "id": "kovalchuk",
       "slug": "kovalchuk-ada-petrivna",
       "name": "Ковальчук Ада Петрівна",
       "specialties": [
-        "Дерматолог"
+        "Дерматовенеролог",
+        "Трихолог"
       ],
       "sourceUrl": "https://doc.ua/ua/doctor/dnepropetrovsk/kovalchuk-ada",
       "sourceClinicUrl": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
@@ -94,13 +96,14 @@
       },
       "fieldSources": {
         "name": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
-        "specialties": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
+        "specialties": "Clinic instruction 2026-11-24",
         "rating": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
         "category": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
         "experienceYears": "User-supplied IMG_9176.MP4 · 00:24, 00:30, 00:33 · DOC.ua profile",
         "patientGroups": "User-supplied IMG_9176.MP4 · 00:24, 00:30, 00:33 · DOC.ua profile",
         "education": "User-supplied IMG_9176.MP4 · 00:24, 00:30, 00:33 · DOC.ua profile",
-        "services": "User-supplied IMG_9176.MP4 · 00:24, 00:30, 00:33 · DOC.ua profile"
+        "services": "User-supplied IMG_9176.MP4 · 00:24, 00:30, 00:33 · DOC.ua profile",
+        "displaySpecialty": "Clinic instruction 2026-11-24"
       },
       "category": "Вища категорія",
       "experienceYears": 28,
@@ -114,7 +117,7 @@
       "services": [
         {
           "name": "Консультативний прийом",
-          "price": 1200,
+          "price": 1000,
           "currency": "UAH",
           "qualifier": "from"
         },
@@ -136,15 +139,17 @@
           "00:33"
         ],
         "reviewedAt": "2026-10-06"
-      }
+      },
+      "displaySpecialty": "Дерматовенеролог вищої категорії, трихолог",
+      "servicesSourceNote": "Вартість консультації уточнено клінікою 24.11.2026. Склад послуг та остаточну суму підтвердить адміністратор."
     },
     {
       "id": "honchar",
       "slug": "sirenko-oksana-iuriyivna",
-      "name": "Сіренко Оксана Юріївна",
+      "name": "Гончар (Сіренко) Оксана Юріївна",
       "specialties": [
         "Кардіолог",
-        "Кардіоревматолог"
+        "Ревматолог"
       ],
       "sourceUrl": "https://doc.ua/ua/doctor/dnepropetrovsk/63841-oksana-sirenko",
       "sourceClinicUrl": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
@@ -165,7 +170,7 @@
       },
       "fieldSources": {
         "name": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
-        "specialties": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
+        "specialties": "Clinic instruction 2026-11-24",
         "rating": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
         "category": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
         "degree": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
@@ -176,10 +181,11 @@
         "courses": "User-supplied IMG_6718.PNG · DOC.ua",
         "memberships": "User-supplied IMG_6719.PNG · DOC.ua",
         "treatments": "User-supplied IMG_6720.PNG · DOC.ua",
-        "services": "User-supplied IMG_6721.PNG · DOC.ua (price: IMG_6715.PNG)"
+        "services": "User-supplied IMG_6721.PNG · DOC.ua (price: IMG_6715.PNG)",
+        "displaySpecialty": "Clinic instruction 2026-11-24"
       },
-      "category": "Перша категорія",
-      "degree": "Кандидат медичних наук",
+      "category": "Вища категорія",
+      "degree": "Кандидат медичних наук, доцент",
       "experienceYears": 12,
       "patientGroups": [
         "Дорослі"
@@ -216,7 +222,7 @@
       "services": [
         {
           "name": "Консультативний прийом",
-          "price": 900,
+          "price": 1200,
           "currency": "UAH",
           "qualifier": "from"
         },
@@ -238,15 +244,16 @@
           "IMG_6721.PNG"
         ],
         "reviewedAt": "2026-10-06"
-      }
+      },
+      "displaySpecialty": "Кардіолог вищої категорії, доцент, к.м.н., ревматолог",
+      "servicesSourceNote": "Вартість консультації уточнено клінікою 24.11.2026. Склад послуг та остаточну суму підтвердить адміністратор."
     },
     {
       "id": "sushko",
       "slug": "sushko-kateryna-vadymivna",
       "name": "Сушко Катерина Вадимівна",
       "specialties": [
-        "Гастроентеролог",
-        "Терапевт"
+        "Гастроентеролог"
       ],
       "sourceUrl": "https://doc.ua/ua/doctor/dnepropetrovsk/ekaterina-sushko",
       "sourceClinicUrl": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
@@ -267,14 +274,15 @@
       },
       "fieldSources": {
         "name": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
-        "specialties": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
+        "specialties": "Clinic instruction 2026-11-24",
         "rating": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
         "education": "IMG_6714.MP4 · 00:00, 00:03, 00:06–00:08 · DOC.ua",
         "courses": "IMG_6714.MP4 · 00:00, 00:03, 00:06–00:08 · DOC.ua",
         "treatments": "IMG_6714.MP4 · 00:00, 00:03, 00:06–00:08 · DOC.ua",
         "experienceYears": "IMG_6714.MP4 · 00:00, 00:03, 00:06–00:08 · DOC.ua",
         "patientGroups": "IMG_6714.MP4 · 00:00, 00:03, 00:06–00:08 · DOC.ua",
-        "services": "IMG_6714.MP4 · 00:00, 00:03, 00:06–00:08 · DOC.ua"
+        "services": "IMG_6714.MP4 · 00:00, 00:03, 00:06–00:08 · DOC.ua",
+        "displaySpecialty": "Clinic instruction 2026-11-24"
       },
       "education": [
         "Дніпропетровська медична академія (2016)",
@@ -311,7 +319,7 @@
       "services": [
         {
           "name": "Консультація",
-          "price": 800,
+          "price": 1000,
           "currency": "UAH",
           "qualifier": "from"
         },
@@ -330,7 +338,9 @@
           "00:06–00:08"
         ],
         "reviewedAt": "2026-10-06"
-      }
+      },
+      "displaySpecialty": "Гастроентеролог",
+      "servicesSourceNote": "Вартість консультації уточнено клінікою 24.11.2026. Склад послуг та остаточну суму підтвердить адміністратор."
     },
     {
       "id": "tomakh",
@@ -358,7 +368,7 @@
       },
       "fieldSources": {
         "name": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
-        "specialties": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
+        "specialties": "Clinic instruction 2026-11-24",
         "rating": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
         "category": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
         "degree": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
@@ -371,10 +381,11 @@
         "services": "IMG_6714.MP4 · 00:21, 00:27–00:40 · DOC.ua",
         "rating.reviewCount": "IMG_6714.MP4 · 00:21, 00:27–00:40",
         "homeVisit": "IMG_6714.MP4 · 00:24 · картка відділення BREORIS",
-        "services.Консультація.price": "Уточнено користувачем 06.10.2026: 1200 грн"
+        "services.Консультація.price": "Уточнено користувачем 06.10.2026: 1200 грн",
+        "displaySpecialty": "Clinic instruction 2026-11-24"
       },
       "category": "Вища категорія",
-      "degree": "Кандидат медичних наук",
+      "degree": "Кандидат медичних наук, доцент",
       "education": [
         "Вища освіта. Дніпропетровська державна медична академія"
       ],
@@ -416,7 +427,8 @@
           "00:27–00:40"
         ],
         "reviewedAt": "2026-10-06"
-      }
+      },
+      "displaySpecialty": "Невролог вищої категорії, доцент, к.м.н."
     },
     {
       "id": "pokaichuk",
@@ -444,7 +456,7 @@
       },
       "fieldSources": {
         "name": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
-        "specialties": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
+        "specialties": "Clinic instruction 2026-11-24",
         "rating": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
         "category": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
         "education": "IMG_6714.MP4 · 00:51–01:09, 01:15 · DOC.ua",
@@ -456,7 +468,8 @@
         "patientGroups": "IMG_6714.MP4 · 00:51–01:09, 01:15 · DOC.ua",
         "services": "IMG_6714.MP4 · 00:51–01:09, 01:15 · DOC.ua",
         "rating.reviewCount": "IMG_6714.MP4 · 00:51–01:09, 01:15",
-        "homeVisit": "IMG_6714.MP4 · 00:54 · картка відділення BREORIS"
+        "homeVisit": "IMG_6714.MP4 · 00:54 · картка відділення BREORIS",
+        "displaySpecialty": "Clinic instruction 2026-11-24"
       },
       "category": "Вища категорія",
       "education": [
@@ -509,15 +522,14 @@
           "01:15"
         ],
         "reviewedAt": "2026-10-06"
-      }
+      },
+      "displaySpecialty": "Невролог вищої категорії"
     },
     {
       "id": "orlov",
       "slug": "orlov-semen-ievhenovych",
       "name": "Орлов Семен Євгенович",
       "specialties": [
-        "Ортопед",
-        "Травматолог",
         "Ортопед-травматолог"
       ],
       "sourceUrl": "https://doc.ua/ua/doctor/dnepropetrovsk/semen-orlov",
@@ -539,14 +551,15 @@
       },
       "fieldSources": {
         "name": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
-        "specialties": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
+        "specialties": "Clinic instruction 2026-11-24",
         "rating": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
         "category": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
         "experienceYears": "User-supplied IMG_9176.MP4 · 00:45, 00:48–00:49 · DOC.ua profile",
         "patientGroups": "User-supplied IMG_9176.MP4 · 00:45, 00:48–00:49 · DOC.ua profile",
         "education": "User-supplied IMG_9176.MP4 · 00:45, 00:48–00:49 · DOC.ua profile",
         "services": "User-supplied IMG_9176.MP4 · 00:45, 00:48–00:49 · DOC.ua profile",
-        "rating.reviewCount": "User-supplied IMG_9176.MP4 · 00:48 · DOC.ua profile"
+        "rating.reviewCount": "User-supplied IMG_9176.MP4 · 00:48 · DOC.ua profile",
+        "displaySpecialty": "Clinic instruction 2026-11-24"
       },
       "category": "Перша категорія",
       "experienceYears": 21,
@@ -559,7 +572,7 @@
       "services": [
         {
           "name": "Консультація",
-          "price": 1000,
+          "price": 1200,
           "currency": "UAH",
           "qualifier": "from"
         }
@@ -571,7 +584,9 @@
           "00:48–00:49"
         ],
         "reviewedAt": "2026-10-06"
-      }
+      },
+      "displaySpecialty": "Ортопед-травматолог",
+      "servicesSourceNote": "Вартість консультації уточнено клінікою 24.11.2026. Склад послуг та остаточну суму підтвердить адміністратор."
     },
     {
       "id": "pavlova",
@@ -633,8 +648,8 @@
       "slug": "sokrut-dariia-volodymyrivna",
       "name": "Сокрут Дарія Володимирівна",
       "specialties": [
-        "УЗД-фахівець",
-        "Ендокринолог"
+        "Ендокринолог",
+        "Лікар УЗД"
       ],
       "sourceUrl": "https://doc.ua/ua/doctor/dnepropetrovsk/darya-sokrut",
       "sourceClinicUrl": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
@@ -655,7 +670,7 @@
       },
       "fieldSources": {
         "name": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
-        "specialties": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
+        "specialties": "Clinic instruction 2026-11-24",
         "rating": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
         "education": "IMG_6714.MP4 · 01:51–02:03 · DOC.ua",
         "courses": "IMG_6714.MP4 · 01:51–02:03 · DOC.ua",
@@ -663,7 +678,8 @@
         "experienceYears": "IMG_6714.MP4 · 01:51–02:03 · DOC.ua",
         "patientGroups": "IMG_6714.MP4 · 01:51–02:03 · DOC.ua",
         "services": "IMG_6714.MP4 · 01:51–02:03 · DOC.ua",
-        "rating.reviewCount": "IMG_6714.MP4 · 01:51–02:03"
+        "rating.reviewCount": "IMG_6714.MP4 · 01:51–02:03",
+        "displaySpecialty": "Clinic instruction 2026-11-24"
       },
       "education": [
         "Вінницький національний медичний університет ім. М. І. Пирогова, спеціальність «Лікувальна справа»",
@@ -714,14 +730,15 @@
           "01:51–02:03"
         ],
         "reviewedAt": "2026-10-06"
-      }
+      },
+      "displaySpecialty": "Ендокринолог, лікар УЗД"
     },
     {
       "id": "baldetska",
       "slug": "baldietska-anna-oleksiyivna",
       "name": "Балдєтська Анна Олексіївна",
       "specialties": [
-        "Реабілітолог"
+        "Лікар ФРМ"
       ],
       "sourceUrl": "https://doc.ua/ua/doctor/dnepropetrovsk/anna-baldetskaya",
       "sourceClinicUrl": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
@@ -742,7 +759,7 @@
       },
       "fieldSources": {
         "name": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
-        "specialties": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
+        "specialties": "Clinic instruction 2026-11-24",
         "rating": "https://doc.ua/klinika/dnepropetrovsk/breoris-medical/breoris-medical/doctors",
         "education": "IMG_6714.MP4 · 02:12–02:18 · DOC.ua",
         "treatments": "IMG_6714.MP4 · 02:12–02:18 · DOC.ua",
@@ -751,7 +768,8 @@
         "patientGroups": "IMG_6714.MP4 · 02:12–02:18 · DOC.ua",
         "services": "IMG_6714.MP4 · 02:12–02:18 · DOC.ua",
         "rating.reviewCount": "IMG_6714.MP4 · 02:12–02:18",
-        "homeVisit": "IMG_6714.MP4 · 02:12 · картка відділення BREORIS"
+        "homeVisit": "IMG_6714.MP4 · 02:12 · картка відділення BREORIS",
+        "displaySpecialty": "Clinic instruction 2026-11-24"
       },
       "education": [
         "Повна медична освіта та 2 роки інтернатури"
@@ -802,14 +820,15 @@
       },
       "sourceNotes": [
         "На картці відділення у відео 02:12 є напис «Діти з 10 років», а у профілі — «Дорослі». Вікові обмеження прийому потрібно підтвердити у клініки."
-      ]
+      ],
+      "displaySpecialty": "Лікар ФРМ"
     },
     {
       "id": "podhorna",
       "slug": "podhorna-daria-andriivna",
       "name": "Подгорна Дар’я Андріївна",
       "specialties": [
-        "Лікар ультразвукової діагностики"
+        "Лікар УЗД"
       ],
       "sourceUrl": "https://www.instagram.com/breoris_medical/",
       "sourceAccess": "clinic-supplied-screenshots",
@@ -883,7 +902,9 @@
         "experienceYears": "IMG_7048.PNG — профіль DOC.UA",
         "education": "IMG_7049.PNG — профіль DOC.UA",
         "courses": "IMG_7050.PNG — профіль DOC.UA",
-        "services": "IMG_9729.PNG та IMG_7050.PNG"
+        "services": "IMG_9729.PNG та IMG_7050.PNG",
+        "specialties": "Clinic instruction 2026-11-24",
+        "displaySpecialty": "Clinic instruction 2026-11-24"
       },
       "screenshotEvidence": {
         "files": [
@@ -895,7 +916,35 @@
         "reviewedAt": "2026-11-13"
       },
       "compactFacts": true,
-      "showPatientGroupsInSummary": true
+      "showPatientGroupsInSummary": true,
+      "displaySpecialty": "Лікар УЗД"
+    },
+    {
+      "id": "hrytsai",
+      "slug": "hrytsai-hanna-volodymyrivna",
+      "name": "Грицай Ганна Володимирівна",
+      "specialties": [
+        "Невролог"
+      ],
+      "displaySpecialty": "Невролог вищої категорії, доцент, к.м.н.",
+      "category": "Вища категорія",
+      "degree": "Кандидат медичних наук, доцент",
+      "sourceUrl": "https://www.breoris-medical.com/",
+      "sourceIsDoctorProfile": false,
+      "sourceLabel": "Інформація клініки",
+      "sourceDate": "24.11.2026",
+      "sourceAccess": "clinic-supplied-2026-11-24",
+      "compactFacts": true,
+      "image": {
+        "src": "assets/likar-gricay.jpg",
+        "width": 540,
+        "height": 960
+      },
+      "fieldSources": {
+        "specialties": "Clinic instruction 2026-11-24",
+        "category": "Clinic instruction 2026-11-24",
+        "degree": "Clinic instruction 2026-11-24"
+      }
     }
   ],
   "updatedAt": "2026-11-13"

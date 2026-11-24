@@ -20,7 +20,7 @@ def strip(lang='uk'):
 
 def enhance(page,root='',lang='uk'):
  if '<header class="header"' not in page:return page
- page=re.sub(r'((?:health24-booking|data|app)\.js)(?:\?[^\"]*)?',r'\1?v=20261122-specialties1',page)
+ page=re.sub(r'((?:administrator-booking|health24-booking|data|app)\.js)(?:\?[^\"]*)?',r'\1?v=20261124-client1',page)
  page=re.sub(r'(src="[^\"]*assets/logo.png)(?:\?[^\"]*)?"',r'\1?v=20261113-web"',page)
  page=re.sub(r'<!-- clinic-strip:start -->.*?<!-- clinic-strip:end -->', '', page, flags=re.S)
  page=page.replace('<header class="header"',strip(lang)+'<header class="header"',1)

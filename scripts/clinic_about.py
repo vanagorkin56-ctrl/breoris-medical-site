@@ -11,14 +11,20 @@ def render():
     title = copy_block('h2', 'clinic-about-title', 'Медичний центр у Дніпрі',
                        'Medical centre in Dnipro', ['у Дніпрі'], ['in Dnipro'], True)
     lead = copy_block('p', 'clinic-about-lead',
-                      'Breoris Medical — багатопрофільний медичний центр у Дніпрі.',
-                      'Breoris Medical is a multidisciplinary medical centre in Dnipro.')
-    services = copy_block('p', 'clinic-about-services',
-                          'Консультації лікарів, УЗД, функціональна та лабораторна діагностика.',
-                          'Doctor consultations, ultrasound, functional diagnostics and laboratory tests.',
-                          ['Консультації лікарів', 'УЗД'], ['Doctor consultations', 'ultrasound'])
-    specialties = copy_block('p', 'clinic-about-specialties',
-                             'Неврологія, жіноче та чоловіче здоров’я, профілактика й відновлення. Допоможемо обрати спеціаліста та спланувати візит.',
-                             'Neurology, women’s and men’s health, prevention and rehabilitation. We help you choose a specialist and plan your visit.',
-                             ['Неврологія', 'жіноче та чоловіче здоров’я'], ['Neurology', 'women’s and men’s health'])
+                      'Breoris Medical — медицина, в центрі якої людина.',
+                      'Breoris Medical — medicine with people at its heart.')
+    paragraphs = [
+        ('Ми створили сучасний медичний простір у самому серці Дніпра, де професіоналізм лікарів поєднується з турботою, комфортом та щирою увагою до кожного пацієнта.',
+         'We have created a modern medical space in the heart of Dnipro, where medical expertise meets care, comfort and personal attention for every patient.'),
+        ('Наш підхід — бачити не лише окремі симптоми, а людину в цілому. Ми об’єднуємо досвід лікарів різних спеціальностей, сучасну діагностику та комплексний підхід до вирішення проблем зі здоров’ям.',
+         'Our approach is to see the whole person, beyond individual symptoms. We bring together doctors from different specialties, modern diagnostics and a comprehensive approach to health concerns.'),
+        ('Наші ключові напрями: сучасна неврологія та реабілітація, жіноче й чоловіче здоров’я, кардіологія, ендокринологія, гастроентерологія, УЗД, лабораторна діагностика та профілактичні програми.',
+         'Our key areas: modern neurology and rehabilitation, women’s and men’s health, cardiology, endocrinology, gastroenterology, ultrasound, laboratory diagnostics and preventive programmes.'),
+        ('Ми приділяємо увагу кожній деталі — від першого знайомства до діагностики, лікування та відновлення.',
+         'We pay attention to every detail — from your first visit through diagnosis, treatment and recovery.'),
+        ('Breoris Medical — простір, де ваше здоров’я отримує увагу, на яку заслуговує.',
+         'Breoris Medical — a space where your health receives the attention it deserves.')
+    ]
+    services = ''.join(copy_block('p', 'clinic-about-paragraph', uk, en) for uk, en in paragraphs)
+    specialties = ''
     return f'''<!-- home-about:start --><section class="home-clinic section" id="pro-nas" aria-labelledby="clinic-about-title"><div class="clinic-about-inner"><div class="clinic-about-heading"><p class="direction-eyebrow">Про клініку</p>{title.replace('class="clinic-about-title"', 'class="clinic-about-title" id="clinic-about-title"')}</div><div class="clinic-about-layout"><figure class="clinic-about-photo"><img src="assets/campaigns/reception.jpg" alt="Фото клініки Breoris Medical" width="960" height="1280" loading="lazy"></figure><div class="clinic-about-copy">{lead}<div class="clinic-about-body">{services}{specialties}</div><a class="text-link" href="#poslugi">Переглянути послуги <span aria-hidden="true">↗</span></a></div></div></div></section><!-- home-about:end -->'''

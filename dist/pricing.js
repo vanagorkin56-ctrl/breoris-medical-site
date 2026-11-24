@@ -51,22 +51,24 @@ window.BreorisPricing = (() => {
   const exact = (amount,note='') => ({label:money(amount),amount,note});
   const from = (amount,note='') => ({label:`${word('від','от','from')} ${money(amount)}`,amount,note});
   function quote(service,detail,doctorId,repeat=false) {
+    if (!repeat && (!detail || detail === 'consult') && window.BreorisConsultationPrices?.[service] != null) return from(window.BreorisConsultationPrices[service]);
     if (details[service] && detail) {
       const row=details[service].find(item=>item[0]===detail);
       if(row && detail!=='consult') return row[3]==='from'?from(row[2]):exact(row[2],row[3]==='medicines'?word('Без вартості препаратів.','Без стоимости препаратов.','Medicines are excluded.'):'');
     }
+    if(service==='ЕКОПФО') return from(additionalStartingPrices[service]);
     if(service==='Електроенцефалографія (ЕЕГ)') return exact(1000);
     if(service==='Інфузійна терапія') return exact(700,word('Без вартості препаратів.','Без стоимости препаратов.','Medicines are excluded.'));
     if(service==='Денний стаціонар') return {label:`${money(300)} / ${word('год','час','hour')}`,amount:300,note:word('Без вартості препаратів. Підсумок залежить від тривалості.','Без стоимости препаратов. Итог зависит от продолжительности.','Medicines are excluded. The total depends on duration.')};
     if(!consultation.has(service)) return unknown();
-    if(service==='Ортопедія та травматологія') return exact(repeat?900:1200);
+    if(service==='Ортопедія та травматологія') return from(repeat?900:1200);
     if(service==='Гінекологія') return exact(repeat?800:1000);
     if(seniorDoctors.has(doctorId)) return exact(repeat?900:1200);
     if(doctorId==='any') return {label:repeat?`${money(800)}–${money(900)}`:`${money(1000)}–${money(1200)}`,note:word('Точна сума залежить від лікаря.','Точная сумма зависит от врача.','The exact amount depends on the doctor.')};
     return exact(repeat?800:1000);
   }
   // Starting prices supplied by the clinic owner on 2026-10-07.
-  const additionalStartingPrices = {'Проктологія':1000,'Урологія':1000,'Лікувальний та відновлювальний масаж':600};
+  const additionalStartingPrices = {'Проктологія':1000,'Урологія':1000,'Лікувальний та відновлювальний масаж':600,'ЕКОПФО':5000};
   function summary(service) {
     if (additionalStartingPrices[service] != null) return from(additionalStartingPrices[service]).label;
     const physicianPrice = window.BreorisConsultationPrices?.[service];
@@ -78,5 +80,5 @@ window.BreorisPricing = (() => {
     if (service === 'Денний стаціонар') return `${from(300).label} / ${word('год','час','hour')}`;
     return word('Ціну уточнюйте','Цену уточняйте','Ask for pricing');
   }
-  return {details,consultation,quote,summary};
+  return {details,consultation,quote,summary,startingPrices:additionalStartingPrices};
 })();

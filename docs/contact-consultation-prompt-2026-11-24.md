@@ -1,0 +1,13 @@
+# Consultation form photograph — 24 November 2026
+
+Current replacement after the user rejected the abstract glass visual.
+
+Mode: built-in image_gen; new image generation. Saved asset: `dist/assets/campaigns/contact-consultation-nov24.jpg` (1086 × 1448). Original retained locally: `output/crm-2026-11-24/contact-consultation-original.png`.
+
+This is an anonymous illustrative scene, not an actual Breoris physician or clinic interior. Existing real doctor and clinic photographs are unchanged.
+
+Validation: 78-page static check and JavaScript syntax passed. Desktop form inspected in the browser; the crop is positioned toward the stethoscope and resting hand. Mobile still hides the decorative photo under the unchanged breakpoint. Local preview only, unpublished.
+
+Exact final prompt:
+
+Use case: photorealistic-natural. Generate one exceptional, understated editorial healthcare photograph for the narrow side panel of an appointment contact form for Breoris Medical. Vertical 3:4 composition. Subject: a natural quiet moment in a consultation, adult clinician seated in a simple white cotton medical coat over a muted pale-blue shirt, listening to an adult patient across a pale warm desk. Frame from collarbone to hands, deliberately no faces and no heads within the frame. Main focal point is the clinician's relaxed, anatomically correct hands resting comfortably on the desk, one open hand making a small conversational gesture; only a softly blurred fragment of the patient's neutral sleeve at the lower right edge. A dark understated stethoscope lies naturally against the coat near the outer side of the frame; no identifiable people. Show a believable human consultation rather than arranged medical props. Composition must hold up cropped to a vertical strip about 300px wide: clean white fabric, pale blue shirt, natural skin, desk and soft background, no empty dramatic set. Photography: sophisticated candid editorial image for a premium independent medical practice, 85mm lens, shallow depth of field, real cotton weave, natural skin texture, soft window daylight, gentle neutral whites, muted blues and warm skin, minimal clean room context, realistic restrained color grading. Avoid glossy advertising, fake smiles, plastic skin, overexposure, clutter, abstract glass shapes, spheres, plants as subject, futuristic renders, lab equipment, needles, medical procedures, readable papers, patient records, jewelry, watches, text, captions, logos, watermarks or medical cross symbols. This is an illustrative anonymous consultation scene, never a portrait of a real Breoris physician or its actual clinic interior.

@@ -96,15 +96,15 @@ def forms(page_doctor):
     return template('doctor-forms.html', doctor_options=options, rating_options=stars, page_doctor=e(page_doctor))
 
 def shell(root, title, description, canonical, image, content, schema, page_doctor=''):
-    head = f'''<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="index,follow"><title>{e(title)}</title><meta name="description" content="{e(description)}"><link rel="canonical" href="{e(canonical)}"><meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(description)}"><meta property="og:url" content="{e(canonical)}"><meta property="og:image" content="{e(image)}"><meta name="theme-color" content="#235b92"><link rel="icon" href="{root}assets/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="{root}styles.css"><link rel="stylesheet" href="{root}refresh.css?v=1"><link rel="stylesheet" href="{root}doctor-pages.css?v=1"><link rel="stylesheet" href="{root}health24-booking.css?v=quality-20261026"></head>'''
+    head = f'''<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="index,follow"><title>{e(title)}</title><meta name="description" content="{e(description)}"><link rel="canonical" href="{e(canonical)}"><meta property="og:type" content="website"><meta property="og:locale" content="uk_UA"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(description)}"><meta property="og:url" content="{e(canonical)}"><meta property="og:image" content="{e(image)}"><meta name="theme-color" content="#235b92"><link rel="icon" href="{root}assets/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="{root}styles.css"><link rel="stylesheet" href="{root}refresh.css?v=1"><link rel="stylesheet" href="{root}doctor-pages.css?v=1"><link rel="stylesheet" href="{root}administrator-booking.css?v=20261124-client1"></head>'''
     structured = json.dumps(schema, ensure_ascii=False).replace('<', '\\u003c')
-    return clinic_chrome.enhance(ui_refinements.stylesheet(head,root) + f'<body class="doctor-page" data-page-doctor="{e(page_doctor)}"><a class="skip" href="#main">Перейти до змісту</a>' + shared(HEADER, root) + '<main id="main" class="doctor-main">' + content + '</main>' + shared(FOOTER, root) + forms(page_doctor) + '<div class="mobile-booking"><a href="tel:+380975323664">+380 97 532 36 64</a><button class="button primary" type="button" data-book>Записатися</button></div>' + f'<script type="application/ld+json">{structured}</script><script src="{root}health24-booking.js?v=3" defer></script><script src="{root}doctor-pages-config.js" defer></script><script src="{root}doctor-pages.js" defer></script></body></html>\n', root)
+    return clinic_chrome.enhance(ui_refinements.stylesheet(head,root) + f'<body class="doctor-page" data-page-doctor="{e(page_doctor)}"><a class="skip" href="#main">Перейти до змісту</a>' + shared(HEADER, root) + '<main id="main" class="doctor-main">' + content + '</main>' + shared(FOOTER, root) + forms(page_doctor) + '<div class="mobile-booking"><a href="tel:+380975323664">+380 97 532 36 64</a><button class="button primary" type="button" data-book>Записатися</button></div>' + f'<script type="application/ld+json">{structured}</script><script src="{root}administrator-booking.js?v=20261124-client1" defer></script><script src="{root}doctor-pages-config.js" defer></script><script src="{root}doctor-pages.js" defer></script></body></html>\n', root)
 
 def build(only_doctor=None):
     if only_doctor and only_doctor not in {d['id'] for d in DOCTORS}:
         raise ValueError('Unknown doctor: ' + only_doctor)
     # Consultation minima use the same source as individual physician pages.
-    specialty_services = {'Терапевт': 'Терапія', 'Невролог': 'Неврологія', 'Кардіолог': 'Кардіологія', 'Кардіоревматолог': 'Ревматологія', 'Ендокринолог': 'Ендокринологія', 'Гастроентеролог': 'Гастроентерологія', 'Ортопед-травматолог': 'Ортопедія та травматологія', 'Акушер-гінеколог': 'Гінекологія', 'Дерматолог': 'Дерматологія'}
+    specialty_services = {'Терапевт': 'Терапія', 'Невролог': 'Неврологія', 'Кардіолог': 'Кардіологія', 'Кардіоревматолог': 'Ревматологія', 'Ендокринолог': 'Ендокринологія', 'Гастроентеролог': 'Гастроентерологія', 'Ортопед-травматолог': 'Ортопедія та травматологія', 'Акушер-гінеколог': 'Гінекологія', 'Дерматолог': 'Дерматологія', 'Дерматовенеролог': 'Дерматологія', 'Ревматолог': 'Ревматологія'}
     consultation_minima = {}
     for doctor in DOCTORS:
         prices = [s['price'] for s in doctor.get('services', []) if s['name'] in ('Консультація', 'Консультативний прийом') and s.get('price') is not None]
@@ -112,6 +112,7 @@ def build(only_doctor=None):
             service = specialty_services.get(specialty)
             if service and prices:
                 consultation_minima[service] = min(consultation_minima.get(service, min(prices)), min(prices))
+    consultation_minima.update(json.loads((ROOT / 'data/consultation-starting-prices.json').read_text()))
     (DIST / 'consultation-prices.js').write_text('/* Generated from data/doctors.json by build-doctors.py. */\nwindow.BreorisConsultationPrices = ' + json.dumps(consultation_minima, ensure_ascii=False, indent=2) + ';\n', encoding='utf-8')
     routes = {}
     cards = []
@@ -127,7 +128,7 @@ def build(only_doctor=None):
         canonical = ORIGIN + f'/ua/doctors/{d["slug"]}/'
         urls.append(canonical)
         routes[d['id']] = relative
-        specialty = ', '.join(d['specialties'])
+        specialty = d.get('displaySpecialty') or ', '.join(d['specialties'])
         experience = f'. Досвід роботи — {years(d["experienceYears"])}' if 'experienceYears' in d else ''
         title = f'{d["name"]} — {specialty}{experience}'
         description = f'{d["name"]} — {specialty.lower()}{experience}. BREORIS MEDICAL, Дніпро. Запишіться онлайн на консультацію або зателефонуйте до клініки.'

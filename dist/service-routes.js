@@ -25,5 +25,7 @@ window.BreorisServiceRoutes = {
   "Денний стаціонар": "ua/services/dennyi-statsionar/",
   "Інфузійна терапія": "ua/services/infuziina-terapiia/",
   "Лікувальний та відновлювальний масаж": "ua/services/masazh/",
-  "Виїзд медичних спеціалістів додому": "ua/services/vyizd-dodomu/"
+  "Виїзд медичних спеціалістів додому": "ua/services/vyizd-dodomu/",
+  "ЕКОПФО": "ua/services/ekopfo/",
+  "Вакцинація": "ua/services/vaktsynatsiia/"
 };

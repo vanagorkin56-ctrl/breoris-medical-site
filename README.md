@@ -1,3 +1,15 @@
+# Internal CRM — 24 November 2026
+
+The private `/admin/` workspace now manages website and staff-created enquiries, statuses, physician/time assignment, staff responsibility, priority, next contact, notes/history, day calendar and phone-grouped contacts. The appointment/declaration forms have a new anonymous consultation photograph. See [CRM behaviour, verification and rollout](docs/crm-workspace-2026-11-24.md). Local checks pass; production database migrations and publication remain pending because the hosting connector cannot access the project.
+
+---
+
+# Client corrections — 24 November 2026
+
+The client revision is implemented on `codex/client-revisions-nov24`. Read [the change and verification record](docs/client-revision-2026-11-24.md) before publishing. Booking is now an administrator-confirmed contact request for all doctors; production requires the prepared database migration. Publication is pending. Garvis was confirmed as a reference only; declaration enquiries now use a dedicated Breoris form mode. EKOPFO starts from UAH 5,000; vaccination prices are pending.
+
+---
+
 # Current Health24 booking — 2026-10-16
 
 Booking actions now open the real Health24 workflow: clinic-scoped doctor/specialty profiles, live available dates and exact time intervals, patient first/last name, phone, birth date, sex and consent, then server-side visit creation. Phone/Telegram remain secondary help links. Both the homepage and generated physician pages use `health24-booking.js` and `health24-booking.css`.

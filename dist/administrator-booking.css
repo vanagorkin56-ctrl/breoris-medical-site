@@ -1,0 +1,23 @@
+#administrator-booking-dialog{width:min(1000px,calc(100% - 32px));max-height:calc(100dvh - 32px);padding:0;border:0;border-radius:24px;color:#203b4a;background:#edf4f6;box-sizing:border-box;overflow:auto}
+#administrator-booking-dialog::backdrop{background:rgba(10,35,48,.5)}
+#administrator-booking-dialog .dialog-close{position:absolute;z-index:2;right:12px;top:10px;min-width:44px;min-height:44px;background:#fff;border:1px solid #dce4e7;border-radius:50%;font-size:30px;line-height:1;color:#203b4a;cursor:pointer}
+.request-layout{display:grid;grid-template-columns:minmax(0,1fr) 30%;align-items:stretch}
+.request-content{padding:38px 32px;min-width:0}.request-eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#5b6b75;margin:0 0 14px}
+#administrator-booking-dialog h2{padding-right:26px;font-size:clamp(28px,3vw,38px);line-height:1.2;margin:0 0 24px;text-wrap:balance}
+.request-tabs{display:flex;align-items:center;gap:20px;flex-wrap:wrap}.request-tab{background:#235b92;color:#fff;padding:12px 20px;border-radius:28px;font-size:16px}.request-tabs a{font-size:16px;min-height:44px;display:inline-flex;align-items:center;text-decoration:underline;color:#235b92}
+.request-intro,.request-note,.request-hint,.request-help,.request-consent,.request-price,#request-status,#request-success p{font-size:16px;line-height:1.6}.request-intro{margin:22px 0}.request-note,.request-hint{color:#5b6b75}.request-hint{margin:6px 0 0;font-size:14px}
+.request-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px 16px}.request-wide{grid-column:1/-1}
+#administrator-request-form label:not(.request-consent){display:block;font-size:16px;font-weight:500;margin-bottom:7px}
+#administrator-request-form input:not([type=checkbox]),#administrator-request-form select,#administrator-request-form textarea{display:block;width:100%;max-width:100%;min-width:0;min-height:52px;padding:13px 14px;border:1px solid #c7d8df;border-radius:14px;background:#fff;color:#203b4a;font:inherit;font-size:16px;box-sizing:border-box}
+#administrator-request-form input[type=date],#administrator-request-form input[type=time]{appearance:none;-webkit-appearance:none}
+#administrator-request-form select{padding-right:26px;white-space:normal}#administrator-request-form textarea{resize:vertical}
+#administrator-request-form .request-trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.request-price{border-left:3px solid #235b92;padding:12px 14px;background:#fff;margin:22px 0 16px}
+.request-selection-details{font-size:16px;line-height:1.6;margin:10px 0 0;overflow-wrap:anywhere;color:#235b92}
+.request-consent{display:flex;align-items:flex-start;gap:12px;margin:20px 0}.request-consent input{width:22px;height:22px;flex-shrink:0;margin:3px 0;accent-color:#235b92}
+#request-submit{min-height:52px;width:100%}.request-help{display:flex;gap:14px 22px;flex-wrap:wrap;border-top:1px solid #cbdce3;margin-top:26px;padding-top:16px}.request-help a{color:#235b92;text-decoration:underline;min-height:44px;display:inline-flex;align-items:center}
+.request-photo{position:sticky;top:0;height:calc(100dvh - 32px);max-height:920px;margin:0;min-width:0;overflow:hidden;border-radius:0 24px 24px 0}.request-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:15% center}
+#request-status{padding:14px;border-radius:12px;background:#fff4e8;color:#70432b;margin:16px 0}#request-success h3{font-size:28px;line-height:1.25}#request-success .button{min-height:48px;margin-top:18px}.request-reference{overflow-wrap:anywhere;color:#5b6b75}
+#administrator-booking-dialog button:disabled{opacity:.6;cursor:wait}#administrator-booking-dialog :focus-visible{outline:3px solid #235b92;outline-offset:3px}
+@media(max-width:760px){#administrator-booking-dialog{width:calc(100% - 20px);max-height:calc(100dvh - 20px);border-radius:20px}.request-layout{display:block}.request-photo{display:none}.request-content{padding:30px 22px}.request-fields{gap:16px 12px}}
+@media(max-width:420px){.request-content{padding:28px 18px}.request-fields{grid-template-columns:minmax(0,1fr)}#administrator-booking-dialog h2{font-size:28px}.request-tabs{gap:6px 18px}.request-hint{font-size:16px}}

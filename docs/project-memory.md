@@ -1,5 +1,31 @@
 # Breoris Medical: project memory
 
+## Form photograph correction — 24 November 2026
+
+- The user rejected the blue/ivory glass image. Contact forms now use `dist/assets/campaigns/contact-consultation-nov24.jpg`, an anonymous illustrative consultation photograph focused on a clinician’s coat and hands, with soft daylight and no visible face. Do not restore the rejected glass photograph or describe the new illustration as an actual Breoris physician/clinic. Genuine clinic/gallery and physician photos remain unchanged.
+- Built-in image_gen; current prompt and provenance: `docs/contact-visual-prompt-2026-11-24.md`. This correction is local and unpublished.
+
+## Internal CRM and general form visual — 24 November 2026
+
+- User explicitly requested a CRM inside the website administrator cabinet. `/admin/` now includes appointment/declaration lists, server search and filters, real overview counts, pagination, confirmed day calendar and a phone-grouped contact directory. Staff can create phone/on-site enquiries, assign a doctor, agree a time, record responsible staff, priority, next contact and notes, complete/cancel work, and view immutable change history.
+- Existing active-administrator access remains required. User session tokens and database row/column policies protect private records; no patient details in localStorage. Manual contact confirmation has distinct staff provenance. A completed declaration enquiry is not a signed declaration.
+- Apply `database/crm-workspace-migration.sql` after `administrator-requests-migration.sql` before rollout. Neither was applied to production. Publication is still blocked by hosting connector access (403/no teams).
+- Historical first version (subsequently rejected): contact forms used the conceptual blue/ivory glass photograph `dist/assets/campaigns/contact-glass-nov24.jpg`. Genuine clinic/gallery and doctor photographs remain intact. Built-in image_gen provenance and exact prompt are in `docs/contact-visual-prompt-2026-11-24.md`.
+- 42 server tests + 7 database tests pass; 78 public pages checked. Browser checks on fictional local data verified website form → stored CRM enquiry, staff creation, completion, saved notes/history, calendar, contacts, field reset, desktop and 390px mobile without horizontal overflow. No real patient records submitted. See `docs/crm-workspace-2026-11-24.md` and `output/crm-2026-11-24/`.
+
+## Client-requested administrator booking and content corrections — 24 November 2026
+
+- Current implementation is `/Users/ivangorkin/Documents/ChatGPT/Bioris/site-client-nov24`, branch `codex/client-revisions-nov24`, based on `fd51c55` (published 22 November tree). Original dirty workspace is preserved.
+- The client now explicitly requires all booking through an administrator, including doctors connected to Health24. This supersedes the previous direct-booking decision. One contact form replaces schedule selection. A pending request is still not a confirmed appointment.
+- Clinic supplied all ten physician labels and full introduction. Hrytsai’s neurology, highest category, degree and associate professorship are now clinic-confirmed. Sushko is gastroenterologist only. Sirenko is displayed as Honchar (Sirenko), keeping `honchar` and the existing URL.
+- Six consultation starting prices updated. Gastroenterology card includes nutrition/dietetics. Vaccination and EKOPFO are present in the service catalogue. Existing green fourth-slide colour is retained.
+- New administrator-request persistence and queue changes require `database/administrator-requests-migration.sql` before live use. The old public direct-appointment endpoint is disabled in this revision. No production migration or publication has occurred.
+- User confirmed the Garvis declaration form is a reference only. The Breoris declaration button opens a dedicated contact-request mode; requests are stored with `requested_service = Декларація з терапевтом`. It collects name/phone and optional email/comment, without passport or tax ID fields. It is an enquiry, not a completed declaration.
+- User confirmed EKOPFO starting price of UAH 5,000; service cards, detail pages (UA/EN) and request estimates are synchronized. Description reuses the clinic-supplied Instagram material already in the project. Vaccination prices are still to be supplied.
+- Verification: 78 public pages, 38 server tests and four database tests pass; UA desktop/mobile and EN mobile introduction checked. A local-only fixture submission verifies pending status and field reset. No real appointments or patient requests were submitted.
+- Hosting connector cannot access the project (403, no available teams). See `docs/client-revision-2026-11-24.md` and `output/client-revision-2026-11-24/` for evidence and live acceptance dependencies.
+
+
 ## Light green campaign and doctor specialty audit — 22 November 2026
 
 - User requested a lighter green fourth slide and verification of physician labels against supplied DOC.UA screenshots. Fourth theme now uses sage `#c7dbb8`, dark green text and a lighter photo overlay; approved image, layout and other three themes retained.

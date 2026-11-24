@@ -104,7 +104,7 @@ test('a conflicting specialty cannot expose slots or submit a Health24 appointme
   await assert.rejects(h.booking.availability(663338,h.day),e=>e.code==='doctor_unavailable');
   await assert.rejects(h.booking.book({attemptId:randomUUID(),token:h.booking.signSlot(663338,h.slot),patient:h.patient},'test-ip'),e=>e.code==='doctor_unavailable');
   const {callbackDoctors}=require('../server/clinic-directory');
-  const fallback=callbackDoctors(result.doctors).find(d=>d.siteId==='pokaichuk');assert.equal(fallback.id,'callback:pokaichuk');assert.equal(fallback.specialty,'Невролог');assert.equal(fallback.mode,'callback');
+  const fallback=callbackDoctors(result.doctors).find(d=>d.siteId==='pokaichuk');assert.equal(fallback.id,'callback:pokaichuk');assert.equal(fallback.specialty,'Невролог вищої категорії');assert.equal(fallback.mode,'callback');
   assert.equal(h.posts(),0);assert.equal(h.reads(),0);
  }finally{h.restore();}
 });
@@ -114,7 +114,7 @@ test('a corrected provider specialty becomes directly bookable without an ID ove
  try{const result=await h.booking.catalog();assert.equal(result.doctors[0].specialtyMismatch,false);const slots=await h.booking.availability(663338,h.day);assert.equal(slots.employeeId,663338);assert.equal(slots.days[0].slots.length,1);assert.equal(h.posts(),0);}finally{h.restore();}
 });
 
-test('a clinician awaiting clinic confirmation is not offered in either booking path',async()=>{
+test('clinic-confirmed Hrytsai neurology remains requestable despite a conflicting legacy Health24 profile',async()=>{
  const h=harness({employeeId:596330,specialty:'Терапевт'});
- try{const result=await h.booking.catalog();assert.equal(result.doctors[0].specialtyMismatch,true);await assert.rejects(h.booking.availability(596330,h.day),e=>e.code==='doctor_unavailable');assert.ok(!require('../server/clinic-directory').callbackDoctors(result.doctors).some(d=>d.siteId==='hrytsai'));assert.equal(h.posts(),0);}finally{h.restore();}
+ try{const result=await h.booking.catalog();assert.equal(result.doctors[0].specialtyMismatch,true);await assert.rejects(h.booking.availability(596330,h.day),e=>e.code==='doctor_unavailable');assert.ok(require('../server/clinic-directory').callbackDoctors(result.doctors).some(d=>d.siteId==='hrytsai'&&d.specialty==='Невролог вищої категорії, доцент, к.м.н.'));assert.equal(h.posts(),0);}finally{h.restore();}
 });

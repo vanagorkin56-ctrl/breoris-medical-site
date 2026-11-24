@@ -10,5 +10,6 @@ window.BreorisDoctorRoutes = {
   "pavlova": "ua/doctors/pavlova-viktoriia-vasylivna/index.html",
   "sokrut": "ua/doctors/sokrut-dariia-volodymyrivna/index.html",
   "baldetska": "ua/doctors/baldietska-anna-oleksiyivna/index.html",
-  "podhorna": "ua/doctors/podhorna-daria-andriivna/index.html"
+  "podhorna": "ua/doctors/podhorna-daria-andriivna/index.html",
+  "hrytsai": "ua/doctors/hrytsai-hanna-volodymyrivna/index.html"
 };

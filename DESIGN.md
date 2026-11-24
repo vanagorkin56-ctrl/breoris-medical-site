@@ -1,3 +1,8 @@
+# November 24 additions
+
+- The user requests an internal CRM for administrators. Preserve the public site's brand while keeping the cabinet practical: clear stage labels, real counts, searchable lists, patient contact cards, next actions, confirmed calendar and change history. No decorative motion or external dashboard dependencies.
+- Contact form artwork is an anonymous illustrative consultation photograph focused on a clinician’s coat and hands in natural light. The user rejected the earlier blue/ivory glass image. This supersedes preserving the literal reception photo within that form only. Genuine clinic/gallery and doctor photographs remain the content source elsewhere. Prompt/provenance: `docs/contact-consultation-prompt-2026-11-24.md`.
+
 # Breoris Medical: current design system
 
 Updated 26 October 2026. Historical prototypes are archived in `docs/design-history-2026-09-29.md`. Current decisions are in `docs/project-memory.md`.

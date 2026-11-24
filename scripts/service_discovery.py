@@ -5,7 +5,7 @@ import subprocess
 
 e = lambda value: html.escape(str(value), quote=True)
 POPULAR = ['uzd', 'analizy', 'nevrolohiia', 'kardiolohiia', 'hinekolohiia', 'endokrynolohiia', 'hastroenterolohiia', 'check-up']
-SHORT = {'uzd': 'УЗД', 'analizy': 'Аналізи', 'check-up': 'Check-up', 'eeh': 'ЕЕГ', 'masazh': 'Лікувальний масаж', 'vyizd-dodomu': 'Виїзд лікаря додому'}
+SHORT = {'uzd': 'УЗД', 'analizy': 'Аналізи', 'check-up': 'Check-up', 'eeh': 'ЕЕГ', 'masazh': 'Лікувальний масаж', 'vyizd-dodomu': 'Виїзд лікаря додому', 'hastroenterolohiia': 'Гастроентерологія, нутриціологія, дієтологія'}
 ALIASES = {
     'uzd': 'узи ultrasound sonography щитовидка щитоподібна щитовидная серце сердце heart нирки почки kidney судини сосуды',
     'analizy': 'анализы analyses lab tests кров кровь blood сеча моча urine лабораторія лаборатория',
@@ -13,7 +13,7 @@ ALIASES = {
     'kardiolohiia': 'кардиолог cardiologist heart серце сердце тиск давление',
     'hinekolohiia': 'гинеколог gynecology gynaecology жіноче женское',
     'endokrynolohiia': 'эндокринолог endocrinology thyroid щитовидка щитовидная щитоподібна гормони гормоны діабет диабет',
-    'hastroenterolohiia': 'гастроэнтеролог gastroenterology шлунок желудок живіт живот травлення пищеварение',
+    'hastroenterolohiia': 'нутриціологія дієтологія нутрициология диетология nutrition dietetics гастроэнтеролог gastroenterology шлунок желудок живіт живот травлення пищеварение',
     'dermatolohiia': 'дерматолог dermatology skin шкіра кожа',
     'ortopediia-travmatolohiia': 'ортопед травматолог orthopaedics trauma joints суглоби суставы',
     'terapiia': 'терапевт therapist primary care',

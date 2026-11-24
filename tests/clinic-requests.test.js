@@ -7,13 +7,13 @@ test('callback submission cannot masquerade as Health24 booking and returns rece
 test('admin session requires verified user AND explicit active membership; cookies are not exposed to scripts',async()=>{const h=harness();try{const db=require('../server/clinic-db'),admin=require('../server/clinic-admin');let body;const res={setHeader(k,v){body=v;}};admin.cookie(res,'fake.token.12345678901234567890',3600);for(const text of ['HttpOnly','Secure','SameSite=Strict','Path=/'])assert.ok(body.includes(text));const original=db.request;db.request=async path=>path.startsWith('/auth')?{id:'11111111-1111-4111-8111-111111111111'}:[];await assert.rejects(admin.session({headers:{cookie:'__Host-breoris_admin=fake.token.12345678901234567890'}}),e=>e.code==='not_authorized');db.request=original;await assert.rejects(admin.session({headers:{}}),e=>e.code==='not_authorized');}finally{h.restore();}});
 test('public and administrative mutation routes reject cross-origin requests before touching persistence',async()=>{const h=harness();try{const handler=require('../api/booking/requests');let code;const res={setHeader(){},status(v){code=v;return this;},json(){return this;}};await handler({method:'POST',headers:{origin:'https://other.example','content-type':'application/json'},body:{}},res);assert.equal(code,403);assert.equal(h.calls.length,0);}finally{h.restore();}});
 
-test('public directory routes verified conflicting profiles to callback and withholds unconfirmed clinicians',async()=>{
+test('legacy directory routes Health24 specialty conflicts to the confirmed clinic specialties',async()=>{
  const employee=(id,name,specialty)=>({id,name,fired:false,resource_office:false,employee_type:{value:'SPECIALIST'},position:{name_uk:specialty}});
  const h=harness({extraRows:[employee(663338,'Покайчук Маргарита Григорівна','Терапевт'),employee(596330,'Грицай Ганна Володимирівна','Терапевт'),employee(596094,'Сокрут Дарія Володимирівна','Лікар з ультразвукової діагностики')]});
  try{
   const result=await require('../server/clinic-directory').directory();
-  assert.ok(!result.doctors.some(d=>d.id===663338||d.siteId==='hrytsai'));
-  assert.deepEqual(result.doctors.filter(d=>d.siteId==='pokaichuk').map(d=>[d.id,d.specialty,d.mode]),[['callback:pokaichuk','Невролог','callback']]);
+  assert.ok(!result.doctors.some(d=>d.id===663338||d.id===596330));
+  assert.deepEqual(result.doctors.filter(d=>d.siteId==='pokaichuk').map(d=>[d.id,d.specialty,d.mode]),[['callback:pokaichuk','Невролог вищої категорії','callback']]);
   assert.ok(result.doctors.some(d=>d.id===596094&&d.mode==='health24'&&d.consultationFrom===null));
   assert.equal(result.doctors.find(d=>d.id===595920).specialty,'Невролог');
   assert.equal(h.calls.filter(c=>c.url.includes('/visit')).length,0);
