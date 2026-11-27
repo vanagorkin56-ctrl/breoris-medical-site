@@ -1,9 +1,17 @@
+# Podhorna branded card correction — 27 November 2026
+
+- The user clarified that the entire branded physician card is required, like all other doctors: clinic logo, full name, blue wave, specialty and listed studies. The previous portrait-only crop was a misunderstanding and is superseded.
+- Shared `dist/assets/doctors/podhorna.jpg` now contains the complete supplied card. Only the phone UI was removed: source crop x=0, y=177, 1290 × 2293, resized to 1080 × 1920 to match the existing clinician cards. No image generation, retouching or recreated lettering.
+- Source image provenance/dimensions and generated profile/directory were synchronized. Keep the complete branded card in future updates; do not restore the portrait-only crop. Stable doctor ID, route, specialty and appointment context are unchanged.
+- Verification and publication evidence: `output/podhorna-branded-card-2026-11-27/`.
+
 # Podhorna portrait — 27 November 2026
 
 - User requested replacing the existing physician photograph with the supplied `IMG_7111 3.PNG`. Doctor ID `podhorna` and profile URL are unchanged.
 - Replaced shared `dist/assets/doctors/podhorna.jpg` with a direct crop from that screenshot: x=430, y=300, width=672, height=882. JPEG quality 90; no generated face, retouching or background replacement. The status bar, clinic logo and text panel are outside the crop. The shared asset covers homepage cards, directory and profile.
 - Updated image provenance/dimensions in `data/doctors.json` and regenerated only Podhorna’s profile plus the shared directory. Physician facts and all other portraits are unchanged.
 - Static validation passed 78 pages. Desktop and 390px mobile profile checked; no horizontal overflow. Release evidence is in `output/podhorna-photo-2026-11-27/`.
+- Published main commit `2243f7808f37eb896ad90f71981a7bfe9651cd51`, Vercel production `dpl_Hz2me3JuwL5BWvp8ThedmJRnapBJ`, READY. Live profile and filtered homepage card both load the new 672 × 882 image. Existing custom-domain handover remains separate; use the verified Vercel alias for this release.
 
 # Release status — 24 November 2026
 
