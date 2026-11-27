@@ -839,16 +839,16 @@
       "retrievedAt": "2026-11-13",
       "image": {
         "src": "assets/doctors/podhorna.jpg",
-        "originalAsset": "IMG_9729.PNG",
-        "provenance": "Портрет із наданого користувачем матеріалу клініки; за явним проханням користувача виконано лише обрізання без генерації.",
+        "originalAsset": "IMG_7111 3.PNG",
+        "provenance": "Портрет із наданого користувачем матеріалу клініки від 27.11.2026. Виконано лише точне обрізання та збереження JPEG, без генерації та ретуші.",
         "crop": {
-          "x": 195,
-          "y": 145,
-          "width": 320,
-          "height": 420
+          "x": 430,
+          "y": 300,
+          "width": 672,
+          "height": 882
         },
-        "width": 320,
-        "height": 420
+        "width": 672,
+        "height": 882
       },
       "experienceYears": 3,
       "patientGroups": [

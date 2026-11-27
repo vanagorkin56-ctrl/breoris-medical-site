@@ -1,7 +1,17 @@
-# Release preparation — 24 November 2026
+# Podhorna portrait — 27 November 2026
+
+- User requested replacing the existing physician photograph with the supplied `IMG_7111 3.PNG`. Doctor ID `podhorna` and profile URL are unchanged.
+- Replaced shared `dist/assets/doctors/podhorna.jpg` with a direct crop from that screenshot: x=430, y=300, width=672, height=882. JPEG quality 90; no generated face, retouching or background replacement. The status bar, clinic logo and text panel are outside the crop. The shared asset covers homepage cards, directory and profile.
+- Updated image provenance/dimensions in `data/doctors.json` and regenerated only Podhorna’s profile plus the shared directory. Physician facts and all other portraits are unchanged.
+- Static validation passed 78 pages. Desktop and 390px mobile profile checked; no horizontal overflow. Release evidence is in `output/podhorna-photo-2026-11-27/`.
+
+# Release status — 24 November 2026
 
 - Release branch `codex/client-revisions-nov24-release` contains the reviewed clinic corrections and CRM. First preview exposed the Hobby limit of 12 functions; contacts now use the authenticated requests route with `view=contacts`, reducing 13 functions to 12. No upgrade required.
-- Production database remains unchanged pending explicit approval of both prepared SQL migrations. Vercel and the Supabase dashboard are accessible. Live acceptance remains pending.
+- Both database migrations were applied successfully to Supabase project `ikrhumtauxwccnjrrijd` after explicit user approval. Live checks confirmed the new columns, RLS, server-only submission, ordinary-account isolation and active-administrator RPC access. No patient data was created or printed.
+- Published repository main commit `7403ed365b97d54ffa7e7295dabf6a338dac7baa`: Vercel production `dpl_AkVYzRR1Ho8m2YLa7PgcCKu7qMxE`, READY. Application: `https://breoris-medical-site-dist.vercel.app/`; CRM: `/admin/`. The form, catalogue, EKOPFO price and login page load; private contacts reject unauthenticated access. Actual administrator email/password login and a clinic-approved real request remain acceptance checks.
+- Custom-domain handover is still separate: apex and www resolve to old host `65.21.20.126` under gooddnsserver.com; Vercel confirms misconfiguration. The apex visibly serves the previous site. DNS was not changed; the user was asked which provider manages it. Do not claim the new site is live on the clinic domain yet.
+- Final checks: 43 server tests, 7 local database tests and 78 public pages passed. Supabase Security Advisor rerun: 0 errors, 4 reviewed warnings; no unrelated Auth settings changed. Vercel error/fatal scan returned no groups. Evidence: `output/release-2026-11-24/release.md`. Earlier pending-publication notes below describe preparation history and are superseded by this section.
 
 # Breoris Medical: project memory
 

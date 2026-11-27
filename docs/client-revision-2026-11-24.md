@@ -1,5 +1,7 @@
 # Clinic corrections — 24 November 2026
 
+Release update: both migrations are now applied, and commit `7403ed3` is published to the Vercel production application. Custom-domain DNS cutover remains outstanding. See `output/release-2026-11-24/release.md` and the top of project memory for current verification and acceptance limitations; preparation-time pending statements below are historical.
+
 ## Source and location
 
 The client asked to implement the agreed corrections and supplied the full Ukrainian clinic introduction and a screenshot of the Kaplia-style contact form. Changes are on `codex/client-revisions-nov24` in `/Users/ivangorkin/Documents/ChatGPT/Bioris/site-client-nov24`.

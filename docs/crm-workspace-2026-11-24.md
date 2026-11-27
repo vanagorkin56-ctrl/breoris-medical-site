@@ -1,5 +1,7 @@
 # Internal CRM workspace — 24 November 2026
 
+Release update: both migrations are now applied, and commit `7403ed3` is published to the Vercel production application. Custom-domain DNS cutover remains outstanding. See `output/release-2026-11-24/release.md` and the top of project memory for current verification and acceptance limitations; preparation-time pending statements below are historical.
+
 The user asked to manage clinic enquiries through the website's own administrator cabinet, as a CRM, and replace the literal reception photograph with a general brand visual. Implementation is in `site-client-nov24`, branch `codex/client-revisions-nov24`. Publication remains pending.
 
 ## Working behaviour
