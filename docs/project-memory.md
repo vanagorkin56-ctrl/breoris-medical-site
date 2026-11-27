@@ -1,9 +1,16 @@
+# Homepage corrections — 27 November 2026
+
+- The neurology slide and its UA/EN direction pages introduce Nataliia Tomakh as Medical Director. The approved women’s and men’s health slide stays as supplied.
+- The NHSU slide and direction pages open the existing declaration request form, including on mobile. The former homepage declaration block, the homepage "Усі профілі лікарів" link and the lower appointment banner were removed. Individual doctor profiles and other appointment entry points remain available.
+- The EKOPFO slide uses the supplied ivory, blue and turquoise palette with the existing photograph. It falls back to Manrope until the clinic supplies its ACTAY WIDE webfont. Place the clinic video before Contacts once the source and poster are available.
+
 # Podhorna branded card correction — 27 November 2026
 
 - The user clarified that the entire branded physician card is required, like all other doctors: clinic logo, full name, blue wave, specialty and listed studies. The previous portrait-only crop was a misunderstanding and is superseded.
 - Shared `dist/assets/doctors/podhorna.jpg` now contains the complete supplied card. Only the phone UI was removed: source crop x=0, y=177, 1290 × 2293, resized to 1080 × 1920 to match the existing clinician cards. No image generation, retouching or recreated lettering.
 - Source image provenance/dimensions and generated profile/directory were synchronized. Keep the complete branded card in future updates; do not restore the portrait-only crop. Stable doctor ID, route, specialty and appointment context are unchanged.
 - Verification and publication evidence: `output/podhorna-branded-card-2026-11-27/`.
+- Published main commit `fe903bb705106d4bbb6264dee4b28bde25afbb40`, Vercel production `dpl_F5y9pHzyy3Ue5bBVmwa39FRo7TN8`, READY. Live profile loads the complete 1080 × 1920 branded card.
 
 # Podhorna portrait — 27 November 2026
 

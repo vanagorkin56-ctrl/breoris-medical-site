@@ -16,9 +16,9 @@
   --campaign-line:#9fbacd; --campaign-dot:#9bb9ce;
 }
 .direction-hero[data-theme=documents] {
-  --campaign-bg:#c7dbb8; --campaign-ink:#1e4038; --campaign-accent:#2f6953;
-  --campaign-body:#325746; --campaign-button:#2f6953; --campaign-button-ink:#fff;
-  --campaign-line:#718e72; --campaign-dot:#769574;
+  --campaign-bg:#F5F2ED; --campaign-ink:#193C63; --campaign-accent:#2D619E;
+  --campaign-body:#354552; --campaign-button:#2D619E; --campaign-button-ink:#FFFFFF;
+  --campaign-line:#2D619E; --campaign-dot:#6CCACE;
 }
 .direction-hero .direction-slides{max-width:none;margin:0}
 .direction-hero .direction-slide{grid-template-columns:52% 48%;gap:0;align-items:stretch;min-height:clamp(500px,calc(100svh - 158px),780px)}
@@ -50,11 +50,18 @@
 .direction-slide[data-theme=prevention] .campaign-article>span{top:6.5cqw;bottom:auto;background:#163c5a36}
 .direction-slide[data-theme=screening] .direction-photo>img{object-position:50% 53%}
 .direction-slide[data-theme=screening] .direction-photo:after{background:linear-gradient(180deg,rgba(226,247,245,.76),rgba(226,247,245,.38) 30%,transparent 49%,rgba(12,47,73,.15) 69%,rgba(12,47,73,.88))}
-.direction-slide[data-theme=documents] .direction-photo>img{object-position:50% 48%}
-.direction-slide[data-theme=documents] .direction-photo:after{background:linear-gradient(180deg,#ebf4e0e6,#ddebd124 46%,#e4efdbef)}
-.direction-hero .direction-slide[data-theme=documents] .direction-photo figcaption,.direction-hero .direction-slide[data-theme=documents] .campaign-article{color:#1e4038}
-.direction-hero .direction-slide[data-theme=documents] .direction-photo .text-focus{color:#2f6953}
-.direction-hero .direction-slide[data-theme=documents] .campaign-article>span{border-color:#55796199;background:#edf4e178}
+.direction-slide[data-theme=documents] .direction-photo>img{object-position:50% 48%;filter:grayscale(1)}
+.direction-slide[data-theme=documents] .direction-photo:after{background:linear-gradient(180deg,#DDE8F3F2,#DDE8F3B3 34%,#DDE8F34D 58%,#DDE8F3F2)}
+.direction-hero .direction-slide[data-theme=documents] .direction-photo figcaption,
+.direction-hero .direction-slide[data-theme=documents] .direction-photo .text-focus,
+.direction-hero .direction-slide[data-theme=documents] .campaign-article{color:var(--campaign-ink)}
+.direction-hero .direction-slide[data-theme=documents] .direction-copy h2,
+.direction-hero .direction-slide[data-theme=documents] .direction-photo .campaign-question{font-family:"Actay Wide",Manrope,"DM Sans",Arial,sans-serif}
+.direction-hero .direction-slide[data-theme=documents] .direction-copy .text-focus{color:inherit;background:none;-webkit-text-fill-color:currentColor;animation:none}
+.direction-hero .direction-slide[data-theme=documents] .direction-more{color:var(--campaign-button)}
+.direction-hero .direction-slide[data-theme=documents] .campaign-article>span{border-color:#2D619E80;background:#F5F2EDB3}
+.direction-hero .direction-slide[data-theme=documents] .campaign-article:focus-visible{outline-offset:-4px}
+.direction-hero[data-theme=documents] .direction-controls button{color:var(--campaign-button)}
 .direction-hero .direction-slide[data-theme=documents] .campaign-question{font-size:12cqw;max-width:12ch;line-height:1.07}
 .direction-hero .direction-photo .campaign-screening{color:#163c5a;font-weight:500;max-width:none}
 .campaign-screening-word{display:block;font-size:7.7cqw;letter-spacing:-.04em;line-height:1.1;margin-bottom:1.3cqw}
@@ -85,8 +92,9 @@
  .direction-hero .direction-summary{font-size:16px;line-height:1.55;min-height:0;max-width:none;margin:0}
  .direction-hero .campaign-full-summary{display:none}.direction-hero .campaign-mobile-summary{display:block}
  .direction-hero .direction-actions{justify-content:flex-start;flex-wrap:wrap;gap:16px;margin-top:16px}
- /* The fixed mobile bar supplies the single booking action. */
- .direction-hero .direction-book{display:none}
+ /* The fixed mobile bar handles appointments. Declarations have their own action. */
+ .direction-hero .direction-book:not([data-declaration]){display:none}
+ .direction-hero .direction-book[data-declaration]{display:inline-flex;min-height:44px;max-width:100%;padding:9px 14px;gap:14px;font-size:14px!important;white-space:normal;text-align:left}
  .direction-hero .direction-more{font-size:14px;line-height:1.45;min-height:44px;border:0;border-bottom:1px solid var(--campaign-line);border-radius:0;padding:11px 0;white-space:nowrap;display:inline-flex}
  .direction-hero .direction-more:after{display:none}
  .direction-hero .direction-controls{position:static;justify-content:center;margin:14px 20px 0;gap:14px}

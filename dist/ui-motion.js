@@ -1,5 +1,5 @@
 (() => {
-  const sections = document.querySelectorAll('.intro,.about-detail,.services,.feature,.additional,.doctors,.statement,.location,.contact-banner');
+  const sections = document.querySelectorAll('.intro,.about-detail,.services,.feature,.additional,.doctors,.statement,.location');
   if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
     sections.forEach(section => section.classList.add('is-visible'));
     return;

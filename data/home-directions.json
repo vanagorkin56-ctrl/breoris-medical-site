@@ -5,11 +5,11 @@
     "portrait": false,
     "uk": {
       "title": "Центр сучасної неврології",
-      "intro": "Діагностика, лікування та реабілітація під керівництвом Наталії Валеріївни Томах.",
+      "intro": "Діагностика, лікування та реабілітація під керівництвом медичного директора Наталії Валеріївни Томах.",
       "alt": "Рекламна сцена консультації з образом Наталії Томах",
       "caption": "Наталія Томах · лікар-невролог",
       "paragraphs": [
-        "Центр сучасної неврології Breoris Medical працює під керівництвом Наталії Валеріївни Томах — кандидата медичних наук, доцента, лікаря-невролога вищої категорії.",
+        "Центр сучасної неврології Breoris Medical працює під керівництвом медичного директора Наталії Валеріївни Томах — кандидата медичних наук, доцента, лікаря-невролога вищої категорії.",
         "Центр спеціалізується на комплексній діагностиці, лікуванні та реабілітації пацієнтів із захворюваннями нервової системи.",
         "Наші фахівці працюють із головним болем і мігренню, запамороченням, болем у спині та шиї, порушеннями чутливості, а також складними неврологічними захворюваннями — розсіяним склерозом, хворобою Паркінсона, епілепсією та судинними патологіями головного мозку.",
         "Основа нашої роботи — мультидисциплінарний підхід, що об’єднує досвід неврологів, лікаря фізичної та реабілітаційної медицини й інших спеціалістів.",
@@ -18,11 +18,11 @@
     },
     "en": {
       "title": "Centre for modern neurology",
-      "intro": "Diagnosis, treatment and rehabilitation led by neurologist Nataliia Tomakh.",
+      "intro": "Diagnosis, treatment and rehabilitation led by Medical Director Nataliia Tomakh.",
       "alt": "Promotional consultation scene featuring the likeness of Nataliia Tomakh",
       "caption": "Nataliia Tomakh · neurologist",
       "paragraphs": [
-        "The Breoris Medical Centre for Modern Neurology is led by Nataliia Tomakh, Candidate of Medical Sciences, Associate Professor and highest-category neurologist.",
+        "The Breoris Medical Centre for Modern Neurology is led by Medical Director Nataliia Tomakh, Candidate of Medical Sciences, Associate Professor and highest-category neurologist.",
         "The centre specialises in comprehensive diagnosis, treatment and rehabilitation for people with nervous system conditions.",
         "Our specialists see patients with headaches and migraine, dizziness, back and neck pain, sensory disturbances, multiple sclerosis, Parkinson’s disease, epilepsy and cerebrovascular conditions.",
         "Our multidisciplinary approach brings together neurologists, a physical and rehabilitation medicine physician and other specialists.",
@@ -40,7 +40,7 @@
         ],
         "caption": "Коли звернутися до невролога",
         "alt": "Концептуальний профіль жінки за матовим склом у блакитному світлі.",
-        "mobileIntro": "Діагностика, лікування та реабілітація. Керівниця — Наталія Томах."
+        "mobileIntro": "Діагностика, лікування та реабілітація. Медичний директор — Наталія Томах."
       },
       "en": {
         "question": "Headache?",
@@ -49,7 +49,7 @@
         ],
         "caption": "When to see a neurologist",
         "alt": "Conceptual profile of a woman behind frosted glass in blue light.",
-        "mobileIntro": "Diagnosis, treatment and rehabilitation led by Nataliia Tomakh."
+        "mobileIntro": "Diagnosis, treatment and rehabilitation led by Medical Director Nataliia Tomakh."
       }
     }
   },
@@ -104,9 +104,13 @@
   },
   {
     "slug": "public-health-programmes",
+    "declaration": true,
     "image": "assets/campaigns/public-programmes-premium.jpg",
     "uk": {
       "title": "Медичні програми НСЗУ",
+      "declarationLabel": "Подати заявку на декларацію",
+      "ctaTitle": "Декларація з терапевтом",
+      "ctaText": "Залиште контакти. Адміністратор клініки зв’яжеться з вами та пояснить, як оформити декларацію.",
       "intro": "Декларація з терапевтом, первинна допомога та скринінг 40+. Уточніть умови участі перед візитом.",
       "alt": "Рекламна візуалізація: відвідувачка в зоні очікування клініки",
       "caption": "Первинна допомога · декларація з терапевтом",
@@ -120,6 +124,9 @@
     },
     "en": {
       "title": "NHSU medical programmes",
+      "declarationLabel": "Submit a declaration request",
+      "ctaTitle": "Declaration with a primary care doctor",
+      "ctaText": "Leave your contact details. A clinic administrator will get in touch and explain how to arrange your declaration.",
       "intro": "Register with a physician, access primary care and ask about screening for people aged 40+. Check eligibility before visiting.",
       "alt": "Promotional visual: a visitor in the clinic waiting area",
       "caption": "Primary care · register with a physician",
