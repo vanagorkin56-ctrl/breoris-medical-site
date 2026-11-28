@@ -263,6 +263,12 @@
   Object.assign(dictionaries.en, {"Невролог вищої категорії, доцент, к.м.н.": "Senior neurologist, Associate Professor, Candidate of Medical Sciences", "Невролог вищої категорії": "Senior neurologist", "Дерматовенеролог вищої категорії, трихолог": "Senior dermatovenereologist, trichologist", "Кардіолог вищої категорії, доцент, к.м.н., ревматолог": "Senior cardiologist, Associate Professor, Candidate of Medical Sciences, rheumatologist", "Ендокринолог, лікар УЗД": "Endocrinologist, ultrasound specialist", "Лікар ФРМ": "Physical and rehabilitation medicine physician", "Гастроентерологія, нутриціологія, дієтологія": "Gastroenterology, nutrition and dietetics", "ЕКОПФО": "EKOPFO", "Вакцинація": "Vaccination", "Декларація з терапевтом онлайн": "Online declaration with a primary care doctor", "Заповніть форму для оформлення декларації з терапевтом.": "Complete the form to apply for a declaration with a primary care doctor.", "Заповнити форму": "Complete the form"});
   Object.assign(dictionaries.en, {"Уточніть в адміністратора, як оформити декларацію з терапевтом.": "Ask the administrator how to arrange a declaration with a primary care doctor.", "Зв’язатися з адміністратором": "Contact the administrator"});
   Object.assign(dictionaries.en, {"Залиште заявку онлайн — адміністратор Breoris Medical зв’яжеться з вами щодо оформлення декларації.": "Submit a request online. A Breoris Medical administrator will contact you about arranging your declaration.", "Залишити заявку": "Leave a request"});
+  Object.assign(dictionaries.en, {
+    'Відео про клініку': 'Clinic video',
+    'Познайомтеся з командою та зазирніть у кабінети Breoris Medical.': 'Meet the team and take a look inside Breoris Medical.',
+    'Дивитися відео': 'Play video',
+    'Не вдалося завантажити відео. Спробуйте ще раз.': 'The video could not be loaded. Try again.'
+  });
   window.BreorisLocale = { get language(){return language}, t(value){return dictionaries[language]?.[value] || value}, setLanguage, translateTree };
   document.addEventListener('change', event => { if (event.target.matches('.language-select')) setLanguage(event.target.value); });
   const observer = new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => { if (node.nodeType === Node.TEXT_NODE) translateTextNode(node); else if (node.nodeType === Node.ELEMENT_NODE) translateTree(node); })));
